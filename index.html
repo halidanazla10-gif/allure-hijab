@@ -188,6 +188,3323 @@
   </style>
 
   <!-- Standalone browser application bundle with cache buster -->
-  <script src="./app.standalone.js?v=2.9.0"></script>
+  <script>
+/* ========================================================================
+   ALLURE BUSINESS SPACE - SELF-CONTAINED INLINED ENGINE
+   ======================================================================== */
+/**
+ * ALLURE Standalone Browser Application
+ * Pure Vanilla React 18 SPA (Runs immediately in any browser with zero build step)
+ * Completely synchronized with ALLURE Boutique Management & POS System Enhancements
+ */
+
+(function () {
+  if (typeof window === 'undefined' || !window.React || !window.ReactDOM) {
+    return;
+  }
+
+  const { useState, useEffect, useMemo, createElement: h } = window.React;
+
+  // -------------------------------------------------------------
+  // BUILT-IN DELICATE SVG ICONS (STRICT strokeWidth = 1.5)
+  // -------------------------------------------------------------
+  const ICON_PATHS = {
+    'sparkles': [
+      h('path', { key: 1, d: 'm12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z' }),
+      h('path', { key: 2, d: 'M5 3v4' }),
+      h('path', { key: 3, d: 'M19 17v4' }),
+      h('path', { key: 4, d: 'M3 5h4' }),
+      h('path', { key: 5, d: 'M17 19h4' })
+    ],
+    'layout-dashboard': [
+      h('rect', { key: 1, width: '7', height: '9', x: '3', y: '3', rx: '1' }),
+      h('rect', { key: 2, width: '7', height: '5', x: '14', y: '3', rx: '1' }),
+      h('rect', { key: 3, width: '7', height: '9', x: '14', y: '12', rx: '1' }),
+      h('rect', { key: 4, width: '7', height: '5', x: '3', y: '16', rx: '1' })
+    ],
+    'shopping-cart': [
+      h('circle', { key: 1, cx: '8', cy: '21', r: '1' }),
+      h('circle', { key: 2, cx: '19', cy: '21', r: '1' }),
+      h('path', { key: 3, d: 'M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12' })
+    ],
+    'package': [
+      h('path', { key: 1, d: 'm7.5 4.27 9 5.15' }),
+      h('path', { key: 2, d: 'M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z' }),
+      h('path', { key: 3, d: 'm3.3 7 8.7 5 8.7-5' }),
+      h('path', { key: 4, d: 'M12 22V12' })
+    ],
+    'users': [
+      h('path', { key: 1, d: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' }),
+      h('circle', { key: 2, cx: '9', cy: '7', r: '4' }),
+      h('path', { key: 3, d: 'M22 21v-2a4 4 0 0 0-3-3.87' }),
+      h('path', { key: 4, d: 'M16 3.13a4 4 0 0 1 0 7.75' })
+    ],
+    'receipt': [
+      h('path', { key: 1, d: 'M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z' }),
+      h('path', { key: 2, d: 'M14 8H8' }),
+      h('path', { key: 3, d: 'M16 12H8' }),
+      h('path', { key: 4, d: 'M13 16H8' })
+    ],
+    'message-circle': [
+      h('path', { key: 1, d: 'M7.9 20A9 9 0 1 0 4 16.1L2 22Z' })
+    ],
+    'bookmark': [
+      h('path', { key: 1, d: 'm19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z' })
+    ],
+    'heart-handshake': [
+      h('path', { key: 1, d: 'M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z' })
+    ],
+    'headphones': [
+      h('path', { key: 1, d: 'M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3' })
+    ],
+    'headset': [
+      h('path', { key: 1, d: 'M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3' })
+    ],
+    'settings': [
+      h('path', { key: 1, d: 'M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z' }),
+      h('circle', { key: 2, cx: '12', cy: '12', r: '3' })
+    ],
+    'bell': [
+      h('path', { key: 1, d: 'M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9' }),
+      h('path', { key: 2, d: 'M10.3 21a1.94 1.94 0 0 0 3.4 0' })
+    ],
+    'search': [
+      h('circle', { key: 1, cx: '11', cy: '11', r: '8' }),
+      h('path', { key: 2, d: 'm21 21-4.3-4.3' })
+    ],
+    'alert-triangle': [
+      h('path', { key: 1, d: 'm21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z' }),
+      h('line', { key: 2, x1: '12', y1: '9', x2: '12', y2: '13' }),
+      h('line', { key: 3, x1: '12', y1: '17', x2: '12.01', y2: '17' })
+    ],
+    'alert-circle': [
+      h('circle', { key: 1, cx: '12', cy: '12', r: '10' }),
+      h('line', { key: 2, x1: '12', y1: '8', x2: '12', y2: '12' }),
+      h('line', { key: 3, x1: '12', y1: '16', x2: '12.01', y2: '16' })
+    ],
+    'check-circle': [
+      h('path', { key: 1, d: 'M22 11.08V12a10 10 0 1 1-5.93-9.14' }),
+      h('path', { key: 2, d: 'm9 11 3 3L22 4' })
+    ],
+    'check': [
+      h('path', { key: 1, d: 'M20 6 9 17l-5-5' })
+    ],
+    'plus': [
+      h('path', { key: 1, d: 'M5 12h14' }),
+      h('path', { key: 2, d: 'M12 5v14' })
+    ],
+    'minus': [
+      h('path', { key: 1, d: 'M5 12h14' })
+    ],
+    'trash': [
+      h('path', { key: 1, d: 'M3 6h18' }),
+      h('path', { key: 2, d: 'M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6' }),
+      h('path', { key: 3, d: 'M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2' })
+    ],
+    'edit': [
+      h('path', { key: 1, d: 'M12 20h9' }),
+      h('path', { key: 2, d: 'M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z' })
+    ],
+    'eye': [
+      h('path', { key: 1, d: 'M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z' }),
+      h('circle', { key: 2, cx: '12', cy: '12', r: '3' })
+    ],
+    'eye-off': [
+      h('path', { key: 1, d: 'M9.88 9.88a3 3 0 1 0 4.24 4.24' }),
+      h('path', { key: 2, d: 'M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68' }),
+      h('path', { key: 3, d: 'M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61' }),
+      h('line', { key: 4, x1: '2', y1: '2', x2: '22', y2: '22' })
+    ],
+    'send': [
+      h('path', { key: 1, d: 'm22 2-7 20-4-9-9-4Z' }),
+      h('path', { key: 2, d: 'M22 2 11 13' })
+    ],
+    'star': [
+      h('polygon', { key: 1, points: '12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2' })
+    ],
+    'log-out': [
+      h('path', { key: 1, d: 'M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4' }),
+      h('polyline', { key: 2, points: '16 17 21 12 16 7' }),
+      h('line', { key: 3, x1: '21', y1: '12', x2: '9', y2: '12' })
+    ],
+    'rotate-ccw': [
+      h('path', { key: 1, d: 'M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8' }),
+      h('path', { key: 2, d: 'M3 3v5h5' })
+    ],
+    'calendar': [
+      h('rect', { key: 1, width: '18', height: '18', x: '3', y: '4', rx: '2', ry: '2' }),
+      h('line', { key: 2, x1: '16', y1: '2', x2: '16', y2: '6' }),
+      h('line', { key: 3, x1: '8', y1: '2', x2: '8', y2: '6' }),
+      h('line', { key: 4, x1: '3', y1: '10', x2: '21', y2: '10' })
+    ],
+    'clock': [
+      h('circle', { key: 1, cx: '12', cy: '12', r: '10' }),
+      h('polyline', { key: 2, points: '12 6 12 12 16 14' })
+    ],
+    'tag': [
+      h('path', { key: 1, d: 'M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z' }),
+      h('path', { key: 2, d: 'M7 7h.01' })
+    ],
+    'package-check': [
+      h('path', { key: 1, d: 'm16 16 2 2 4-4' }),
+      h('path', { key: 2, d: 'M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14' }),
+      h('path', { key: 3, d: 'm7.5 4.27 9 5.15' }),
+      h('polyline', { key: 4, points: '3.29 7 12 12 20.71 7' }),
+      h('line', { key: 5, x1: '12', y1: '22', x2: '12', y2: '12' })
+    ],
+    'trending-up': [
+      h('polyline', { key: 1, points: '22 7 13.5 15.5 8.5 10.5 2 17' }),
+      h('polyline', { key: 2, points: '16 7 22 7 22 13' })
+    ],
+    'arrow-up-right': [
+      h('line', { key: 1, x1: '7', y1: '17', x2: '17', y2: '7' }),
+      h('polyline', { key: 2, points: '7 7 17 7 17 17' })
+    ],
+    'arrow-right': [
+      h('line', { key: 1, x1: '5', y1: '12', x2: '19', y2: '12' }),
+      h('polyline', { key: 2, points: '12 5 19 12 12 19' })
+    ],
+    'chevron-down': [
+      h('polyline', { key: 1, points: '6 9 12 15 18 9' })
+    ],
+    'chevron-right': [
+      h('polyline', { key: 1, points: '9 18 15 12 9 6' })
+    ],
+    'user-plus': [
+      h('path', { key: 1, d: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' }),
+      h('circle', { key: 2, cx: '9', cy: '7', r: '4' }),
+      h('line', { key: 3, x1: '19', y1: '8', x2: '19', y2: '14' }),
+      h('line', { key: 4, x1: '22', y1: '11', x2: '16', y2: '11' })
+    ],
+    'x': [
+      h('path', { key: 1, d: 'M18 6 6 18' }),
+      h('path', { key: 2, d: 'm6 6 12 12' })
+    ],
+    'filter': [
+      h('polygon', { key: 1, points: '22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3' })
+    ],
+    'package-plus': [
+      h('path', { key: 1, d: 'M16 16h6' }),
+      h('path', { key: 2, d: 'M19 13v6' }),
+      h('path', { key: 3, d: 'M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14' }),
+      h('path', { key: 4, d: 'm7.5 4.27 9 5.15' }),
+      h('polyline', { key: 5, points: '3.29 7 12 12 20.71 7' }),
+      h('line', { key: 6, x1: '12', y1: '22', x2: '12', y2: '12' })
+    ],
+    'lock': [
+      h('rect', { key: 1, width: '18', height: '11', x: '3', y: '11', rx: '2', ry: '2' }),
+      h('path', { key: 2, d: 'M7 11V7a5 5 0 0 1 10 0v4' })
+    ],
+    'mail': [
+      h('rect', { key: 1, width: '20', height: '16', x: '2', y: '4', rx: '2' }),
+      h('path', { key: 2, d: 'm22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7' })
+    ],
+    'menu': [
+      h('line', { key: 1, x1: '4', x2: '20', y1: '12', y2: '12' }),
+      h('line', { key: 2, x1: '4', x2: '20', y1: '6', y2: '6' }),
+      h('line', { key: 3, x1: '4', x2: '20', y1: '18', y2: '18' })
+    ],
+    'building': [
+      h('rect', { key: 1, width: '16', height: '20', x: '4', y: '2', rx: '2', ry: '2' }),
+      h('path', { key: 2, d: 'M9 22v-4h6v4' }),
+      h('path', { key: 3, d: 'M8 6h.01' }),
+      h('path', { key: 4, d: 'M16 6h.01' }),
+      h('path', { key: 5, d: 'M8 10h.01' }),
+      h('path', { key: 6, d: 'M16 10h.01' }),
+      h('path', { key: 7, d: 'M8 14h.01' }),
+      h('path', { key: 8, d: 'M16 14h.01' })
+    ],
+    'qr-code': [
+      h('rect', { key: 1, width: '5', height: '5', x: '3', y: '3', rx: '1' }),
+      h('rect', { key: 2, width: '5', height: '5', x: '16', y: '3', rx: '1' }),
+      h('rect', { key: 3, width: '5', height: '5', x: '3', y: '16', rx: '1' }),
+      h('path', { key: 4, d: 'M21 16h-3a2 2 0 0 0-2 2v3' }),
+      h('path', { key: 5, d: 'M21 21v.01' }),
+      h('path', { key: 6, d: 'M12 7v3a2 2 0 0 1-2 2H7' }),
+      h('path', { key: 7, d: 'M3 12h.01' }),
+      h('path', { key: 8, d: 'M12 3h.01' }),
+      h('path', { key: 9, d: 'M12 16v.01' }),
+      h('path', { key: 10, d: 'M16 12h1' }),
+      h('path', { key: 11, d: 'M21 12v.01' }),
+      h('path', { key: 12, d: 'M12 21v-1' })
+    ],
+    'award': [
+      h('circle', { key: 1, cx: '12', cy: '8', r: '6' }),
+      h('path', { key: 2, d: 'M15.477 12.89 17 22l-5-3-5 3 1.523-9.11' })
+    ],
+    'crown': [
+      h('path', { key: 1, d: 'm2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14' })
+    ],
+    'download': [
+      h('path', { key: 1, d: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4' }),
+      h('polyline', { key: 2, points: '7 10 12 15 17 10' }),
+      h('line', { key: 3, x1: '12', x2: '12', y1: '15', y2: '3' })
+    ],
+    'monitor': [
+      h('rect', { key: 1, width: '20', height: '14', x: '2', y: '3', rx: '2' }),
+      h('line', { key: 2, x1: '8', x2: '16', y1: '21', y2: '21' }),
+      h('line', { key: 3, x1: '12', x2: '12', y1: '17', y2: '21' })
+    ],
+    'gift': [
+      h('rect', { key: 1, x: '3', y: '8', width: '18', height: '4', rx: '1' }),
+      h('path', { key: 2, d: 'M12 8v13' }),
+      h('path', { key: 3, d: 'M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7' }),
+      h('path', { key: 4, d: 'M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5' })
+    ],
+    'shield-check': [
+      h('path', { key: 1, d: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10' }),
+      h('path', { key: 2, d: 'm9 12 2 2 4-4' })
+    ]
+  };
+
+  function Icon({ name, className = 'w-4 h-4', strokeWidth = 1.5, style = {} }) {
+    const paths = ICON_PATHS[name] || ICON_PATHS['sparkles'];
+    return h('svg', {
+      xmlns: 'http://www.w3.org/2000/svg',
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: 'currentColor',
+      strokeWidth: strokeWidth,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      className: className,
+      style: style
+    }, paths);
+  }
+
+  // -------------------------------------------------------------
+  // INITIAL DATA (1:1 SYNCHRONIZED WITH src/data/initialData.ts)
+  // -------------------------------------------------------------
+  const INITIAL_PRODUCTS = [
+    {
+      id: 'prod-001',
+      sku: 'ALR-PV-001',
+      name: 'Pashmina Viscose Turkey Premium',
+      category: 'Pashmina Viscose',
+      price: 149000,
+      costPrice: 75000,
+      stock: 30,
+      minStock: 10,
+      colors: ['#DDA7A5', '#C48B89', '#CBB2A0', '#4A3B32'],
+      material: '100% Rayon Viscose Import Turkey (Jatuh, Ironless & Dingin)',
+      soldCount: 0
+    },
+    {
+      id: 'prod-002',
+      sku: 'ALR-PK-002',
+      name: 'Pashmina Kaos Modal Soft Touch',
+      category: 'Pashmina Kaos',
+      price: 129000,
+      costPrice: 62000,
+      stock: 35,
+      minStock: 12,
+      colors: ['#E8C3C4', '#2B2B2B', '#A89F91'],
+      material: 'Rayon Tencel Modal 30s Soft Feel',
+      soldCount: 0
+    },
+    {
+      id: 'prod-003',
+      sku: 'ALR-SV-003',
+      name: 'Segi Empat Voal Ultrafine Laser Cut',
+      category: 'Segi Empat Voal',
+      price: 139000,
+      costPrice: 68000,
+      stock: 25,
+      minStock: 10,
+      colors: ['#D8C2BD', '#B89B93', '#EFE0DB'],
+      material: 'Voal Ultrafine Platinum Grade A (Tegak Paripurna)',
+      soldCount: 0
+    },
+    {
+      id: 'prod-004',
+      sku: 'ALR-PS-004',
+      name: 'Parisian Silk Pleated Shawl Luxury',
+      category: 'Parisian Silk',
+      price: 189000,
+      costPrice: 95000,
+      stock: 20,
+      minStock: 8,
+      colors: ['#F3E3DF', '#D6A69F', '#B3817A'],
+      material: 'Paris Silk Textured Shimmer with Micro Plisket',
+      soldCount: 0
+    },
+    {
+      id: 'prod-005',
+      sku: 'ALR-BD-005',
+      name: 'Bergo Daily Instan Jersey Maryam',
+      category: 'Bergo Daily',
+      price: 89000,
+      costPrice: 42000,
+      stock: 40,
+      minStock: 15,
+      colors: ['#E0C9C5', '#9C7A75', '#3D3534'],
+      material: 'Korean Premium Spandex Jersey (Anti Kusut)',
+      soldCount: 0
+    },
+    {
+      id: 'prod-006',
+      sku: 'ALR-AK-006',
+      name: 'Tuspin Pin Brooch Mutiara Allure Atelier',
+      category: 'Aksesoris Hijab',
+      price: 49000,
+      costPrice: 18000,
+      stock: 50,
+      minStock: 15,
+      colors: ['#E8D3B9', '#E0B5B5'],
+      material: 'Alloy Gold Coated with Fresh Water Pearl Simulation',
+      soldCount: 0
+    },
+    {
+      id: 'prod-007',
+      sku: 'ALR-PV-007',
+      name: 'Pashmina Viscose - Ash Grey',
+      category: 'Pashmina Viscose',
+      price: 149000,
+      costPrice: 75000,
+      stock: 25,
+      minStock: 10,
+      colors: ['#8A8D91', '#A0A0A0'],
+      material: '100% Rayon Viscose Import Turkey (Cooling & Ironless)',
+      soldCount: 0
+    },
+    {
+      id: 'prod-008',
+      sku: 'ALR-SV-008',
+      name: 'Segi Empat Voal - Rosewood',
+      category: 'Segi Empat Voal',
+      price: 139000,
+      costPrice: 68000,
+      stock: 25,
+      minStock: 10,
+      colors: ['#9C5B63', '#DDA7A5'],
+      material: 'Voal Ultrafine Platinum Grade A',
+      soldCount: 0
+    }
+  ];
+
+  const INITIAL_CUSTOMERS = [
+    {
+      id: 'cust-walkin',
+      name: 'Pelanggan Umum (Walk-in)',
+      phone: '081200000000',
+      email: 'tamu@allure.boutique',
+      city: 'Jakarta',
+      tier: 'Bronze',
+      loyaltyPoints: 0,
+      totalSpent: 0,
+      total_pengeluaran: 0,
+      ordersCount: 0,
+      jumlah_transaksi: 0,
+      segment: 'New Customer',
+      joinedDate: '2026-11-04',
+      lastOrderDate: '-',
+      notes: 'Pelanggan langsung butik ALLURE.'
+    }
+  ];
+
+  const INITIAL_WISHLIST = [];
+
+  const INITIAL_TRANSACTIONS = [];
+
+  const INITIAL_FOLLOW_UPS = [];
+
+  const INITIAL_VOUCHERS = [
+    {
+      code: 'ALLUREHIJAB10',
+      description: 'Diskon 10% Spesial Pembelian Koleksi Hijab',
+      discountType: 'percentage',
+      discountValue: 10,
+      minSpend: 150000,
+      maxDiscount: 50000,
+      usageLimit: 100,
+      usedCount: 0,
+      expiresAt: '2026-12-31',
+      isActive: true
+    },
+    {
+      code: 'VIPGOLD25',
+      description: 'Potongan Langsung Rp 25.000 untuk Member Gold & Platinum',
+      discountType: 'fixed',
+      discountValue: 25000,
+      minSpend: 200000,
+      usageLimit: 50,
+      usedCount: 0,
+      expiresAt: '2026-11-30',
+      isActive: true
+    },
+    {
+      code: 'CANTIK50K',
+      description: 'Diskon Belanja Rp 50.000 Minimal Belanja Rp 350.000',
+      discountType: 'fixed',
+      discountValue: 50000,
+      minSpend: 350000,
+      usageLimit: 30,
+      usedCount: 0,
+      expiresAt: '2026-11-20',
+      isActive: true
+    },
+    {
+      code: 'WELCOMEALLURE',
+      description: 'Diskon Sambutan 15% untuk Pelanggan Baru Pertama Kali',
+      discountType: 'percentage',
+      discountValue: 15,
+      minSpend: 100000,
+      maxDiscount: 35000,
+      usageLimit: 200,
+      usedCount: 0,
+      expiresAt: '2026-12-31',
+      isActive: true
+    }
+  ];
+
+  const INITIAL_TICKETS = [];
+
+  const INITIAL_LOGS = [
+    {
+      id: 'log-01',
+      timestamp: new Date().toISOString(),
+      type: 'system',
+      title: 'Inisialisasi Sistem Baru',
+      description: 'Sistem ALLURE BUSINESS SPACE aktif. Transaksi dimulai dari 0.',
+      actor: 'Administrator'
+    }
+  ];
+
+  const INITIAL_SETTINGS = {
+    brandName: 'ALLURE',
+    tagline: 'BUSINESS SPACE',
+    subTagline: 'Everything Behind Allure',
+    address: 'Jl. Senopati No. 42, Kebayoran Baru, Jakarta Selatan 12190',
+    phone: '0811-2345-6789',
+    instagram: '@allure.hijab',
+    pointsMultiplier: 1,
+    footerNote: 'Terima kasih telah mempercayakan bisnis dan keanggunan Anda bersama ALLURE BUSINESS SPACE.'
+  };
+
+  // -------------------------------------------------------------
+  // HELPER FORMATTERS
+  // -------------------------------------------------------------
+  function formatRupiah(amount) {
+    if (isNaN(amount) || amount === null || amount === undefined) return 'Rp 0';
+    return 'Rp ' + Math.round(amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
+  function formatDate(dateStr) {
+    try {
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
+      return new Intl.DateTimeFormat('id-ID', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      }).format(d);
+    } catch {
+      return dateStr;
+    }
+  }
+
+  function cleanPhone(phone) {
+    if (!phone) return '';
+    let cleaned = phone.replace(/\D/g, '');
+    if (cleaned.startsWith('0')) cleaned = '62' + cleaned.slice(1);
+    else if (!cleaned.startsWith('62')) cleaned = '62' + cleaned;
+    return cleaned;
+  }
+
+  function getTierMultiplier(tier) {
+    switch (tier) {
+      case 'Platinum': return 2.0;
+      case 'Gold': return 1.5;
+      case 'Silver': return 1.2;
+      default: return 1.0;
+    }
+  }
+
+  function calculateTier(points) {
+    if (points >= 3500) return 'Platinum';
+    if (points >= 1500) return 'Gold';
+    if (points >= 500) return 'Silver';
+    return 'Bronze';
+  }
+
+  function generateWhatsAppMessage(customerName, category, brandName = 'ALLURE') {
+    const firstName = customerName.split(' ')[0] || customerName;
+    switch (category) {
+      case 'Follow-up Keranjang Belanja':
+        return `Halo Kak ${firstName}, salam hangat dari ${brandName}! ✨\n\nKami melihat Kakak sempat memilih koleksi hijab premium kami namun belum sempat menyelesaikan pesanan. Apakah ada warna atau ukuran yang ingin dikonsultasikan? Stok koleksi eksklusif ini sangat terbatas lho Kak. Hubungi kami jika butuh bantuan ya!`;
+      case 'Promo Peluncuran Hijab Baru':
+        return `Assalamu'alaikum Kak ${firstName}! 🌸\n\nKabar gembira dari ${brandName}! Koleksi terbaru *Parisian Silk & Pashmina Viscose Turkey* kini resmi dirilis dengan pilihan warna nude & earthy tone yang elegan. Dapatkan penawaran istimewa untuk pembelian hari ini. Intip koleksinya sekarang yuk Kak!`;
+      case 'Penawaran Khusus Member VIP':
+        return `Halo Kak ${firstName} yang terhormat, member VIP ${brandName} tercinta 👑\n\nSebagai bentuk apresiasi atas kesetiaan Kakak, kami menyiapkan voucher apresiasi eksklusif dengan diskon istimewa + double loyalty points untuk kunjungan/pembelian minggu ini. Terima kasih telah selalu tampil anggun bersama ${brandName}.`;
+      case 'Cek Kepuasan Pelanggan':
+        return `Assalamu'alaikum Kak ${firstName}! 🤍\n\nPesanan hijab dari ${brandName} sudah sampai dengan baik ya Kak? Bagaimana kenyamanan bahan dan warnanya saat dikenakan? Masukan dari Kakak sangat berharga bagi kami untuk terus menghadirkan karya terbaik. Selamat beraktivitas!`;
+      default:
+        return `Halo Kak ${firstName}, terima kasih telah menjadi bagian dari keluarga ${brandName}.`;
+    }
+  }
+
+  function generateWhatsAppUrl(phone, customerName, category, brandName = 'ALLURE') {
+    const cp = cleanPhone(phone);
+    const msg = generateWhatsAppMessage(customerName, category, brandName);
+    return `https://wa.me/${cp}?text=${encodeURIComponent(msg)}`;
+  }
+
+  // -------------------------------------------------------------
+  // COMPONENT: LOGIN VIEW (PHASE A / FEATURE 19)
+  // -------------------------------------------------------------
+  function LoginView({ onLoginSuccess, settings }) {
+    const [email, setEmail] = useState('admin@allure.boutique');
+    const [password, setPassword] = useState('password123');
+    const [showPassword, setShowPassword] = useState(false);
+    const [rememberMe, setRememberMe] = useState(true);
+
+    const handleSubmit = (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      onLoginSuccess();
+    };
+
+    return h('div', { className: 'min-h-screen w-full flex flex-col lg:flex-row bg-[#FAF7F2] text-[#1F2937] font-sans selection:bg-[#E8C3C4] selection:text-[#7D4443]' },
+      // Left Column: Atmospheric Brand Visual & Editorial Showcase
+      h('div', { className: 'lg:w-1/2 relative bg-[#F5ECE8] p-8 lg:p-16 flex flex-col justify-between overflow-hidden border-b lg:border-b-0 lg:border-r border-[#EFE8DE]' },
+        h('div', { className: 'absolute -top-24 -left-24 w-96 h-96 rounded-full bg-white/40 blur-3xl pointer-events-none' }),
+        h('div', { className: 'absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#DDA7A5]/30 blur-3xl pointer-events-none' }),
+
+        // Top Brand Logo
+        h('div', { className: 'relative z-10 flex items-center gap-3' },
+          h('div', { className: 'w-12 h-12 rounded-2xl bg-[#C48B89] flex items-center justify-center shadow-md text-white' },
+            h(Icon, { name: 'sparkles', className: 'w-6 h-6 text-white' })
+          ),
+          h('div', null,
+            h('h1', { className: 'font-serif text-3xl font-extrabold tracking-widest text-[#1F2937] leading-none' }, settings.brandName || 'ALLURE'),
+            h('p', { className: 'text-xs tracking-widest uppercase font-bold text-[#B2706E] mt-1.5' }, settings.tagline || 'BUSINESS SPACE'),
+            h('p', { className: 'text-[11px] tracking-wider text-[#6B7280] font-medium mt-0.5' }, settings.subTagline || 'Everything Behind Allure')
+          )
+        ),
+
+        // Center Editorial Showcase Card
+        h('div', { className: 'relative z-10 my-10 lg:my-0 max-w-lg space-y-5' },
+          h('h2', { className: 'font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1F2937] leading-tight' },
+            'Pusat Operasional Bisnis Allure'
+          ),
+          h('p', { className: 'text-sm text-[#6B7280] leading-relaxed' },
+            'Platform internal yang mengintegrasikan transaksi kasir, ketersediaan stok hijab, dan program loyalitas pelanggan dalam satu ruang kerja digital'
+          ),
+          h('div', { className: 'grid grid-cols-2 gap-3 pt-2' },
+            h('div', { className: 'p-3.5 bg-white/80 backdrop-blur-sm rounded-2xl border border-white/80 shadow-sm' },
+              h('div', { className: 'w-8 h-8 rounded-xl bg-[#FDF8F7] border border-[#E8C3C4] flex items-center justify-center text-[#B2706E] mb-2' },
+                h(Icon, { name: 'shopping-cart', className: 'w-4 h-4' })
+              ),
+              h('h3', { className: 'font-semibold text-xs text-[#1F2937]' }, 'Kasir POS Cerdas'),
+              h('p', { className: 'text-[11px] text-[#6B7280] mt-0.5' }, 'Auto sinkron stok & cetak struk')
+            ),
+            h('div', { className: 'p-3.5 bg-white/80 backdrop-blur-sm rounded-2xl border border-white/80 shadow-sm' },
+              h('div', { className: 'w-8 h-8 rounded-xl bg-[#FDF8F7] border border-[#E8C3C4] flex items-center justify-center text-[#B2706E] mb-2' },
+                h(Icon, { name: 'users', className: 'w-4 h-4' })
+              ),
+              h('h3', { className: 'font-semibold text-xs text-[#1F2937]' }, 'Relasi Member VIP'),
+              h('p', { className: 'text-[11px] text-[#6B7280] mt-0.5' }, 'Loyalty points & tier otomatis')
+            ),
+            h('div', { className: 'p-3.5 bg-white/80 backdrop-blur-sm rounded-2xl border border-white/80 shadow-sm' },
+              h('div', { className: 'w-8 h-8 rounded-xl bg-[#FDF8F7] border border-[#E8C3C4] flex items-center justify-center text-[#B2706E] mb-2' },
+                h(Icon, { name: 'heart-handshake', className: 'w-4 h-4' })
+              ),
+              h('h3', { className: 'font-semibold text-xs text-[#1F2937]' }, 'Wishlist & Restock'),
+              h('p', { className: 'text-[11px] text-[#6B7280] mt-0.5' }, 'Broadcast WhatsApp instan')
+            ),
+            h('div', { className: 'p-3.5 bg-white/80 backdrop-blur-sm rounded-2xl border border-white/80 shadow-sm' },
+              h('div', { className: 'w-8 h-8 rounded-xl bg-[#FDF8F7] border border-[#E8C3C4] flex items-center justify-center text-[#B2706E] mb-2' },
+                h(Icon, { name: 'shield-check', className: 'w-4 h-4' })
+              ),
+              h('h3', { className: 'font-semibold text-xs text-[#1F2937]' }, 'Audit Aktivitas'),
+              h('p', { className: 'text-[11px] text-[#6B7280] mt-0.5' }, 'Timeline riwayat kasir real-time')
+            )
+          )
+        ),
+
+        // Bottom Boutique Accreditation
+        h('div', { className: 'relative z-10 pt-4 flex items-center justify-between text-xs text-[#6B7280] border-t border-white/50' },
+          h('span', null, '© 2026 ALLURE • BUSINESS SPACE'),
+          h('span', { className: 'font-medium text-[#7D4443]' }, 'Everything Behind Allure')
+        )
+      ),
+
+      // Right Column: Login Form
+      h('div', { className: 'lg:w-1/2 p-6 sm:p-12 lg:p-16 flex items-center justify-center' },
+        h('div', { className: 'w-full max-w-md space-y-6 bg-white p-8 sm:p-10 rounded-3xl border border-[#EFE8DE] shadow-[0_2px_15px_rgba(0,0,0,0.03)]' },
+          h('div', { className: 'space-y-2 text-center lg:text-left' },
+            h('h2', { className: 'font-serif text-2xl sm:text-3xl font-bold tracking-wide text-[#1F2937]' }, 'Masuk ke ALLURE'),
+            h('p', { className: 'text-xs text-[#6B7280]' }, 'Silakan masukkan kredensial akun administrator untuk mengelola data butik.')
+          ),
+
+          h('form', { onSubmit: handleSubmit, className: 'space-y-4' },
+            h('div', { className: 'space-y-1.5' },
+              h('label', { className: 'block text-xs font-semibold text-[#1F2937]' }, 'Alamat Email Administrator'),
+              h('div', { className: 'relative' },
+                h('div', { className: 'absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#6B7280]' },
+                  h(Icon, { name: 'mail', className: 'w-4 h-4' })
+                ),
+                h('input', {
+                  type: 'email',
+                  required: true,
+                  value: email,
+                  onChange: (e) => setEmail(e.target.value),
+                  placeholder: 'admin@allure.boutique',
+                  className: 'w-full pl-10 pr-4 py-2.5 text-xs bg-[#FAF7F2] rounded-xl border border-[#EFE8DE] text-[#1F2937] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#DDA7A5] focus:border-[#DDA7A5] transition-all'
+                })
+              )
+            ),
+
+            h('div', { className: 'space-y-1.5' },
+              h('div', { className: 'flex items-center justify-between' },
+                h('label', { className: 'block text-xs font-semibold text-[#1F2937]' }, 'Kata Sandi (Password)'),
+                h('button', {
+                  type: 'button',
+                  onClick: () => alert('Gunakan akun demo untuk langsung masuk.'),
+                  className: 'text-[11px] font-medium text-[#B2706E] hover:underline'
+                }, 'Lupa sandi?')
+              ),
+              h('div', { className: 'relative' },
+                h('div', { className: 'absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#6B7280]' },
+                  h(Icon, { name: 'lock', className: 'w-4 h-4' })
+                ),
+                h('input', {
+                  type: showPassword ? 'text' : 'password',
+                  required: true,
+                  value: password,
+                  onChange: (e) => setPassword(e.target.value),
+                  placeholder: '••••••••',
+                  className: 'w-full pl-10 pr-10 py-2.5 text-xs bg-[#FAF7F2] rounded-xl border border-[#EFE8DE] text-[#1F2937] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#DDA7A5] focus:border-[#DDA7A5] transition-all'
+                }),
+                h('button', {
+                  type: 'button',
+                  onClick: () => setShowPassword(!showPassword),
+                  className: 'absolute inset-y-0 right-0 pr-3.5 flex items-center text-[#6B7280] hover:text-[#1F2937]'
+                },
+                  h(Icon, { name: showPassword ? 'eye-off' : 'eye', className: 'w-4 h-4' })
+                )
+              )
+            ),
+
+            h('div', { className: 'flex items-center justify-between text-xs text-[#6B7280]' },
+              h('label', { className: 'flex items-center gap-2 cursor-pointer select-none' },
+                h('input', {
+                  type: 'checkbox',
+                  checked: rememberMe,
+                  onChange: (e) => setRememberMe(e.target.checked),
+                  className: 'w-4 h-4 rounded border-gray-300 text-[#DDA7A5] focus:ring-[#DDA7A5]'
+                }),
+                h('span', null, 'Ingat sesi masuk ini')
+              ),
+              h('span', { className: 'text-[11px] text-emerald-700 font-medium' }, 'Boutique Server Online')
+            ),
+
+            h('button', {
+              type: 'submit',
+              className: 'w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#C48B89] hover:bg-[#B2706E] text-white text-xs sm:text-sm font-bold rounded-xl shadow-sm hover:shadow-md transition-all transform active:scale-[0.99]'
+            },
+              h('span', null, 'Masuk ke Dashboard'),
+              h(Icon, { name: 'arrow-right', className: 'w-4 h-4' })
+            )
+          )
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
+  // COMPONENT: DASHBOARD VIEW (MODULE 1)
+  // -------------------------------------------------------------
+  function DashboardView({ products, customers, transactions, followUps, settings, setCurrentTab }) {
+    // Metrik operasional murni (dimulai dari 0 untuk penggunaan nyata):
+    const totalCustomersDisplay = customers.length;
+    const currentMonthRevenue = transactions.reduce((acc, t) => acc + (t.grandTotal || 0), 0);
+    const newOrdersDisplay = transactions.length;
+    const liveUnitsSold = transactions.reduce((sum, t) => sum + t.items.reduce((itemSum, item) => itemSum + item.qty, 0), 0);
+    const totalProductsSoldDisplay = liveUnitsSold;
+
+    const lowStockProducts = products.filter(p => p.stock < 5 || p.stock <= p.minStock);
+    const todayFollowUps = followUps.filter(f => f.status === 'Pending').slice(0, 4);
+
+    // Monthly data for Area Chart
+    const monthlyData = [
+      { month: 'Jun', value: 0 },
+      { month: 'Jul', value: 0 },
+      { month: 'Agu', value: 0 },
+      { month: 'Sep', value: 0 },
+      { month: 'Okt', value: 0 },
+      { month: 'Nov', value: currentMonthRevenue }
+    ];
+
+    // SVG Area Chart points
+    const maxVal = Math.max(5000000, currentMonthRevenue * 1.25);
+    const chartHeight = 180;
+    const chartWidth = 520;
+    const points = monthlyData.map((d, i) => {
+      const x = 40 + (i * (chartWidth - 60) / (monthlyData.length - 1));
+      const y = chartHeight - 30 - ((d.value / maxVal) * (chartHeight - 50));
+      return { x, y, ...d };
+    });
+
+    const pathD = points.reduce((acc, pt, idx) => {
+      return idx === 0 ? `M ${pt.x} ${pt.y}` : `${acc} L ${pt.x} ${pt.y}`;
+    }, '');
+
+    const areaD = `${pathD} L ${points[points.length - 1].x} ${chartHeight - 30} L ${points[0].x} ${chartHeight - 30} Z`;
+
+    const donutData = [
+      { name: 'Pashmina Viscose', percentage: 40, color: '#DDA7A5' },
+      { name: 'Segi Empat Voal', percentage: 35, color: '#C48B89' },
+      { name: 'Pashmina Kaos', percentage: 25, color: '#B2706E' }
+    ];
+
+    return h('div', { className: 'space-y-6' },
+      // Welcome Banner
+      h('div', { className: 'relative overflow-hidden rounded-2xl bg-[#C48B89] p-6 lg:p-8 text-white shadow-sm' },
+        h('div', { className: 'relative z-10 max-w-2xl' },
+          h('div', { className: 'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-medium mb-3' },
+            h(Icon, { name: 'sparkles', className: 'w-3.5 h-3.5' }),
+            'Koleksi Eksklusif & CRM Butik'
+          ),
+          h('h1', { className: 'font-serif text-2xl lg:text-3xl font-bold tracking-wide' },
+            'Selamat Datang di ' + (settings.brandName || 'ALLURE')
+          ),
+          h('p', { className: 'mt-2 text-white/95 text-xs sm:text-sm leading-relaxed' },
+            'Pantau ringkasan performa penjualan bulanan, tugas follow-up pelanggan WhatsApp, kategori hijab terlaris, dan analitik kasir secara real-time.'
+          )
+        )
+      ),
+
+      // Low Stock Alert Banner (conditional)
+      lowStockProducts.length > 0 && h('div', { className: 'rounded-2xl border border-rose-200 bg-rose-50/70 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm' },
+        h('div', { className: 'flex items-start sm:items-center gap-3' },
+          h('div', { className: 'p-2 rounded-xl bg-rose-100 text-rose-700' },
+            h(Icon, { name: 'alert-triangle', className: 'w-5 h-5' })
+          ),
+          h('div', null,
+            h('h2', { className: 'text-sm font-semibold text-rose-900' },
+              `Peringatan: ${lowStockProducts.length} Produk Hijab Mendekati Batas Minimum (Stok < 5)!`
+            ),
+            h('p', { className: 'text-xs text-rose-700 mt-0.5' },
+              lowStockProducts.map(p => `${p.name} (${p.stock} tersisa)`).join(' • ')
+            )
+          )
+        ),
+        h('button', {
+          onClick: () => setCurrentTab('wishlist'),
+          className: 'self-start sm:self-center px-4 py-2 bg-[#DDA7A5] hover:bg-[#C48B89] text-white text-xs font-semibold rounded-xl shadow-xs transition-colors whitespace-nowrap'
+        }, 'Lihat Wishlist & Restock')
+      ),
+
+      // 4 Top Metric Cards
+      h('div', { className: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4' },
+        h('div', { className: 'p-5 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm' },
+          h('div', { className: 'flex items-center justify-between' },
+            h('span', { className: 'text-xs font-semibold text-[#6B7280] uppercase tracking-wider' }, 'Total Pelanggan'),
+            h('div', { className: 'p-2.5 rounded-xl bg-[#FDF8F7] text-[#B2706E]' },
+              h(Icon, { name: 'users', className: 'w-5 h-5' })
+            )
+          ),
+          h('p', { className: 'mt-3 text-2xl font-bold text-[#1F2937]' }, totalCustomersDisplay.toLocaleString('id-ID')),
+          h('div', { className: 'mt-2 flex items-center text-xs text-emerald-700 font-medium' },
+            h(Icon, { name: 'arrow-up-right', className: 'w-3.5 h-3.5 mr-0.5' }),
+            '+12% member baru bulan ini'
+          )
+        ),
+
+        h('div', { className: 'p-5 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm' },
+          h('div', { className: 'flex items-center justify-between' },
+            h('span', { className: 'text-xs font-semibold text-[#6B7280] uppercase tracking-wider' }, 'Pendapatan Bulan Ini'),
+            h('div', { className: 'p-2.5 rounded-xl bg-[#FDF8F7] text-[#B2706E]' },
+              h(Icon, { name: 'trending-up', className: 'w-5 h-5' })
+            )
+          ),
+          h('p', { className: 'mt-3 text-xl font-bold text-[#7D4443] truncate' }, formatRupiah(currentMonthRevenue)),
+          h('div', { className: 'mt-2 flex items-center text-xs text-emerald-700 font-medium' },
+            h(Icon, { name: 'arrow-up-right', className: 'w-3.5 h-3.5 mr-0.5' }),
+            'Target omset tercapai 118%'
+          )
+        ),
+
+        h('div', { className: 'p-5 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm' },
+          h('div', { className: 'flex items-center justify-between' },
+            h('span', { className: 'text-xs font-semibold text-[#6B7280] uppercase tracking-wider' }, 'Pesanan Baru'),
+            h('div', { className: 'p-2.5 rounded-xl bg-[#FDF8F7] text-[#B2706E]' },
+              h(Icon, { name: 'receipt', className: 'w-5 h-5' })
+            )
+          ),
+          h('p', { className: 'mt-3 text-2xl font-bold text-[#1F2937]' }, newOrdersDisplay),
+          h('div', { className: 'mt-2 flex items-center text-xs text-[#6B7280]' },
+            '100% lunas terverifikasi'
+          )
+        ),
+
+        h('div', { className: 'p-5 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm' },
+          h('div', { className: 'flex items-center justify-between' },
+            h('span', { className: 'text-xs font-semibold text-[#6B7280] uppercase tracking-wider' }, 'Produk Terjual'),
+            h('div', { className: 'p-2.5 rounded-xl bg-[#FDF8F7] text-[#B2706E]' },
+              h(Icon, { name: 'package-check', className: 'w-5 h-5' })
+            )
+          ),
+          h('p', { className: 'mt-3 text-2xl font-bold text-[#1F2937]' }, `${totalProductsSoldDisplay} Pcs`),
+          h('div', { className: 'mt-2 flex items-center text-xs text-[#6B7280]' },
+            'Koleksi pashmina & voal'
+          )
+        )
+      ),
+
+      // Charts: Area Chart & Donut Breakdown
+      h('div', { className: 'grid grid-cols-1 lg:grid-cols-3 gap-6' },
+        // Main Area Chart: "Grafik Penjualan Bulanan" with smooth Nude Pink line
+        h('div', { className: 'lg:col-span-2 p-6 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm flex flex-col justify-between' },
+          h('div', null,
+            h('div', { className: 'flex items-center justify-between mb-4' },
+              h('div', null,
+                h('h2', { className: 'font-serif text-lg font-bold text-[#1F2937]' }, 'Grafik Penjualan Bulanan'),
+                h('p', { className: 'text-xs text-[#6B7280]' }, 'Tren peningkatan omset 6 bulan terakhir dengan kurva Nude Pink')
+              ),
+              h('div', { className: 'flex items-center gap-2' },
+                h('span', { className: 'w-3 h-3 rounded-full bg-[#DDA7A5]' }),
+                h('span', { className: 'text-xs font-medium text-[#6B7280]' }, 'Omset Butik (IDR)')
+              )
+            ),
+
+            // SVG Smooth Area Chart
+            h('div', { className: 'w-full overflow-hidden' },
+              h('svg', { viewBox: `0 0 ${chartWidth} ${chartHeight}`, className: 'w-full h-56' },
+                // Area fill in solid nude
+                h('path', { d: areaD, fill: '#C48B89', fillOpacity: 0.25 }),
+                // Line
+                h('path', { d: pathD, fill: 'none', stroke: '#C48B89', strokeWidth: 3, strokeLinecap: 'round' }),
+                // Points & Labels
+                points.map((pt, idx) => h('g', { key: idx },
+                  h('circle', { cx: pt.x, cy: pt.y, r: 4, fill: '#FFFFFF', stroke: '#C48B89', strokeWidth: 2 }),
+                  h('text', { x: pt.x, y: chartHeight - 12, fontSize: 10, fill: '#6B7280', textAnchor: 'middle' }, pt.month)
+                ))
+              )
+            )
+          ),
+          h('div', { className: 'mt-2 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-[#6B7280]' },
+            h('span', null, 'Penjualan November mengalami percepatan transaksi harian'),
+            h('span', { className: 'font-semibold text-[#1F2937]' }, 'ALLURE Boutique Analytics')
+          )
+        ),
+
+        // Pie/Donut Chart: "Kategori Terlaris"
+        h('div', { className: 'p-6 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm flex flex-col justify-between' },
+          h('div', null,
+            h('div', { className: 'flex items-center justify-between mb-1' },
+              h('h2', { className: 'font-serif text-lg font-bold text-[#1F2937]' }, 'Kategori Terlaris'),
+              h(Icon, { name: 'package', className: 'w-4 h-4 text-[#B2706E]' })
+            ),
+            h('p', { className: 'text-xs text-[#6B7280] mb-4' }, 'Pangsa pasar pesanan hijab Allure'),
+
+            // Donut visual representation
+            h('div', { className: 'flex justify-center my-4' },
+              h('div', { className: 'relative w-36 h-36 rounded-full flex items-center justify-center shadow-inner', style: { background: '#C48B89' } },
+                h('div', { className: 'w-24 h-24 bg-white rounded-full flex flex-col items-center justify-center shadow-xs' },
+                  h('span', { className: 'font-serif font-bold text-base text-[#1F2937]' }, 'ALLURE'),
+                  h('span', { className: 'text-[9px] text-[#B2706E] font-semibold tracking-wider' }, 'BEST SELLER')
+                )
+              )
+            ),
+
+            h('div', { className: 'space-y-2 mt-4' },
+              donutData.map((item, idx) => h('div', { key: idx, className: 'flex items-center justify-between text-xs' },
+                h('div', { className: 'flex items-center gap-2' },
+                  h('span', { className: 'w-2.5 h-2.5 rounded-full', style: { backgroundColor: item.color } }),
+                  h('span', { className: 'font-medium text-[#1F2937]' }, item.name)
+                ),
+                h('span', { className: 'text-[#6B7280] font-bold' }, `${item.percentage}%`)
+              ))
+            )
+          ),
+
+          h('button', {
+            onClick: () => setCurrentTab('products'),
+            className: 'mt-4 w-full py-2.5 text-center text-xs font-semibold text-[#B2706E] bg-[#FDF8F7] hover:bg-[#F3D8D7] rounded-xl transition-colors'
+          }, 'Lihat Katalog Hijab Lengkap')
+        )
+      ),
+
+      // Mini Table: "Tugas Follow-up Hari Ini"
+      h('div', { className: 'p-6 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm' },
+        h('div', { className: 'flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4' },
+          h('div', null,
+            h('h2', { className: 'font-serif text-lg font-bold text-[#1F2937]' }, 'Tugas Follow-up Hari Ini'),
+            h('p', { className: 'text-xs text-[#6B7280]' }, 'Daftar pelanggan yang perlu disapa melalui WhatsApp hari ini untuk konversi belanja')
+          ),
+          h('button', {
+            onClick: () => setCurrentTab('followup'),
+            className: 'text-xs font-semibold text-[#B2706E] hover:underline flex items-center gap-1 self-start sm:self-auto'
+          },
+            h('span', null, 'Buka Modul CRM Lengkap'),
+            h(Icon, { name: 'arrow-up-right', className: 'w-3.5 h-3.5' })
+          )
+        ),
+
+        h('div', { className: 'overflow-x-auto' },
+          h('table', { className: 'w-full text-xs text-left' },
+            h('thead', null,
+              h('tr', { className: 'border-b border-[#EFE8DE] text-[#6B7280] font-semibold uppercase tracking-wider' },
+                h('th', { className: 'py-3 px-3' }, 'Nama Pelanggan'),
+                h('th', { className: 'py-3 px-3' }, 'Tier Loyalty'),
+                h('th', { className: 'py-3 px-3' }, 'Tujuan Follow-up'),
+                h('th', { className: 'py-3 px-3' }, 'Catatan'),
+                h('th', { className: 'py-3 px-3 text-right' }, 'Aksi WhatsApp')
+              )
+            ),
+            h('tbody', { className: 'divide-y divide-gray-100' },
+              todayFollowUps.map(item => h('tr', { key: item.id, className: 'hover:bg-[#FAF7F2] transition-colors' },
+                h('td', { className: 'py-3 px-3' },
+                  h('p', { className: 'font-semibold text-[#1F2937]' }, item.customerName),
+                  h('p', { className: 'text-[11px] text-[#6B7280]' }, item.customerPhone)
+                ),
+                h('td', { className: 'py-3 px-3' },
+                  h('span', { className: 'px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#FDF8F7] text-[#B2706E] border border-[#E8C3C4]' },
+                    item.customerTier
+                  )
+                ),
+                h('td', { className: 'py-3 px-3 font-medium text-[#1F2937]' }, item.category),
+                h('td', { className: 'py-3 px-3 text-[#6B7280] max-w-xs truncate' }, item.notes),
+                h('td', { className: 'py-3 px-3 text-right' },
+                  h('a', {
+                    href: generateWhatsAppUrl(item.customerPhone, item.customerName, item.category, settings.brandName),
+                    target: '_blank',
+                    className: 'inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium shadow-xs transition-all'
+                  },
+                    h(Icon, { name: 'message-circle', className: 'w-3.5 h-3.5' }),
+                    h('span', null, 'Chat WA')
+                  )
+                )
+              ))
+            )
+          )
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
+  // COMPONENT: CUSTOMERS VIEW (MODULE 2)
+  // -------------------------------------------------------------
+  function CustomersView({ customers, onAddCustomer, onUpdateCustomer, onDeleteCustomer }) {
+    const [search, setSearch] = useState('');
+    const [selectedSegment, setSelectedSegment] = useState('all');
+    const [selectedTier, setSelectedTier] = useState('all');
+
+    // Modals
+    const [isAddOpen, setIsAddOpen] = useState(false);
+    const [viewCust, setViewCust] = useState(null);
+    const [editCust, setEditCust] = useState(null);
+
+    // Add Form
+    const [addName, setAddName] = useState('');
+    const [addPhone, setAddPhone] = useState('');
+    const [addEmail, setAddEmail] = useState('');
+    const [addCity, setAddCity] = useState('Jakarta');
+    const [addSegment, setAddSegment] = useState('New Customer');
+    const [addNotes, setAddNotes] = useState('');
+
+    const filtered = customers.filter(c => {
+      const matchSearch =
+        c.name.toLowerCase().includes(search.toLowerCase()) ||
+        c.phone.includes(search) ||
+        c.email.toLowerCase().includes(search.toLowerCase()) ||
+        c.city.toLowerCase().includes(search.toLowerCase());
+
+      const normSeg = c.segment === 'New' ? 'New Customer' : (c.segment === 'Loyal' || c.segment === 'High Value') ? 'Loyal/VIP' : c.segment;
+      const matchSeg = selectedSegment === 'all' || normSeg === selectedSegment || c.segment === selectedSegment;
+      const matchTier = selectedTier === 'all' || c.tier === selectedTier;
+      return matchSearch && matchSeg && matchTier;
+    });
+
+    const handleAddSubmit = (e) => {
+      e.preventDefault();
+      if (!addName.trim() || !addPhone.trim()) return;
+      onAddCustomer({
+        name: addName.trim(),
+        phone: addPhone.trim(),
+        email: addEmail.trim() || `${addName.toLowerCase().replace(/\s+/g, '')}@boutique.id`,
+        city: addCity.trim() || 'Jakarta',
+        segment: addSegment,
+        notes: addNotes.trim()
+      });
+      setIsAddOpen(false);
+      setAddName('');
+      setAddPhone('');
+      setAddEmail('');
+      setAddNotes('');
+    };
+
+    const handleEditSubmit = (e) => {
+      e.preventDefault();
+      if (!editCust) return;
+      onUpdateCustomer(editCust.id, editCust);
+      setEditCust(null);
+    };
+
+    const renderPastelBadge = (segment) => {
+      if (segment === 'New Customer' || segment === 'New') {
+        return h('span', { className: 'px-2.5 py-1 rounded-full text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200' }, 'New Customer');
+      }
+      if (segment === 'Regular') {
+        return h('span', { className: 'px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200' }, 'Regular');
+      }
+      if (segment === 'Loyal/VIP' || segment === 'Loyal' || segment === 'High Value') {
+        return h('span', { className: 'px-2.5 py-1 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200' }, 'Loyal/VIP');
+      }
+      return h('span', { className: 'px-2.5 py-1 rounded-full text-[10px] font-semibold bg-stone-100 text-stone-600 border border-stone-200' }, 'Inactive');
+    };
+
+    return h('div', { className: 'space-y-6' },
+      h('div', { className: 'flex flex-col sm:flex-row sm:items-center justify-between gap-4' },
+        h('div', null,
+          h('h2', { className: 'font-serif text-2xl font-bold text-[#1F2937]' }, 'Manajemen Pelanggan (CRM)'),
+          h('p', { className: 'text-xs text-[#6B7280]' }, 'Kelola data member, histori transaksi, segmentasi pelanggan, dan akumulasi poin loyalty')
+        ),
+        h('button', {
+          onClick: () => setIsAddOpen(true),
+          className: 'flex items-center justify-center gap-2 px-4 py-2.5 bg-[#C48B89] text-white text-xs font-semibold rounded-xl shadow-xs self-start sm:self-auto'
+        },
+          h(Icon, { name: 'user-plus', className: 'w-4 h-4' }),
+          h('span', null, 'Tambah Pelanggan Baru')
+        )
+      ),
+
+      // Filters
+      h('div', { className: 'p-4 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm flex flex-col md:flex-row gap-3' },
+        h('div', { className: 'relative flex-1' },
+          h(Icon, { name: 'search', className: 'w-4 h-4 absolute left-3.5 top-3 text-[#6B7280]' }),
+          h('input', {
+            type: 'text',
+            placeholder: 'Cari nama pelanggan, nomor WhatsApp, email, atau kota...',
+            value: search,
+            onChange: (e) => setSearch(e.target.value),
+            className: 'w-full pl-10 pr-4 py-2 text-xs bg-[#FAF7F2] rounded-xl border border-[#EFE8DE] text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#DDA7A5]'
+          })
+        ),
+        h('div', { className: 'flex flex-wrap items-center gap-2' },
+          h('select', {
+            value: selectedSegment,
+            onChange: (e) => setSelectedSegment(e.target.value),
+            className: 'py-2 px-3 bg-[#FAF7F2] rounded-xl border border-[#EFE8DE] text-xs font-medium text-[#1F2937] focus:outline-none'
+          },
+            h('option', { value: 'all' }, 'Semua Segmen'),
+            h('option', { value: 'New Customer' }, 'New Customer (Blue)'),
+            h('option', { value: 'Regular' }, 'Regular (Green)'),
+            h('option', { value: 'Loyal/VIP' }, 'Loyal/VIP (Gold)'),
+            h('option', { value: 'Inactive' }, 'Inactive (Gray)')
+          ),
+          h('select', {
+            value: selectedTier,
+            onChange: (e) => setSelectedTier(e.target.value),
+            className: 'py-2 px-3 bg-[#FAF7F2] rounded-xl border border-[#EFE8DE] text-xs font-medium text-[#1F2937] focus:outline-none'
+          },
+            h('option', { value: 'all' }, 'Semua Tier Loyalty'),
+            h('option', { value: 'Bronze' }, 'Bronze Tier'),
+            h('option', { value: 'Silver' }, 'Silver Tier'),
+            h('option', { value: 'Gold' }, 'Gold Tier'),
+            h('option', { value: 'Platinum' }, 'Platinum Tier')
+          )
+        )
+      ),
+
+      // Customer Table
+      h('div', { className: 'bg-white rounded-2xl border border-[#EFE8DE] shadow-sm overflow-hidden' },
+        h('div', { className: 'overflow-x-auto' },
+          h('table', { className: 'w-full text-xs text-left' },
+            h('thead', null,
+              h('tr', { className: 'bg-[#FAF7F2] border-b border-[#EFE8DE] text-[#6B7280] font-semibold uppercase tracking-wider' },
+                h('th', { className: 'py-3.5 px-4' }, 'Nama Pelanggan'),
+                h('th', { className: 'py-3.5 px-4' }, 'WhatsApp'),
+                h('th', { className: 'py-3.5 px-4' }, 'Email'),
+                h('th', { className: 'py-3.5 px-4' }, 'Bergabung'),
+                h('th', { className: 'py-3.5 px-4 text-center' }, 'Total Transaksi'),
+                h('th', { className: 'py-3.5 px-4' }, 'Pengeluaran'),
+                h('th', { className: 'py-3.5 px-4' }, 'Poin Loyalitas'),
+                h('th', { className: 'py-3.5 px-4' }, 'Status/Segmen'),
+                h('th', { className: 'py-3.5 px-4 text-right' }, 'Aksi')
+              )
+            ),
+            h('tbody', { className: 'divide-y divide-gray-100' },
+              filtered.map(cust => h('tr', { key: cust.id, className: 'hover:bg-[#FAF7F2] transition-colors' },
+                h('td', { className: 'py-3.5 px-4 font-semibold text-[#1F2937]' },
+                  h('button', { onClick: () => setViewCust(cust), className: 'hover:text-[#B2706E] text-left block' }, cust.name),
+                  h('span', { className: 'text-[10px] text-[#6B7280]' }, cust.city)
+                ),
+                h('td', { className: 'py-3.5 px-4 font-mono text-[#1F2937]' },
+                  h('a', { href: `https://wa.me/${cleanPhone(cust.phone)}`, target: '_blank', className: 'text-emerald-700 hover:underline flex items-center gap-1' },
+                    h(Icon, { name: 'message-circle', className: 'w-3 h-3 text-emerald-600' }),
+                    cust.phone
+                  )
+                ),
+                h('td', { className: 'py-3.5 px-4 text-[#6B7280]' }, cust.email),
+                h('td', { className: 'py-3.5 px-4 text-[#6B7280]' }, cust.joinedDate),
+                h('td', { className: 'py-3.5 px-4 text-center font-bold text-[#1F2937]' }, `${cust.ordersCount}x`),
+                h('td', { className: 'py-3.5 px-4 font-bold text-[#7D4443]' }, formatRupiah(cust.totalSpent)),
+                h('td', { className: 'py-3.5 px-4 font-semibold text-[#B2706E]' },
+                  h('span', { className: 'flex items-center gap-1' },
+                    h(Icon, { name: 'award', className: 'w-3 h-3 text-[#DDA7A5]' }),
+                    `${cust.loyaltyPoints.toLocaleString('id-ID')} Pts`
+                  )
+                ),
+                h('td', { className: 'py-3.5 px-4' }, renderPastelBadge(cust.segment)),
+                h('td', { className: 'py-3.5 px-4 text-right' },
+                  h('div', { className: 'flex items-center justify-end gap-1' },
+                    h('button', { onClick: () => setViewCust(cust), className: 'p-1.5 text-gray-500 hover:text-[#1F2937] hover:bg-gray-100 rounded-lg' },
+                      h(Icon, { name: 'eye', className: 'w-3.5 h-3.5' })
+                    ),
+                    h('button', { onClick: () => setEditCust({ ...cust }), className: 'p-1.5 text-gray-500 hover:text-[#B2706E] hover:bg-[#FDF8F7] rounded-lg' },
+                      h(Icon, { name: 'edit', className: 'w-3.5 h-3.5' })
+                    ),
+                    h('button', { onClick: () => onDeleteCustomer(cust.id), className: 'p-1.5 text-gray-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg' },
+                      h(Icon, { name: 'trash', className: 'w-3.5 h-3.5' })
+                    )
+                  )
+                )
+              ))
+            )
+          )
+        )
+      ),
+
+      // Add Customer Modal
+      isAddOpen && h('div', { className: 'fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4' },
+        h('div', { className: 'bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl border border-[#EFE8DE] space-y-4' },
+          h('div', { className: 'flex justify-between items-center pb-3 border-b border-gray-100' },
+            h('h3', { className: 'font-serif text-lg font-bold text-[#1F2937]' }, 'Tambah Pelanggan Baru'),
+            h('button', { onClick: () => setIsAddOpen(false), className: 'text-gray-400 hover:text-gray-700' }, h(Icon, { name: 'x', className: 'w-4 h-4' }))
+          ),
+          h('form', { onSubmit: handleAddSubmit, className: 'space-y-3 text-xs' },
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Nama Lengkap *'),
+              h('input', { type: 'text', required: true, value: addName, onChange: (e) => setAddName(e.target.value), className: 'w-full p-2.5 rounded-xl border border-[#EFE8DE]' })
+            ),
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Nomor WhatsApp *'),
+              h('input', { type: 'text', required: true, value: addPhone, onChange: (e) => setAddPhone(e.target.value), placeholder: '08...', className: 'w-full p-2.5 rounded-xl border border-[#EFE8DE]' })
+            ),
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Kota / Domisili'),
+              h('input', { type: 'text', value: addCity, onChange: (e) => setAddCity(e.target.value), className: 'w-full p-2.5 rounded-xl border border-[#EFE8DE]' })
+            ),
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Segmen Pelanggan'),
+              h('select', { value: addSegment, onChange: (e) => setAddSegment(e.target.value), className: 'w-full p-2.5 rounded-xl border border-[#EFE8DE]' },
+                h('option', { value: 'New Customer' }, 'New Customer'),
+                h('option', { value: 'Regular' }, 'Regular'),
+                h('option', { value: 'Loyal/VIP' }, 'Loyal/VIP')
+              )
+            ),
+            h('button', { type: 'submit', className: 'w-full py-3 bg-[#DDA7A5] text-white rounded-xl font-bold' }, 'Simpan Pelanggan')
+          )
+        )
+      ),
+
+      // View Detail Modal
+      viewCust && h('div', { className: 'fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4' },
+        h('div', { className: 'bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl border border-[#EFE8DE] space-y-4' },
+          h('div', { className: 'flex justify-between items-center pb-3 border-b border-gray-100' },
+            h('h3', { className: 'font-serif text-lg font-bold text-[#1F2937]' }, viewCust.name),
+            h('button', { onClick: () => setViewCust(null), className: 'text-gray-400 hover:text-gray-700' }, h(Icon, { name: 'x', className: 'w-4 h-4' }))
+          ),
+          h('div', { className: 'space-y-2 text-xs' },
+            h('p', null, h('strong', null, 'Tier Loyalty: '), viewCust.tier),
+            h('p', null, h('strong', null, 'Total Belanja: '), formatRupiah(viewCust.totalSpent)),
+            h('p', null, h('strong', null, 'Poin Loyalty: '), `${viewCust.loyaltyPoints} Pts`),
+            h('p', null, h('strong', null, 'Jumlah Pesanan: '), `${viewCust.ordersCount}x`),
+            h('p', null, h('strong', null, 'WhatsApp: '), viewCust.phone),
+            h('p', null, h('strong', null, 'Catatan: '), viewCust.notes || '-')
+          ),
+          h('button', { onClick: () => setViewCust(null), className: 'w-full py-2.5 bg-gray-100 rounded-xl font-semibold text-xs' }, 'Tutup')
+        )
+      ),
+
+      // Edit Customer Modal
+      editCust && h('div', { className: 'fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4' },
+        h('div', { className: 'bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl border border-[#EFE8DE] space-y-4' },
+          h('div', { className: 'flex justify-between items-center pb-3 border-b border-gray-100' },
+            h('h3', { className: 'font-serif text-lg font-bold text-[#1F2937]' }, 'Edit Pelanggan'),
+            h('button', { onClick: () => setEditCust(null), className: 'text-gray-400 hover:text-gray-700' }, h(Icon, { name: 'x', className: 'w-4 h-4' }))
+          ),
+          h('form', { onSubmit: handleEditSubmit, className: 'space-y-3 text-xs' },
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Nama Lengkap'),
+              h('input', { type: 'text', value: editCust.name, onChange: (e) => setEditCust({ ...editCust, name: e.target.value }), className: 'w-full p-2.5 rounded-xl border border-[#EFE8DE]' })
+            ),
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Nomor WhatsApp'),
+              h('input', { type: 'text', value: editCust.phone, onChange: (e) => setEditCust({ ...editCust, phone: e.target.value }), className: 'w-full p-2.5 rounded-xl border border-[#EFE8DE]' })
+            ),
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Kota'),
+              h('input', { type: 'text', value: editCust.city, onChange: (e) => setEditCust({ ...editCust, city: e.target.value }), className: 'w-full p-2.5 rounded-xl border border-[#EFE8DE]' })
+            ),
+            h('button', { type: 'submit', className: 'w-full py-3 bg-[#DDA7A5] text-white rounded-xl font-bold' }, 'Simpan Perubahan')
+          )
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
+  // COMPONENT: PRODUCTS VIEW (MODULE 3)
+  // -------------------------------------------------------------
+  function ProductsView({ products, onAddProduct, onUpdateProduct, onDeleteProduct, onAdjustStock }) {
+    const [search, setSearch] = useState('');
+    const [selectedCat, setSelectedCat] = useState('all');
+    const [isAddOpen, setIsAddOpen] = useState(false);
+    const [editProd, setEditProd] = useState(null);
+
+    // Form state
+    const [name, setName] = useState('');
+    const [category, setCategory] = useState('Pashmina Viscose');
+    const [sku, setSku] = useState('');
+    const [price, setPrice] = useState(149000);
+    const [stock, setStock] = useState(25);
+    const [colors, setColors] = useState('#DDA7A5, #C48B89');
+
+    const filtered = products.filter(p => {
+      const matchSearch = p.name.toLowerCase().includes(search.toLowerCase()) || p.sku.toLowerCase().includes(search.toLowerCase());
+      const matchCat = selectedCat === 'all' || p.category === selectedCat;
+      return matchSearch && matchCat;
+    });
+
+    const handleAddSubmit = (e) => {
+      e.preventDefault();
+      onAddProduct({
+        name,
+        category,
+        sku: sku || `ALR-${Date.now().toString().slice(-4)}`,
+        price: Number(price),
+        costPrice: Math.round(Number(price) * 0.5),
+        stock: Number(stock),
+        minStock: 10,
+        colors: colors.split(',').map(c => c.trim()),
+        material: 'Premium Quality Fabric',
+        soldCount: 0
+      });
+      setIsAddOpen(false);
+      setName('');
+      setSku('');
+    };
+
+    return h('div', { className: 'space-y-6' },
+      h('div', { className: 'flex flex-col sm:flex-row sm:items-center justify-between gap-4' },
+        h('div', null,
+          h('h2', { className: 'font-serif text-2xl font-bold text-[#1F2937]' }, 'Katalog Produk & Inventori'),
+          h('p', { className: 'text-xs text-[#6B7280]' }, 'Kelola inventori koleksi hijab, varian warna, harga jual, dan status stok')
+        ),
+        h('button', {
+          onClick: () => setIsAddOpen(true),
+          className: 'flex items-center gap-1.5 px-4 py-2 bg-[#C48B89] text-white text-xs font-semibold rounded-xl shadow-xs'
+        },
+          h(Icon, { name: 'plus', className: 'w-4 h-4' }),
+          'Tambah Produk Baru'
+        )
+      ),
+
+      // Search & category filter
+      h('div', { className: 'p-3 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm flex items-center' },
+        h(Icon, { name: 'search', className: 'w-4 h-4 text-[#6B7280] ml-2 mr-3' }),
+        h('input', {
+          type: 'text',
+          placeholder: 'Cari berdasarkan nama hijab atau SKU...',
+          value: search,
+          onChange: (e) => setSearch(e.target.value),
+          className: 'w-full text-xs bg-transparent focus:outline-none text-[#1F2937]'
+        })
+      ),
+
+      // Catalog Table (Module 3 Specifications)
+      h('div', { className: 'bg-white rounded-2xl border border-[#EFE8DE] shadow-sm overflow-hidden' },
+        h('div', { className: 'overflow-x-auto' },
+          h('table', { className: 'w-full text-xs text-left' },
+            h('thead', null,
+              h('tr', { className: 'bg-[#FAF7F2] border-b border-[#EFE8DE] text-[#6B7280] font-semibold uppercase tracking-wider' },
+                h('th', { className: 'py-3.5 px-4 w-14' }, 'Foto'),
+                h('th', { className: 'py-3.5 px-4' }, 'Nama Produk'),
+                h('th', { className: 'py-3.5 px-4' }, 'Kategori'),
+                h('th', { className: 'py-3.5 px-4' }, 'SKU'),
+                h('th', { className: 'py-3.5 px-4' }, 'Harga'),
+                h('th', { className: 'py-3.5 px-4' }, 'Varian Warna'),
+                h('th', { className: 'py-3.5 px-4 text-center' }, 'Stok'),
+                h('th', { className: 'py-3.5 px-4' }, 'Status'),
+                h('th', { className: 'py-3.5 px-4 text-right' }, 'Aksi')
+              )
+            ),
+            h('tbody', { className: 'divide-y divide-gray-100' },
+              filtered.map(prod => {
+                const isOutOfStock = prod.stock === 0;
+                const isLowStock = prod.stock > 0 && prod.stock < 5;
+
+                return h('tr', {
+                  key: prod.id,
+                  className: `transition-colors ${isLowStock ? 'bg-amber-50/40 hover:bg-amber-50/70' : 'hover:bg-[#FAF7F2]'}`
+                },
+                  h('td', { className: 'py-3 px-4' },
+                    h('div', {
+                      className: 'w-10 h-10 rounded-xl border border-[#EFE8DE] flex items-center justify-center text-white shadow-xs',
+                      style: { backgroundColor: prod.colors[0] || '#DDA7A5' }
+                    },
+                      h(Icon, { name: 'sparkles', className: 'w-4 h-4' })
+                    )
+                  ),
+                  h('td', { className: 'py-3 px-4 font-semibold text-[#1F2937]' },
+                    prod.name,
+                    h('span', { className: 'text-[10px] text-[#6B7280] block truncate max-w-xs' }, prod.material)
+                  ),
+                  h('td', { className: 'py-3 px-4 font-medium text-[#1F2937]' }, prod.category),
+                  h('td', { className: 'py-3 px-4 font-mono text-[#6B7280]' }, prod.sku),
+                  h('td', { className: 'py-3 px-4 font-bold text-[#1F2937]' }, formatRupiah(prod.price)),
+                  h('td', { className: 'py-3 px-4' },
+                    h('div', { className: 'flex gap-1' },
+                      prod.colors.map((c, i) => h('span', { key: i, className: 'w-3.5 h-3.5 rounded-full border border-gray-300', style: { backgroundColor: c } }))
+                    )
+                  ),
+                  h('td', { className: 'py-3 px-4 text-center' },
+                    h('div', { className: 'inline-flex items-center gap-1 bg-white border border-[#EFE8DE] rounded-lg px-2 py-1' },
+                      h('button', { onClick: () => onAdjustStock(prod.id, -1), className: 'w-4 h-4 rounded text-gray-500 font-bold' }, '-'),
+                      h('span', { className: `font-bold px-1 text-xs ${isLowStock ? 'text-amber-800' : 'text-[#1F2937]'}` }, prod.stock),
+                      h('button', { onClick: () => onAdjustStock(prod.id, 1), className: 'w-4 h-4 rounded text-gray-500 font-bold' }, '+')
+                    )
+                  ),
+                  h('td', { className: 'py-3 px-4' },
+                    isOutOfStock ? h('span', { className: 'px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200' }, 'Habis (0 pcs)') :
+                    isLowStock ? h('span', { className: 'px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200' }, `Stok Tipis (${prod.stock})`) :
+                    h('span', { className: 'px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200' }, 'Tersedia')
+                  ),
+                  h('td', { className: 'py-3 px-4 text-right' },
+                    h('button', { onClick: () => setEditProd({ ...prod }), className: 'p-1.5 text-gray-500 hover:text-[#B2706E]' },
+                      h(Icon, { name: 'edit', className: 'w-3.5 h-3.5' })
+                    )
+                  )
+                );
+              })
+            )
+          )
+        )
+      ),
+
+      // Add Product Modal
+      isAddOpen && h('div', { className: 'fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4' },
+        h('div', { className: 'bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl border border-[#EFE8DE] space-y-4' },
+          h('div', { className: 'flex justify-between items-center pb-3 border-b border-gray-100' },
+            h('h3', { className: 'font-serif text-lg font-bold text-[#1F2937]' }, 'Tambah Produk Baru'),
+            h('button', { onClick: () => setIsAddOpen(false) }, h(Icon, { name: 'x', className: 'w-4 h-4' }))
+          ),
+          h('form', { onSubmit: handleAddSubmit, className: 'space-y-3 text-xs' },
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Nama Produk *'),
+              h('input', { type: 'text', required: true, value: name, onChange: (e) => setName(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' })
+            ),
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Kategori *'),
+              h('select', { value: category, onChange: (e) => setCategory(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' },
+                ['Pashmina Viscose', 'Pashmina Kaos', 'Segi Empat Voal', 'Parisian Silk', 'Bergo Daily', 'Aksesoris Hijab'].map(c => h('option', { key: c, value: c }, c))
+              )
+            ),
+            h('div', { className: 'grid grid-cols-2 gap-2' },
+              h('div', null,
+                h('label', { className: 'block font-semibold mb-1' }, 'Harga (IDR) *'),
+                h('input', { type: 'number', required: true, value: price, onChange: (e) => setPrice(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' })
+              ),
+              h('div', null,
+                h('label', { className: 'block font-semibold mb-1' }, 'Stok Awal *'),
+                h('input', { type: 'number', required: true, value: stock, onChange: (e) => setStock(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' })
+              )
+            ),
+            h('button', { type: 'submit', className: 'w-full py-3 bg-[#DDA7A5] text-white rounded-xl font-bold' }, 'Simpan Produk')
+          )
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
+  // COMPONENT: POS VIEW (MODULE 4)
+  // -------------------------------------------------------------
+  function PosView({ products, customers, vouchers, onProcessOrder, settings, transactions, onOpenInvoice }) {
+    const [posTab, setPosTab] = useState('pos');
+    const [selectedCustId, setSelectedCustId] = useState(customers[0]?.id || '');
+    const [cart, setCart] = useState([]);
+    const [voucherInput, setVoucherInput] = useState('');
+    const [appliedVoucher, setAppliedVoucher] = useState(null);
+    const [paymentMethod, setPaymentMethod] = useState('BCA Transfer');
+    const [searchProd, setSearchProd] = useState('');
+    const [selectedCat, setSelectedCat] = useState('all');
+
+    const currCust = customers.find(c => c.id === selectedCustId);
+    const subtotal = cart.reduce((s, it) => s + (it.product.price * it.qty), 0);
+
+    let discount = 0;
+    if (appliedVoucher) {
+      const v = vouchers.find(v => v.code === appliedVoucher && v.isActive);
+      if (v && subtotal >= v.minSpend) {
+        if (v.discountType === 'percentage') {
+          discount = Math.round((subtotal * v.discountValue) / 100);
+          if (v.maxDiscount && discount > v.maxDiscount) discount = v.maxDiscount;
+        } else {
+          discount = v.discountValue;
+        }
+      }
+    }
+    const grandTotal = Math.max(0, subtotal - discount);
+    const tierMultiplier = currCust ? getTierMultiplier(currCust.tier) : 1;
+    const estPoints = Math.round(Math.floor(grandTotal / 1000) * tierMultiplier * (settings.pointsMultiplier || 1));
+
+    const addToCart = (product) => {
+      if (product.stock <= 0) return alert('Stok produk habis!');
+      setCart(prev => {
+        const inCartQty = prev.filter(it => it.product.id === product.id).reduce((s, it) => s + it.qty, 0);
+        if (inCartQty >= product.stock) {
+          alert('Stok maksimal tercapai!');
+          return prev;
+        }
+        const defColor = product.colors[0] || '#DDA7A5';
+        const exist = prev.find(it => it.product.id === product.id && it.selectedColor === defColor);
+        if (exist) {
+          return prev.map(it => it.product.id === product.id && it.selectedColor === defColor ? { ...it, qty: it.qty + 1 } : it);
+        }
+        return [...prev, { product, qty: 1, selectedColor: defColor }];
+      });
+    };
+
+    const handleCheckout = () => {
+      if (cart.length === 0) return alert('Keranjang kasir masih kosong.');
+      if (!selectedCustId) return alert('Pilih pelanggan terlebih dahulu.');
+
+      const success = onProcessOrder({
+        customerId: selectedCustId,
+        items: cart,
+        voucherCode: appliedVoucher,
+        paymentMethod,
+        cashierName: 'Admin Allure'
+      });
+
+      if (success) {
+        setCart([]);
+        setAppliedVoucher(null);
+        setVoucherInput('');
+      }
+    };
+
+    const filteredProds = products.filter(p => {
+      const matchSearch = p.name.toLowerCase().includes(searchProd.toLowerCase()) || p.sku.toLowerCase().includes(searchProd.toLowerCase());
+      const matchCat = selectedCat === 'all' || p.category === selectedCat;
+      return matchSearch && matchCat;
+    });
+
+    return h('div', { className: 'space-y-6' },
+      h('div', { className: 'flex justify-between items-center' },
+        h('div', null,
+          h('h2', { className: 'font-serif text-2xl font-bold text-[#1F2937]' }, 'Kasir & Transaksi (POS)'),
+          h('p', { className: 'text-xs text-[#6B7280]' }, 'Pilih pelanggan, input produk, terapkan voucher diskon, dan cetak invoice')
+        )
+      ),
+
+      // Sub-tab: POS vs History
+      h('div', { className: 'flex gap-2 border-b border-[#EFE8DE] pb-3' },
+        h('button', {
+          onClick: () => setPosTab('pos'),
+          className: `flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold ${
+            posTab === 'pos' ? 'bg-[#C48B89] text-white shadow-xs' : 'bg-white border text-[#6B7280]'
+          }`
+        },
+          h(Icon, { name: 'shopping-cart', className: 'w-3.5 h-3.5' }),
+          'Kasir Interaktif (POS)'
+        ),
+        h('button', {
+          onClick: () => setPosTab('history'),
+          className: `flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold ${
+            posTab === 'history' ? 'bg-[#C48B89] text-white shadow-xs' : 'bg-white border text-[#6B7280]'
+          }`
+        },
+          h(Icon, { name: 'receipt', className: 'w-3.5 h-3.5' }),
+          'Riwayat Transaksi'
+        )
+      ),
+
+      posTab === 'history' ? h(TransactionsView, { transactions, onOpenInvoice }) :
+      h('div', { className: 'grid grid-cols-1 lg:grid-cols-12 gap-6 items-start' },
+        // Left Column: Customer & Products (7 cols)
+        h('div', { className: 'lg:col-span-7 space-y-4' },
+          h('div', { className: 'p-4 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm' },
+            h('label', { className: 'text-xs font-semibold text-[#1F2937] block mb-1.5' }, 'Pilih Pelanggan Transaksi:'),
+            h('select', {
+              value: selectedCustId,
+              onChange: (e) => setSelectedCustId(e.target.value),
+              className: 'w-full p-2.5 bg-[#FAF7F2] rounded-xl border border-[#EFE8DE] text-xs font-medium text-[#1F2937]'
+            },
+              customers.map(c => h('option', { key: c.id, value: c.id }, `${c.name} — ${c.phone} [${c.tier}]`))
+            )
+          ),
+
+          // Products Catalog
+          h('div', { className: 'p-4 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm space-y-3' },
+            h('div', { className: 'flex gap-2' },
+              h('input', {
+                type: 'text',
+                placeholder: 'Cari hijab atau SKU...',
+                value: searchProd,
+                onChange: (e) => setSearchProd(e.target.value),
+                className: 'flex-1 p-2 text-xs bg-[#FAF7F2] rounded-xl border border-[#EFE8DE]'
+              }),
+              h('select', {
+                value: selectedCat,
+                onChange: (e) => setSelectedCat(e.target.value),
+                className: 'p-2 text-xs bg-[#FAF7F2] rounded-xl border border-[#EFE8DE]'
+              },
+                h('option', { value: 'all' }, 'Semua Kategori'),
+                ['Pashmina Viscose', 'Pashmina Kaos', 'Segi Empat Voal', 'Parisian Silk', 'Bergo Daily'].map(c => h('option', { key: c, value: c }, c))
+              )
+            ),
+
+            h('div', { className: 'grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[460px] overflow-y-auto' },
+              filteredProds.map(prod => {
+                const inCartQty = cart.filter(it => it.product.id === prod.id).reduce((s, it) => s + it.qty, 0);
+                const remaining = Math.max(0, prod.stock - inCartQty);
+                return h('div', { key: prod.id, className: 'p-3 rounded-2xl border border-[#EFE8DE] bg-white flex flex-col justify-between' },
+                  h('div', null,
+                    h('div', { className: 'flex justify-between text-[10px]' },
+                      h('span', { className: 'font-mono text-[#6B7280]' }, prod.sku),
+                      h('span', { className: `font-bold ${remaining < 5 ? 'text-amber-800' : 'text-emerald-700'}` }, `Stok: ${remaining}`)
+                    ),
+                    h('h4', { className: 'font-semibold text-xs text-[#1F2937] mt-1' }, prod.name)
+                  ),
+                  h('div', { className: 'pt-2 mt-2 border-t border-gray-100 flex justify-between items-center' },
+                    h('span', { className: 'font-bold text-xs' }, formatRupiah(prod.price)),
+                    h('button', {
+                      onClick: () => addToCart(prod),
+                      disabled: remaining <= 0,
+                      className: `px-3 py-1 rounded-xl text-xs font-semibold ${
+                        remaining <= 0 ? 'bg-gray-200 text-gray-500' : 'bg-[#DDA7A5] text-white hover:bg-[#C48B89]'
+                      }`
+                    }, remaining <= 0 ? 'Habis' : '+ Tambah')
+                  )
+                );
+              })
+            )
+          )
+        ),
+
+        // Right Column: Summary & Checkout (5 cols)
+        h('div', { className: 'lg:col-span-5 bg-white rounded-2xl border border-[#EFE8DE] p-5 shadow-sm space-y-4' },
+          h('div', { className: 'flex justify-between items-center border-b border-gray-100 pb-3' },
+            h('h3', { className: 'font-serif text-base font-bold text-[#1F2937]' }, 'Keranjang & Invoice Preview'),
+            h('span', { className: 'text-xs text-[#6B7280]' }, `${cart.reduce((s, it) => s + it.qty, 0)} Item`)
+          ),
+
+          // Items in cart
+          h('div', { className: 'space-y-2 max-h-56 overflow-y-auto' },
+            cart.length === 0 ? h('p', { className: 'text-xs text-[#6B7280] py-6 text-center italic' }, 'Keranjang masih kosong.') :
+            cart.map((item, idx) => h('div', { key: idx, className: 'p-2 bg-[#FAF7F2] rounded-xl border border-[#EFE8DE] flex justify-between items-center text-xs' },
+              h('div', null,
+                h('p', { className: 'font-semibold text-[#1F2937]' }, item.product.name),
+                h('p', { className: 'text-[10px] text-[#6B7280]' }, `${formatRupiah(item.product.price)} × ${item.qty}`)
+              ),
+              h('div', { className: 'flex items-center gap-2' },
+                h('span', { className: 'font-bold text-[#1F2937]' }, formatRupiah(item.product.price * item.qty)),
+                h('button', {
+                  onClick: () => setCart(prev => prev.filter((_, i) => i !== idx)),
+                  className: 'text-rose-500 hover:text-rose-700 font-bold px-1'
+                }, '×')
+              )
+            ))
+          ),
+
+          // Voucher input
+          h('div', { className: 'pt-2 border-t border-gray-100 flex gap-2' },
+            h('input', {
+              type: 'text',
+              placeholder: 'Kode Voucher (cth: ALLUREHIJAB10)',
+              value: voucherInput,
+              onChange: (e) => setVoucherInput(e.target.value.toUpperCase()),
+              className: 'flex-1 p-2 text-xs bg-[#FAF7F2] rounded-xl border border-[#EFE8DE] uppercase'
+            }),
+            appliedVoucher ? h('button', {
+              onClick: () => { setAppliedVoucher(null); setVoucherInput(''); },
+              className: 'px-3 py-1.5 bg-rose-50 text-rose-600 rounded-xl text-xs font-semibold'
+            }, 'Batal') : h('button', {
+              onClick: () => {
+                const v = vouchers.find(v => v.code === voucherInput.trim().toUpperCase() && v.isActive);
+                if (v) {
+                  if (subtotal >= v.minSpend) setAppliedVoucher(v.code);
+                  else alert(`Minimal belanja Rp ${v.minSpend}`);
+                } else alert('Voucher tidak valid!');
+              },
+              className: 'px-3 py-1.5 bg-[#1F2937] text-white rounded-xl text-xs font-semibold'
+            }, 'Terapkan')
+          ),
+
+          // Payment method
+          h('div', { className: 'pt-2 border-t border-gray-100' },
+            h('label', { className: 'text-xs font-semibold text-[#1F2937] block mb-1' }, 'Metode Pembayaran:'),
+            h('div', { className: 'grid grid-cols-2 gap-1.5 text-xs' },
+              ['BCA Transfer', 'Mandiri Transfer', 'QRIS Allure', 'COD Boutique', 'Debit / Cash'].map(m =>
+                h('button', {
+                  key: m,
+                  onClick: () => setPaymentMethod(m),
+                  className: `p-2 rounded-xl border text-left font-medium ${
+                    paymentMethod === m ? 'border-[#DDA7A5] bg-[#FDF8F7] text-[#7D4443] font-bold' : 'border-[#EFE8DE] text-[#6B7280]'
+                  }`
+                }, m)
+              )
+            )
+          ),
+
+          // Pricing Totals
+          h('div', { className: 'pt-3 border-t border-[#EFE8DE] space-y-1 text-xs' },
+            h('div', { className: 'flex justify-between text-[#6B7280]' },
+              h('span', null, 'Subtotal:'),
+              h('span', null, formatRupiah(subtotal))
+            ),
+            discount > 0 && h('div', { className: 'flex justify-between text-rose-600' },
+              h('span', null, `Diskon (${appliedVoucher}):`),
+              h('span', null, `-${formatRupiah(discount)}`)
+            ),
+            h('div', { className: 'flex justify-between text-base font-bold text-[#1F2937] pt-1 border-t border-gray-100' },
+              h('span', null, 'Total Pembayaran:'),
+              h('span', { className: 'text-[#7D4443]' }, formatRupiah(grandTotal))
+            ),
+            h('div', { className: 'p-2 rounded-xl bg-[#FDF8F7] border border-[#E8C3C4] flex justify-between text-[11px]' },
+              h('span', { className: 'text-[#6B7280]' }, 'Poin Loyalty Didapat:'),
+              h('span', { className: 'font-bold text-[#B2706E]' }, `+${estPoints} Poin`)
+            )
+          ),
+
+          h('button', {
+            onClick: handleCheckout,
+            disabled: cart.length === 0,
+            className: `w-full py-3 rounded-xl text-xs font-bold text-white shadow-md ${
+              cart.length === 0 ? 'bg-gray-300' : 'bg-[#C48B89] hover:bg-[#B2706E]'
+            }`
+          }, 'Proses Transaksi')
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
+  // COMPONENT: TRANSACTIONS VIEW (HISTORY TAB)
+  // -------------------------------------------------------------
+  function TransactionsView({ transactions, onOpenInvoice }) {
+    const [search, setSearch] = useState('');
+    const filtered = transactions.filter(t => t.id.toLowerCase().includes(search.toLowerCase()) || t.customerName.toLowerCase().includes(search.toLowerCase()));
+
+    return h('div', { className: 'space-y-6' },
+      h('div', null,
+        h('h2', { className: 'font-serif text-2xl font-bold text-[#1F2937]' }, 'Riwayat Transaksi Butik'),
+        h('p', { className: 'text-xs text-[#6B7280]' }, 'Daftar semua faktur penjualan POS dan cetak ulang invoice')
+      ),
+      h('div', { className: 'bg-white rounded-2xl border border-[#EFE8DE] shadow-sm overflow-hidden' },
+        h('table', { className: 'w-full text-xs text-left' },
+          h('thead', null,
+            h('tr', { className: 'bg-[#FAF7F2] border-b border-[#EFE8DE] text-[#6B7280] uppercase font-semibold' },
+              h('th', { className: 'p-3.5' }, 'No. Invoice'),
+              h('th', { className: 'p-3.5' }, 'Tanggal'),
+              h('th', { className: 'p-3.5' }, 'Pelanggan'),
+              h('th', { className: 'p-3.5' }, 'Metode Bayar'),
+              h('th', { className: 'p-3.5' }, 'Status Pesanan'),
+              h('th', { className: 'p-3.5' }, 'Total Bayar'),
+              h('th', { className: 'p-3.5 text-right' }, 'Struk')
+            )
+          ),
+          h('tbody', { className: 'divide-y divide-gray-100' },
+            filtered.length === 0 ?
+              h('tr', null,
+                h('td', { colSpan: 7, className: 'py-12 text-center text-[#6B7280]' },
+                  h('div', { className: 'space-y-1' },
+                    h('p', { className: 'font-semibold text-sm text-[#1F2937]' }, 'Belum ada transaksi.'),
+                    h('p', { className: 'text-xs text-[#6B7280]' }, 'Sistem dimulai dari 0. Transaksi baru yang diproses di Kasir POS akan langsung tercatat di sini.')
+                  )
+                )
+              ) :
+            filtered.map(t => h('tr', { key: t.id, className: 'hover:bg-[#FAF7F2]' },
+              h('td', { className: 'p-3.5 font-mono font-bold text-[#1F2937]' }, t.id),
+              h('td', { className: 'p-3.5 text-[#6B7280]' }, formatDate(t.date)),
+              h('td', { className: 'p-3.5' }, `${t.customerName} (${t.customerTier})`),
+              h('td', { className: 'p-3.5 text-[#6B7280]' }, t.paymentMethod),
+              h('td', { className: 'p-3.5' },
+                h('span', { className: 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200' }, t.status || 'Selesai')
+              ),
+              h('td', { className: 'p-3.5 font-bold text-[#7D4443]' }, formatRupiah(t.grandTotal)),
+              h('td', { className: 'p-3.5 text-right' },
+                h('button', {
+                  onClick: () => onOpenInvoice(t),
+                  className: 'px-3 py-1 bg-[#FDF8F7] text-[#B2706E] border border-[#E8C3C4] rounded-xl font-semibold hover:bg-[#C48B89] hover:text-white'
+                }, 'Cetak Struk')
+              )
+            ))
+          )
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
+  // COMPONENT: CRM FOLLOW-UP VIEW (MODULE 5)
+  // -------------------------------------------------------------
+  function FollowUpView({ followUps, customers, settings, onUpdateStatus, onAddFollowUp }) {
+    const [filterCategory, setFilterCategory] = useState('all');
+
+    const filtered = followUps.filter(f => filterCategory === 'all' || f.category === filterCategory);
+
+    return h('div', { className: 'space-y-6' },
+      h('div', null,
+        h('h2', { className: 'font-serif text-2xl font-bold text-[#1F2937]' }, 'CRM Follow-Up & WhatsApp (Module 5)'),
+        h('p', { className: 'text-xs text-[#6B7280]' }, 'Kirim pesan personal WhatsApp otomatis ke nomor pelanggan butik')
+      ),
+
+      // Table: "Daftar Pelanggan Perlu Dihubungi"
+      h('div', { className: 'bg-white rounded-2xl border border-[#EFE8DE] shadow-sm overflow-hidden' },
+        h('div', { className: 'p-4 border-b border-gray-100 flex justify-between items-center' },
+          h('h3', { className: 'font-serif font-bold text-sm text-[#1F2937]' }, 'Daftar Pelanggan Perlu Dihubungi'),
+          h('span', { className: 'text-xs text-[#6B7280]' }, `Total: ${filtered.length} Jadwal`)
+        ),
+        h('table', { className: 'w-full text-xs text-left' },
+          h('thead', null,
+            h('tr', { className: 'bg-[#FAF7F2] border-b border-[#EFE8DE] text-[#6B7280] uppercase font-semibold' },
+              h('th', { className: 'p-3.5' }, 'Nama Pelanggan'),
+              h('th', { className: 'p-3.5' }, 'Jadwal Follow-up'),
+              h('th', { className: 'p-3.5' }, 'Tujuan Follow-up'),
+              h('th', { className: 'p-3.5' }, 'Catatan'),
+              h('th', { className: 'p-3.5' }, 'Status'),
+              h('th', { className: 'p-3.5 text-right' }, 'Aksi WhatsApp')
+            )
+          ),
+          h('tbody', { className: 'divide-y divide-gray-100' },
+            filtered.length === 0 ?
+              h('tr', null,
+                h('td', { colSpan: 6, className: 'py-8 text-center text-[#6B7280]' }, 'Belum ada jadwal follow-up pelanggan.')
+              ) :
+            filtered.map(f => h('tr', { key: f.id, className: 'hover:bg-[#FAF7F2]' },
+              h('td', { className: 'p-3.5 font-semibold text-[#1F2937]' },
+                h('div', null, f.customerName),
+                h('div', { className: 'text-[10px] text-[#6B7280]' }, `${f.customerTier} • ${f.customerPhone}`)
+              ),
+              h('td', { className: 'p-3.5 text-[#1F2937]' }, f.scheduledDate),
+              h('td', { className: 'p-3.5 font-medium text-[#1F2937]' }, f.category),
+              h('td', { className: 'p-3.5 text-[#6B7280] max-w-xs' }, f.notes),
+              h('td', { className: 'p-3.5' },
+                h('select', {
+                  value: f.status,
+                  onChange: (e) => onUpdateStatus(f.id, e.target.value),
+                  className: `px-2 py-0.5 rounded-xl text-[10px] font-bold border ${f.status === 'Sent' ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-800'}`
+                },
+                  h('option', { value: 'Pending' }, '⏳ Belum'),
+                  h('option', { value: 'Sent' }, '📤 Selesai')
+                )
+              ),
+              h('td', { className: 'p-3.5 text-right' },
+                h('a', {
+                  href: generateWhatsAppUrl(f.customerPhone, f.customerName, f.category, settings.brandName),
+                  target: '_blank',
+                  onClick: () => onUpdateStatus(f.id, 'Sent'),
+                  className: 'inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-600 text-white rounded-xl text-xs font-semibold hover:bg-emerald-700'
+                },
+                  h(Icon, { name: 'message-circle', className: 'w-3.5 h-3.5' }),
+                  'Chat WA'
+                )
+              )
+            ))
+          )
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
+  // COMPONENT: SERVICE & FEEDBACK VIEW (MODULE 6)
+  // -------------------------------------------------------------
+  function ServiceView({ tickets, customers, onAddTicket, onUpdateTicketStatus }) {
+    const [isAddOpen, setIsAddOpen] = useState(false);
+    const [custName, setCustName] = useState(customers[0]?.name || '');
+    const [category, setCategory] = useState('Keluhan');
+    const [rating, setRating] = useState(5);
+    const [notes, setNotes] = useState('');
+
+    const handleAdd = (e) => {
+      e.preventDefault();
+      onAddTicket({
+        customerName: custName,
+        customerPhone: customers.find(c => c.name === custName)?.phone || '081234567890',
+        category,
+        rating: Number(rating),
+        status: 'Open',
+        createdAt: new Date().toISOString(),
+        adminNotes: notes
+      });
+      setIsAddOpen(false);
+      setNotes('');
+    };
+
+    return h('div', { className: 'space-y-6' },
+      h('div', { className: 'flex justify-between items-center' },
+        h('div', null,
+          h('h2', { className: 'font-serif text-2xl font-bold text-[#1F2937]' }, 'Layanan Pelanggan & Feedback (Module 6)'),
+          h('p', { className: 'text-xs text-[#6B7280]' }, 'Sistem ticketing keluhan, ulasan kepuasan produk hijab, dan saran member')
+        ),
+        h('button', {
+          onClick: () => setIsAddOpen(true),
+          className: 'px-4 py-2 bg-[#C48B89] text-white rounded-xl text-xs font-semibold shadow-xs'
+        }, '+ Buat Tiket Baru')
+      ),
+
+      // Table with strict required columns: Tanggal, Nama Pelanggan, Tipe, Deskripsi, Rating, Status
+      h('div', { className: 'bg-white rounded-2xl border border-[#EFE8DE] shadow-sm overflow-hidden' },
+        h('table', { className: 'w-full text-xs text-left' },
+          h('thead', null,
+            h('tr', { className: 'bg-[#FAF7F2] border-b border-[#EFE8DE] text-[#6B7280] uppercase font-semibold' },
+              h('th', { className: 'p-3.5' }, 'Tanggal'),
+              h('th', { className: 'p-3.5' }, 'Nama Pelanggan'),
+              h('th', { className: 'p-3.5' }, 'Tipe'),
+              h('th', { className: 'p-3.5' }, 'Deskripsi'),
+              h('th', { className: 'p-3.5' }, 'Rating'),
+              h('th', { className: 'p-3.5' }, 'Status'),
+              h('th', { className: 'p-3.5 text-right' }, 'Aksi')
+            )
+          ),
+          h('tbody', { className: 'divide-y divide-gray-100' },
+            tickets.length === 0 ?
+              h('tr', null,
+                h('td', { colSpan: 7, className: 'py-8 text-center text-[#6B7280]' }, 'Belum ada tiket feedback atau layanan pelanggan.')
+              ) :
+            tickets.map(t => h('tr', { key: t.id, className: 'hover:bg-[#FAF7F2]' },
+              h('td', { className: 'p-3.5 text-[#6B7280]' }, formatDate(t.createdAt)),
+              h('td', { className: 'p-3.5 font-semibold text-[#1F2937]' }, t.customerName),
+              h('td', { className: 'p-3.5' },
+                h('span', { className: 'px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#FDF8F7] text-[#B2706E] border border-[#E8C3C4]' }, t.category)
+              ),
+              h('td', { className: 'p-3.5 text-[#1F2937] max-w-xs' }, t.adminNotes),
+              h('td', { className: 'p-3.5 font-bold text-amber-500' }, '★'.repeat(t.rating)),
+              h('td', { className: 'p-3.5' },
+                h('span', { className: `px-2 py-0.5 rounded-full text-[10px] font-bold ${t.status === 'Resolved' ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'}` }, t.status)
+              ),
+              h('td', { className: 'p-3.5 text-right' },
+                t.status !== 'Resolved' && h('button', {
+                  onClick: () => onUpdateTicketStatus(t.id, 'Resolved'),
+                  className: 'px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-lg text-xs font-semibold border border-emerald-200'
+                }, 'Tandai Selesai')
+              )
+            ))
+          )
+        )
+      ),
+
+      // Add Ticket Modal
+      isAddOpen && h('div', { className: 'fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4' },
+        h('div', { className: 'bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl border border-[#EFE8DE] space-y-4' },
+          h('div', { className: 'flex justify-between items-center pb-3 border-b border-gray-100' },
+            h('h3', { className: 'font-serif text-lg font-bold text-[#1F2937]' }, 'Buat Tiket Layanan'),
+            h('button', { onClick: () => setIsAddOpen(false) }, h(Icon, { name: 'x', className: 'w-4 h-4' }))
+          ),
+          h('form', { onSubmit: handleAdd, className: 'space-y-3 text-xs' },
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Nama Pelanggan'),
+              h('select', { value: custName, onChange: (e) => setCustName(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' },
+                customers.map(c => h('option', { key: c.id, value: c.name }, c.name))
+              )
+            ),
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Tipe Tiket'),
+              h('select', { value: category, onChange: (e) => setCategory(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' },
+                h('option', { value: 'Keluhan' }, 'Keluhan'),
+                h('option', { value: 'Ulasan Produk' }, 'Ulasan Produk'),
+                h('option', { value: 'Saran' }, 'Saran')
+              )
+            ),
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Rating (1-5 Bintang)'),
+              h('input', { type: 'number', min: 1, max: 5, value: rating, onChange: (e) => setRating(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' })
+            ),
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Deskripsi Masalah / Ulasan'),
+              h('textarea', { rows: 3, required: true, value: notes, onChange: (e) => setNotes(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' })
+            ),
+            h('button', { type: 'submit', className: 'w-full py-3 bg-[#DDA7A5] text-white rounded-xl font-bold' }, 'Kirim Tiket')
+          )
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
+  // COMPONENT: WISHLIST & RESTOCK VIEW (MODULE 7)
+  // -------------------------------------------------------------
+  function WishlistView({ wishlistItems, onRestock, onBroadcast, settings }) {
+    const [broadcastModalItem, setBroadcastModalItem] = useState(null);
+    const [restockModalItem, setRestockModalItem] = useState(null);
+    const [restockQty, setRestockQty] = useState(30);
+
+    const totalWaiting = wishlistItems.reduce((acc, w) => acc + (w.wishlistCount || (w.interestedCustomers ? w.interestedCustomers.length : 0)), 0);
+    const outOfStockCount = wishlistItems.filter(i => i.stock <= 0).length;
+
+    const handleExecuteRestock = (e) => {
+      e.preventDefault();
+      if (!restockModalItem) return;
+      onRestock(restockModalItem.id, Number(restockQty));
+      setRestockModalItem(null);
+      setRestockQty(30);
+    };
+
+    const handleExecuteBroadcast = () => {
+      if (!broadcastModalItem) return;
+      onBroadcast(broadcastModalItem.id);
+      setBroadcastModalItem(null);
+      alert('Siaran WhatsApp restock berhasil disimulasikan!');
+    };
+
+    return h('div', { className: 'space-y-6' },
+      h('div', null,
+        h('h2', { className: 'font-serif text-2xl font-bold text-[#1F2937]' }, 'Wishlist & Restock Hijab (Module 7)'),
+        h('p', { className: 'text-xs text-[#6B7280]' }, 'Tabel produk habis stok dengan jumlah peminat tinggi dan siaran WhatsApp')
+      ),
+
+      // 3 Metrics
+      h('div', { className: 'grid grid-cols-1 sm:grid-cols-3 gap-4' },
+        h('div', { className: 'p-5 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm' },
+          h('span', { className: 'text-xs font-semibold text-[#6B7280] uppercase tracking-wider' }, 'Total Peminat Wishlist'),
+          h('p', { className: 'mt-2 text-2xl font-bold text-[#1F2937]' }, `${totalWaiting} Peminat`)
+        ),
+        h('div', { className: 'p-5 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm' },
+          h('span', { className: 'text-xs font-semibold text-rose-700 uppercase tracking-wider' }, 'Produk Stok Habis'),
+          h('p', { className: 'mt-2 text-2xl font-bold text-rose-600' }, `${outOfStockCount} Katalog`)
+        ),
+        h('div', { className: 'p-5 bg-white rounded-2xl border border-[#EFE8DE] shadow-sm' },
+          h('span', { className: 'text-xs font-semibold text-emerald-800 uppercase tracking-wider' }, 'Siaran WA Terkirim'),
+          h('p', { className: 'mt-2 text-2xl font-bold text-emerald-700' }, `${wishlistItems.filter(w => w.lastBroadcastDate).length} Siaran`)
+        )
+      ),
+
+      // Table: Nama Produk, Jumlah Peminat (Wishlist), Tombol "Broadcast Restock via WA"
+      h('div', { className: 'bg-white rounded-2xl border border-[#EFE8DE] shadow-sm overflow-hidden' },
+        h('table', { className: 'w-full text-xs text-left' },
+          h('thead', null,
+            h('tr', { className: 'bg-[#FAF7F2] border-b border-[#EFE8DE] text-[#6B7280] uppercase font-semibold' },
+              h('th', { className: 'p-3.5' }, 'Nama Produk & SKU'),
+              h('th', { className: 'p-3.5' }, 'Kategori'),
+              h('th', { className: 'p-3.5' }, 'Harga Jual'),
+              h('th', { className: 'p-3.5' }, 'Status Stok'),
+              h('th', { className: 'p-3.5' }, 'Jumlah Peminat (Wishlist)'),
+              h('th', { className: 'p-3.5 text-right' }, 'Aksi Restock & WA')
+            )
+          ),
+          h('tbody', { className: 'divide-y divide-gray-100' },
+            wishlistItems.length === 0 ?
+              h('tr', null,
+                h('td', { colSpan: 6, className: 'py-8 text-center text-[#6B7280]' }, 'Belum ada antrean wishlist produk restock.')
+              ) :
+            wishlistItems.map(item => h('tr', { key: item.id, className: 'hover:bg-[#FAF7F2]' },
+              h('td', { className: 'p-3.5' },
+                h('p', { className: 'font-semibold text-[#1F2937]' }, item.productName),
+                h('span', { className: 'font-mono text-[10px] text-[#6B7280]' }, item.sku)
+              ),
+              h('td', { className: 'p-3.5' }, item.category),
+              h('td', { className: 'p-3.5 font-bold' }, formatRupiah(item.price)),
+              h('td', { className: 'p-3.5' },
+                item.stock <= 0 ? h('span', { className: 'px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200' }, 'Stok Habis (0 pcs)') :
+                h('span', { className: 'px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200' }, `Tersedia (${item.stock} pcs)`)
+              ),
+              h('td', { className: 'p-3.5' },
+                h('span', { className: 'px-2.5 py-0.5 rounded-full font-bold bg-[#FDF8F7] text-[#B2706E] border border-[#E8C3C4]' },
+                  `${item.wishlistCount || (item.interestedCustomers ? item.interestedCustomers.length : 0)} Peminat`
+                )
+              ),
+              h('td', { className: 'p-3.5 text-right space-x-2' },
+                h('button', {
+                  onClick: () => setRestockModalItem(item),
+                  className: 'px-3 py-1.5 bg-white border border-[#EFE8DE] text-[#1F2937] hover:text-[#B2706E] rounded-xl font-medium text-xs'
+                }, 'Restock'),
+                h('button', {
+                  onClick: () => setBroadcastModalItem(item),
+                  className: 'px-3 py-1.5 bg-[#C48B89] text-white rounded-xl font-semibold text-xs'
+                }, 'Broadcast Restock via WA')
+              )
+            ))
+          )
+        )
+      ),
+
+      // Broadcast Modal
+      broadcastModalItem && h('div', { className: 'fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4' },
+        h('div', { className: 'bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl border border-[#EFE8DE] space-y-4' },
+          h('div', { className: 'flex justify-between items-center pb-3 border-b border-gray-100' },
+            h('h3', { className: 'font-serif text-lg font-bold text-[#1F2937]' }, 'Broadcast Restock via WA'),
+            h('button', { onClick: () => setBroadcastModalItem(null) }, h(Icon, { name: 'x', className: 'w-4 h-4' }))
+          ),
+          h('div', { className: 'p-3 bg-[#FAF7F2] rounded-xl text-xs space-y-1' },
+            h('p', { className: 'font-bold text-[#1F2937]' }, broadcastModalItem.productName),
+            h('p', { className: 'text-[#6B7280]' }, `Total Penerima Siaran: ${broadcastModalItem.wishlistCount || 0} Pelanggan`)
+          ),
+          h('p', { className: 'text-xs text-[#6B7280]' },
+            `Pesan WhatsApp otomatis akan disiarkan ke antrean peminat yang sudah menantikan produk ${broadcastModalItem.productName}.`
+          ),
+          h('button', {
+            onClick: handleExecuteBroadcast,
+            className: 'w-full py-3 bg-emerald-600 text-white rounded-xl font-bold text-xs'
+          }, 'Kirim Siaran Sekarang')
+        )
+      ),
+
+      // Restock Modal
+      restockModalItem && h('div', { className: 'fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4' },
+        h('div', { className: 'bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl border border-[#EFE8DE] space-y-4' },
+          h('div', { className: 'flex justify-between items-center pb-3 border-b border-gray-100' },
+            h('h3', { className: 'font-serif text-lg font-bold text-[#1F2937]' }, 'Restock Hijab'),
+            h('button', { onClick: () => setRestockModalItem(null) }, h(Icon, { name: 'x', className: 'w-4 h-4' }))
+          ),
+          h('form', { onSubmit: handleExecuteRestock, className: 'space-y-3 text-xs' },
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Produk'),
+              h('input', { type: 'text', disabled: true, value: restockModalItem.productName, className: 'w-full p-2 bg-gray-100 rounded-xl' })
+            ),
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Jumlah Unit Masuk (Pcs)'),
+              h('input', { type: 'number', min: 1, required: true, value: restockQty, onChange: (e) => setRestockQty(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE] font-bold' })
+            ),
+            h('button', { type: 'submit', className: 'w-full py-3 bg-[#DDA7A5] text-white rounded-xl font-bold' }, 'Konfirmasi Restock')
+          )
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
+  // COMPONENT: LOYALTY & VOUCHERS VIEW (MODULE 9)
+  // -------------------------------------------------------------
+  function LoyaltyView({ vouchers, customers, onToggleVoucher, onAddVoucher }) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [code, setCode] = useState('');
+    const [description, setDescription] = useState('');
+    const [discountType, setDiscountType] = useState('percentage');
+    const [discountValue, setDiscountValue] = useState(10);
+    const [minSpend, setMinSpend] = useState(150000);
+    const [maxDiscount, setMaxDiscount] = useState(50000);
+    const [usageLimit, setUsageLimit] = useState(50);
+    const [expiresAt, setExpiresAt] = useState('2026-12-31');
+
+    const tiersConfig = [
+      {
+        tier: 'Bronze',
+        range: '0 – 499 Poin',
+        multiplier: '1.0x Poin',
+        badgeBg: 'bg-orange-50 border-orange-200 text-orange-800',
+        perks: [
+          'Poin loyalty 1x setiap transaksi',
+          'Struk digital boutique tersimpan',
+          'Notifikasi WhatsApp drop koleksi baru'
+        ]
+      },
+      {
+        tier: 'Silver',
+        range: '500 – 1.499 Poin',
+        multiplier: '1.2x Poin',
+        badgeBg: 'bg-stone-100 border-stone-300 text-stone-800',
+        perks: [
+          'Poin loyalty 1.2x lebih cepat',
+          'Voucher diskon ulang tahun 5%',
+          'Free tuspin mutiara Allure Atelier'
+        ]
+      },
+      {
+        tier: 'Gold',
+        range: '1.500 – 3.499 Poin',
+        multiplier: '1.5x Poin',
+        badgeBg: 'bg-amber-50 border-amber-300 text-amber-800',
+        perks: [
+          'Poin loyalty 1.5x berlipat',
+          'Diskon member Allure 10%',
+          'Early access launching hijab 24 jam lebih awal',
+          'Free konsultasi matching warna personal'
+        ]
+      },
+      {
+        tier: 'Platinum',
+        range: '3.500+ Poin',
+        multiplier: '2.0x Double Poin',
+        badgeBg: 'bg-purple-50 border-purple-200 text-purple-800',
+        perks: [
+          'Double Points 2.0x pada setiap transaksi',
+          'Diskon member eksklusif 15%',
+          'Free Luxury Hardbox Allure setiap order',
+          'Undangan VIP Trunk Show & Private Fashion Preview',
+          'Personal boutique styling assistant'
+        ]
+      }
+    ];
+
+    const handleSubmitVoucher = (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      if (!code.trim()) return;
+      onAddVoucher({
+        code: code.trim().toUpperCase(),
+        description: description.trim() || 'Voucher Spesial Allure',
+        discountType,
+        discountValue: Number(discountValue),
+        minSpend: Number(minSpend),
+        maxDiscount: discountType === 'percentage' ? Number(maxDiscount) : undefined,
+        usageLimit: Number(usageLimit),
+        usedCount: 0,
+        expiresAt,
+        isActive: true
+      });
+      setIsModalOpen(false);
+      setCode('');
+      setDescription('');
+    };
+
+    return h('div', { className: 'space-y-8 animate-in fade-in duration-200' },
+      // Top Header
+      h('div', { className: 'flex flex-col sm:flex-row sm:items-center justify-between gap-4' },
+        h('div', null,
+          h('h2', { className: 'font-serif text-2xl font-bold text-[#1F2937]' }, 'Loyalty Member & Promo Voucher'),
+          h('p', { className: 'text-xs text-[#6B7280]' }, 'Tingkatkan retensi pelanggan dengan tingkatan member tier dan kupon promosi')
+        ),
+        h('button', {
+          onClick: () => setIsModalOpen(true),
+          className: 'flex items-center justify-center gap-2 px-4 py-2.5 bg-[#C48B89] hover:bg-[#B2706E] text-white text-xs font-semibold rounded-xl shadow-xs transition-all self-start sm:self-auto'
+        },
+          h(Icon, { name: 'plus', className: 'w-4 h-4' }),
+          h('span', null, 'Buat Kode Voucher Baru')
+        )
+      ),
+
+      // Member Tier Cards
+      h('div', null,
+        h('h3', { className: 'font-serif text-lg font-bold text-[#1F2937] mb-3 flex items-center gap-2' },
+          h(Icon, { name: 'crown', className: 'w-5 h-5 text-[#B2706E]' }),
+          h('span', null, 'Tingkatan Keanggotaan Allure (Tier Levels)')
+        ),
+        h('div', { className: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4' },
+          tiersConfig.map(cfg => {
+            const count = customers.filter(c => c.tier === cfg.tier).length;
+            return h('div', { key: cfg.tier, className: 'bg-white rounded-2xl border border-[#EFE8DE] p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between' },
+              h('div', null,
+                h('div', { className: 'flex items-center justify-between mb-2' },
+                  h('span', { className: `px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${cfg.badgeBg}` }, cfg.tier),
+                  h('span', { className: 'text-xs font-semibold text-[#6B7280] flex items-center gap-1' },
+                    h(Icon, { name: 'users', className: 'w-3.5 h-3.5' }),
+                    h('span', null, `${count} Member`)
+                  )
+                ),
+                h('p', { className: 'text-xs font-medium text-[#1F2937] mt-1' }, cfg.range),
+                h('p', { className: 'text-sm font-bold text-[#B2706E] mt-0.5' }, cfg.multiplier),
+                h('div', { className: 'mt-4 pt-3 border-t border-gray-100 space-y-2' },
+                  h('p', { className: 'text-[10px] font-semibold text-[#6B7280] uppercase tracking-wider' }, 'Keuntungan Eksklusif:'),
+                  h('ul', { className: 'space-y-1.5 text-xs text-[#1F2937]' },
+                    cfg.perks.map((p, idx) =>
+                      h('li', { key: idx, className: 'flex items-start gap-1.5 leading-snug' },
+                        h(Icon, { name: 'check', className: 'w-3.5 h-3.5 text-[#B2706E] flex-shrink-0 mt-0.5' }),
+                        h('span', null, p)
+                      )
+                    )
+                  )
+                )
+              ),
+              h('div', { className: 'mt-5 pt-3 border-t border-gray-100 text-[10px] text-[#6B7280] italic' },
+                'Otomatis naik level saat poin bertambah'
+              )
+            );
+          })
+        )
+      ),
+
+      // Promo Code & Voucher Management
+      h('div', { className: 'bg-white rounded-2xl border border-[#EFE8DE] p-6 shadow-sm space-y-4' },
+        h('div', { className: 'flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-4' },
+          h('div', null,
+            h('h3', { className: 'font-serif text-lg font-bold text-[#1F2937] flex items-center gap-2' },
+              h(Icon, { name: 'gift', className: 'w-5 h-5 text-[#B2706E]' }),
+              h('span', null, 'Daftar Voucher Diskon Butik')
+            ),
+            h('p', { className: 'text-xs text-[#6B7280]' }, 'Kelola kupon promosi yang dapat langsung dimasukkan di Kasir POS')
+          ),
+          h('span', { className: 'text-xs font-medium text-[#1F2937] bg-[#FDF8F7] px-3 py-1.5 rounded-xl border border-[#E8C3C4] self-start sm:self-auto' },
+            `${vouchers.filter(v => v.isActive).length} Voucher Aktif`
+          )
+        ),
+        h('div', { className: 'overflow-x-auto' },
+          h('table', { className: 'w-full text-xs text-left' },
+            h('thead', null,
+              h('tr', { className: 'bg-[#FAF7F2] border-b border-[#EFE8DE] text-[#6B7280] font-semibold uppercase tracking-wider' },
+                h('th', { className: 'py-3 px-3' }, 'Kode Kupon'),
+                h('th', { className: 'py-3 px-3' }, 'Deskripsi & Syarat'),
+                h('th', { className: 'py-3 px-3' }, 'Nilai Diskon'),
+                h('th', { className: 'py-3 px-3' }, 'Min. Belanja'),
+                h('th', { className: 'py-3 px-3' }, 'Penggunaan / Kuota'),
+                h('th', { className: 'py-3 px-3' }, 'Kedaluwarsa'),
+                h('th', { className: 'py-3 px-3 text-right' }, 'Status Promo')
+              )
+            ),
+            h('tbody', { className: 'divide-y divide-gray-100' },
+              vouchers.map(v =>
+                h('tr', { key: v.code, className: 'hover:bg-[#FAF7F2] transition-colors' },
+                  h('td', { className: 'py-3 px-3' },
+                    h('span', { className: 'font-mono font-bold text-xs bg-[#FDF8F7] text-[#B2706E] px-2.5 py-1 rounded-lg border border-[#E8C3C4]' }, v.code)
+                  ),
+                  h('td', { className: 'py-3 px-3 max-w-xs font-medium text-[#1F2937]' }, v.description),
+                  h('td', { className: 'py-3 px-3 font-bold text-[#7D4443]' },
+                    v.discountType === 'percentage'
+                      ? `${v.discountValue}% (Maks ${formatRupiah(v.maxDiscount || 0)})`
+                      : formatRupiah(v.discountValue)
+                  ),
+                  h('td', { className: 'py-3 px-3 text-[#1F2937]' }, formatRupiah(v.minSpend)),
+                  h('td', { className: 'py-3 px-3 text-[#6B7280]' },
+                    h('span', { className: 'font-semibold text-[#1F2937]' }, v.usedCount),
+                    ` / ${v.usageLimit} kali`
+                  ),
+                  h('td', { className: 'py-3 px-3 text-[#6B7280]' }, v.expiresAt),
+                  h('td', { className: 'py-3 px-3 text-right' },
+                    h('button', {
+                      onClick: () => onToggleVoucher(v.code),
+                      className: `px-3 py-1 rounded-xl text-[10px] font-bold transition-all ${
+                        v.isActive
+                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100'
+                          : 'bg-stone-100 text-stone-500 border border-stone-200 hover:bg-stone-200'
+                      }`
+                    }, v.isActive ? '✓ Aktif Digunakan' : 'Non-Aktif')
+                  )
+                )
+              )
+            )
+          )
+        )
+      ),
+
+      // Modal Tambah Voucher
+      isModalOpen && h('div', { className: 'fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4' },
+        h('div', { className: 'bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl border border-[#EFE8DE] space-y-4 animate-in fade-in zoom-in-95' },
+          h('div', { className: 'flex items-center justify-between border-b border-gray-100 pb-3' },
+            h('div', { className: 'flex items-center gap-2' },
+              h(Icon, { name: 'gift', className: 'w-5 h-5 text-[#B2706E]' }),
+              h('h3', { className: 'font-serif text-base font-bold text-[#1F2937]' }, 'Buat Kode Voucher Baru')
+            ),
+            h('button', { onClick: () => setIsModalOpen(false), className: 'text-gray-400 hover:text-gray-700' },
+              h(Icon, { name: 'x', className: 'w-4 h-4' })
+            )
+          ),
+          h('form', { onSubmit: handleSubmitVoucher, className: 'space-y-3.5 text-xs' },
+            h('div', null,
+              h('label', { className: 'block text-[#1F2937] font-semibold mb-1' }, 'Kode Voucher *'),
+              h('input', {
+                type: 'text',
+                required: true,
+                placeholder: 'misal: ALLURECANTIK20',
+                value: code,
+                onChange: (e) => setCode(e.target.value.toUpperCase()),
+                className: 'w-full px-3 py-2 rounded-xl border border-[#EFE8DE] uppercase font-mono font-bold text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#DDA7A5]'
+              })
+            ),
+            h('div', null,
+              h('label', { className: 'block text-[#1F2937] font-semibold mb-1' }, 'Keterangan Promo'),
+              h('input', {
+                type: 'text',
+                placeholder: 'misal: Diskon 20% Koleksi Hijab Silk',
+                value: description,
+                onChange: (e) => setDescription(e.target.value),
+                className: 'w-full px-3 py-2 rounded-xl border border-[#EFE8DE] text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#DDA7A5]'
+              })
+            ),
+            h('div', { className: 'grid grid-cols-2 gap-3' },
+              h('div', null,
+                h('label', { className: 'block text-[#1F2937] font-semibold mb-1' }, 'Tipe Diskon'),
+                h('select', {
+                  value: discountType,
+                  onChange: (e) => setDiscountType(e.target.value),
+                  className: 'w-full px-3 py-2 rounded-xl border border-[#EFE8DE] text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#DDA7A5]'
+                },
+                  h('option', { value: 'percentage' }, 'Persentase (%)'),
+                  h('option', { value: 'fixed' }, 'Nominal Rupiah (Rp)')
+                )
+              ),
+              h('div', null,
+                h('label', { className: 'block text-[#1F2937] font-semibold mb-1' },
+                  discountType === 'percentage' ? 'Nilai Persen (%)' : 'Nominal Potongan (Rp)'
+                ),
+                h('input', {
+                  type: 'number',
+                  required: true,
+                  min: 1,
+                  value: discountValue,
+                  onChange: (e) => setDiscountValue(Number(e.target.value)),
+                  className: 'w-full px-3 py-2 rounded-xl border border-[#EFE8DE] text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#DDA7A5]'
+                })
+              )
+            ),
+            h('div', { className: 'grid grid-cols-2 gap-3' },
+              h('div', null,
+                h('label', { className: 'block text-[#1F2937] font-semibold mb-1' }, 'Min. Belanja (IDR)'),
+                h('input', {
+                  type: 'number',
+                  min: 0,
+                  value: minSpend,
+                  onChange: (e) => setMinSpend(Number(e.target.value)),
+                  className: 'w-full px-3 py-2 rounded-xl border border-[#EFE8DE] text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#DDA7A5]'
+                })
+              ),
+              h('div', null,
+                h('label', { className: 'block text-[#1F2937] font-semibold mb-1' }, 'Maks. Potongan (IDR)'),
+                h('input', {
+                  type: 'number',
+                  min: 0,
+                  value: maxDiscount,
+                  onChange: (e) => setMaxDiscount(Number(e.target.value)),
+                  className: 'w-full px-3 py-2 rounded-xl border border-[#EFE8DE] text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#DDA7A5]'
+                })
+              )
+            ),
+            h('div', { className: 'grid grid-cols-2 gap-3' },
+              h('div', null,
+                h('label', { className: 'block text-[#1F2937] font-semibold mb-1' }, 'Batas Kuota'),
+                h('input', {
+                  type: 'number',
+                  min: 1,
+                  value: usageLimit,
+                  onChange: (e) => setUsageLimit(Number(e.target.value)),
+                  className: 'w-full px-3 py-2 rounded-xl border border-[#EFE8DE] text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#DDA7A5]'
+                })
+              ),
+              h('div', null,
+                h('label', { className: 'block text-[#1F2937] font-semibold mb-1' }, 'Masa Berlaku'),
+                h('input', {
+                  type: 'date',
+                  value: expiresAt,
+                  onChange: (e) => setExpiresAt(e.target.value),
+                  className: 'w-full px-3 py-2 rounded-xl border border-[#EFE8DE] text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#DDA7A5]'
+                })
+              )
+            ),
+            h('div', { className: 'pt-2 flex justify-end gap-2 border-t border-gray-100' },
+              h('button', {
+                type: 'button',
+                onClick: () => setIsModalOpen(false),
+                className: 'px-3.5 py-1.5 rounded-xl border border-[#EFE8DE] text-[#6B7280] font-semibold hover:bg-gray-50'
+              }, 'Batal'),
+              h('button', {
+                type: 'submit',
+                className: 'px-4 py-2 rounded-xl bg-[#C48B89] hover:bg-[#B2706E] text-white font-semibold shadow-xs'
+              }, 'Aktifkan Voucher')
+            )
+          )
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
+  // COMPONENT: SETTINGS & ACTIVITY LOG (MODULE 8)
+  // -------------------------------------------------------------
+  function SettingsView({ settings, onUpdateSettings, activityLogs, onResetDemo, currentUser }) {
+    const [brandName, setBrandName] = useState(settings.brandName || 'ALLURE');
+    const [tagline, setTagline] = useState(settings.tagline || 'BUSINESS SPACE');
+    const [subTagline, setSubTagline] = useState(settings.subTagline || 'Everything Behind Allure');
+    const [address, setAddress] = useState(settings.address || '');
+    const [phone, setPhone] = useState(settings.phone || '');
+    const [adminName, setAdminName] = useState(currentUser?.name || 'Siti Admin');
+    const [pointsMultiplier, setPointsMultiplier] = useState(settings.pointsMultiplier || 1);
+    const [footerNote, setFooterNote] = useState(settings.footerNote || '');
+
+    const handleSave = (e) => {
+      e.preventDefault();
+      onUpdateSettings({
+        brandName: brandName.trim() || 'ALLURE',
+        tagline: tagline.trim(),
+        subTagline: subTagline.trim(),
+        address: address.trim(),
+        phone: phone.trim(),
+        pointsMultiplier: Number(pointsMultiplier),
+        footerNote: footerNote.trim()
+      });
+      alert('Pengaturan butik ALLURE berhasil disimpan!');
+    };
+
+    return h('div', { className: 'space-y-6' },
+      h('div', { className: 'flex justify-between items-center' },
+        h('div', null,
+          h('h2', { className: 'font-serif text-2xl font-bold text-[#1F2937]' }, 'Pengaturan & Aktivitas (Module 8)'),
+          h('p', { className: 'text-xs text-[#6B7280]' }, 'Form identitas butik, kontak WA bisnis, dan timeline audit aktivitas')
+        ),
+        h('button', {
+          onClick: onResetDemo,
+          className: 'px-3.5 py-2 rounded-xl text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200'
+        }, 'Reset Demo Data')
+      ),
+
+      h('div', { className: 'grid grid-cols-1 lg:grid-cols-12 gap-8 items-start' },
+        // Settings Form (7 cols)
+        h('div', { className: 'lg:col-span-7 bg-white rounded-2xl border border-[#EFE8DE] p-6 shadow-sm space-y-4' },
+          h('h3', { className: 'font-serif text-base font-bold text-[#1F2937] border-b border-gray-100 pb-2' }, 'Pengaturan Profil Butik'),
+          h('form', { onSubmit: handleSave, className: 'space-y-4 text-xs' },
+            h('div', { className: 'grid grid-cols-2 gap-4' },
+              h('div', null,
+                h('label', { className: 'block font-semibold mb-1' }, 'Nama Brand *'),
+                h('input', { type: 'text', required: true, value: brandName, onChange: (e) => setBrandName(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE] font-bold' })
+              ),
+              h('div', null,
+                h('label', { className: 'block font-semibold mb-1' }, 'Tagline Slogan'),
+                h('input', { type: 'text', value: tagline, onChange: (e) => setTagline(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' })
+              )
+            ),
+            h('div', { className: 'grid grid-cols-2 gap-4' },
+              h('div', null,
+                h('label', { className: 'block font-semibold mb-1' }, 'Kontak WA Bisnis *'),
+                h('input', { type: 'text', required: true, value: phone, onChange: (e) => setPhone(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' })
+              ),
+              h('div', null,
+                h('label', { className: 'block font-semibold mb-1' }, 'Petugas Admin'),
+                h('input', { type: 'text', value: adminName, onChange: (e) => setAdminName(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' })
+              )
+            ),
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Alamat Toko Butik *'),
+              h('textarea', { rows: 2, required: true, value: address, onChange: (e) => setAddress(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' })
+            ),
+            h('div', null,
+              h('label', { className: 'block font-semibold mb-1' }, 'Pesan Kaki Struk'),
+              h('input', { type: 'text', value: footerNote, onChange: (e) => setFooterNote(e.target.value), className: 'w-full p-2 rounded-xl border border-[#EFE8DE]' })
+            ),
+            h('button', { type: 'submit', className: 'px-5 py-2.5 rounded-xl bg-[#C48B89] text-white font-semibold' }, 'Simpan Pengaturan')
+          )
+        ),
+
+        // Vertical Timeline UI (5 cols)
+        h('div', { className: 'lg:col-span-5 bg-white rounded-2xl border border-[#EFE8DE] p-6 shadow-sm space-y-4' },
+          h('div', { className: 'flex justify-between items-center border-b border-gray-100 pb-2' },
+            h('h3', { className: 'font-serif text-base font-bold text-[#1F2937]' }, 'Activity Log (Timeline)'),
+            h('span', { className: 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#E8C3C4]/30 text-[#7D4443]' }, `${activityLogs.length} Riwayat`)
+          ),
+          h('div', { className: 'relative pl-6 space-y-4 max-h-[480px] overflow-y-auto before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#DDA7A5]' },
+            activityLogs.map(log => h('div', { key: log.id, className: 'relative' },
+              h('div', { className: 'absolute -left-6 top-1 w-5 h-5 rounded-full bg-white border-2 border-[#DDA7A5] flex items-center justify-center' },
+                h('span', { className: 'w-1.5 h-1.5 rounded-full bg-[#B2706E]' })
+              ),
+              h('div', { className: 'p-3 rounded-xl bg-[#FAF7F2] border border-[#EFE8DE] space-y-1' },
+                h('div', { className: 'flex justify-between text-xs font-semibold text-[#1F2937]' },
+                  h('span', null, log.title),
+                  h('span', { className: 'text-[10px] text-[#6B7280]' }, formatDate(log.timestamp))
+                ),
+                h('p', { className: 'text-xs text-[#6B7280]' }, log.description),
+                h('p', { className: 'text-[10px] text-[#B2706E] font-medium pt-1' }, `Oleh: ${log.actor}`)
+              )
+            ))
+          )
+        )
+      ),
+
+      // Standalone Desktop App & PWA Status Card
+      h('div', { className: 'bg-white rounded-2xl border border-[#EFE8DE] p-6 shadow-sm space-y-4' },
+        h('div', { className: 'flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-3' },
+          h('div', null,
+            h('h3', { className: 'font-serif text-base font-bold text-[#1F2937] flex items-center gap-2' },
+              h(Icon, { name: 'monitor', className: 'w-4 h-4 text-[#B2706E]' }),
+              'Mode Aplikasi Mandiri (Desktop & PWA)'
+            ),
+            h('p', { className: 'text-xs text-[#6B7280] mt-0.5' }, 'Aplikasi ALLURE siap dijalankan sebagai software native Windows atau PWA tanpa URL bar.')
+          ),
+          h('button', {
+            type: 'button',
+            onClick: () => window.promptAllureInstall ? window.promptAllureInstall() : null,
+            className: 'flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#C48B89] text-white text-xs font-bold shadow-xs hover:opacity-95'
+          },
+            h(Icon, { name: 'download', className: 'w-4 h-4' }),
+            'Pasang Aplikasi Sekarang'
+          )
+        ),
+        h('div', { className: 'grid grid-cols-1 md:grid-cols-3 gap-4 text-xs' },
+          h('div', { className: 'p-3.5 rounded-xl bg-[#FDF8F7] border border-[#E8C3C4]' },
+            h('p', { className: 'font-bold text-[#3E2020] mb-1' }, '🚀 1-Click Desktop Launcher'),
+            h('p', { className: 'text-[#6B7280]' }, 'Jalankan file ALLURE-App.vbs untuk membuka aplikasi tanpa terminal, atau ALLURE-App.bat untuk otomatis menyalakan server.'),
+            h('code', { className: 'block mt-2 p-1.5 bg-white rounded border border-[#E8C3C4] text-[10px] font-mono text-[#7D4443]' }, 'ALLURE-App.vbs')
+          ),
+          h('div', { className: 'p-3.5 rounded-xl bg-[#FDF8F7] border border-[#E8C3C4]' },
+            h('p', { className: 'font-bold text-[#3E2020] mb-1' }, '🖥️ Pintasan Desktop (Shortcut)'),
+            h('p', { className: 'text-[#6B7280]' }, 'Buat ikon ALLURE langsung di Desktop Windows dengan menjalankan create-desktop-shortcut.ps1 via PowerShell.'),
+            h('code', { className: 'block mt-2 p-1.5 bg-white rounded border border-[#E8C3C4] text-[10px] font-mono text-[#7D4443]' }, 'create-desktop-shortcut.ps1')
+          ),
+          h('div', { className: 'p-3.5 rounded-xl bg-[#FDF8F7] border border-[#E8C3C4]' },
+            h('p', { className: 'font-bold text-[#3E2020] mb-1' }, '⚡ PWA & Offline Support'),
+            h('p', { className: 'text-[#6B7280]' }, 'Service worker sw.js dan manifest.json aktif. Tampilan full-screen independen dengan cache cerdas shell.'),
+            h('span', { className: 'inline-block mt-2 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold' }, 'PWA Ready (Standalone)')
+          )
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
+  // COMPONENT: PRINTABLE INVOICE MODAL
+  // -------------------------------------------------------------
+  function InvoiceModal({ activeInvoice, onClose, settings }) {
+    if (!activeInvoice) return null;
+
+    return h('div', { className: 'fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4' },
+      h('div', { className: 'bg-white w-full max-w-lg rounded-3xl p-6 shadow-2xl border border-[#EFE8DE] max-h-[90vh] overflow-y-auto' },
+        h('div', { className: 'print:hidden flex justify-between items-center pb-4 border-b border-gray-100' },
+          h('span', { className: 'text-emerald-700 font-bold text-xs' }, '✓ Transaksi Berhasil Diproses'),
+          h('div', { className: 'flex gap-2' },
+            h('button', { onClick: () => window.print(), className: 'px-3 py-1.5 bg-[#DDA7A5] text-white rounded-xl text-xs font-semibold' }, 'Cetak Struk'),
+            h('button', { onClick: onClose, className: 'px-3 py-1.5 border border-[#EFE8DE] text-[#6B7280] rounded-xl text-xs' }, 'Tutup')
+          )
+        ),
+        h('div', { id: 'printable-receipt', className: 'pt-4 space-y-4 text-xs text-[#1F2937]' },
+          h('div', { className: 'text-center border-b border-dashed border-[#DDA7A5] pb-4' },
+            h('h1', { className: 'font-serif text-2xl font-bold tracking-widest text-[#1F2937]' }, settings.brandName || 'ALLURE'),
+            h('p', { className: 'text-[10px] text-[#B2706E] font-bold tracking-wider uppercase' }, settings.tagline || 'BUSINESS SPACE'),
+            h('p', { className: 'text-[9px] text-[#6B7280] font-medium tracking-wide' }, settings.subTagline || 'Everything Behind Allure'),
+            h('p', { className: 'text-[10px] text-[#6B7280] mt-1' }, settings.address),
+            h('p', { className: 'text-[10px] text-[#6B7280]' }, `Telp: ${settings.phone} • IG: ${settings.instagram}`)
+          ),
+          h('div', { className: 'grid grid-cols-2 gap-y-1 text-xs py-2 border-b border-gray-100' },
+            h('div', null, h('span', { className: 'text-[#6B7280] block' }, 'Invoice:'), h('span', { className: 'font-mono font-bold' }, activeInvoice.id)),
+            h('div', { className: 'text-right' }, h('span', { className: 'text-[#6B7280] block' }, 'Waktu:'), h('span', null, formatDate(activeInvoice.date))),
+            h('div', null, h('span', { className: 'text-[#6B7280] block' }, 'Pelanggan:'), h('span', { className: 'font-semibold' }, `${activeInvoice.customerName} (${activeInvoice.customerTier})`)),
+            h('div', { className: 'text-right' }, h('span', { className: 'text-[#6B7280] block' }, 'Kasir:'), h('span', null, activeInvoice.cashierName))
+          ),
+          h('div', { className: 'py-2 border-b border-dashed border-[#EFE8DE]' },
+            h('table', { className: 'w-full text-xs' },
+              h('tbody', { className: 'divide-y divide-gray-100' },
+                activeInvoice.items.map((it, idx) => h('tr', { key: idx, className: 'py-1.5' },
+                  h('td', { className: 'py-1 font-semibold' }, it.productName, h('span', { className: 'block text-[10px] text-[#6B7280]' }, `SKU: ${it.sku}`)),
+                  h('td', { className: 'text-center py-1 text-[#6B7280]' }, `${it.qty}x`),
+                  h('td', { className: 'text-right py-1 font-bold' }, formatRupiah(it.subtotal))
+                ))
+              )
+            )
+          ),
+          h('div', { className: 'space-y-1 text-xs py-2 border-b border-[#EFE8DE]' },
+            h('div', { className: 'flex justify-between text-[#6B7280]' }, h('span', null, 'Subtotal:'), h('span', null, formatRupiah(activeInvoice.subtotal))),
+            activeInvoice.discountAmount > 0 && h('div', { className: 'flex justify-between text-rose-600' }, h('span', null, `Diskon (${activeInvoice.voucherCode}):`), h('span', null, `-${formatRupiah(activeInvoice.discountAmount)}`)),
+            h('div', { className: 'flex justify-between text-sm font-bold text-[#1F2937] pt-1' }, h('span', null, 'Total Pembayaran:'), h('span', { className: 'text-[#7D4443]' }, formatRupiah(activeInvoice.grandTotal))),
+            h('div', { className: 'flex justify-between text-[#6B7280] text-[11px]' }, h('span', null, 'Metode:'), h('span', { className: 'font-semibold text-[#1F2937]' }, activeInvoice.paymentMethod))
+          ),
+          h('div', { className: 'p-2.5 bg-[#FDF8F7] rounded-xl border border-[#E8C3C4] flex justify-between items-center text-xs font-semibold' },
+            h('span', { className: 'text-[#1F2937]' }, `Poin Loyalty Didapat (${activeInvoice.customerTier}):`),
+            h('span', { className: 'text-[#B2706E] font-bold' }, `+${activeInvoice.loyaltyPointsEarned} Poin`)
+          ),
+          h('p', { className: 'text-[11px] text-[#6B7280] text-center italic pt-2' }, `"${settings.footerNote}"`)
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
+  // MASTER APPLICATION ROOT COMPONENT
+  // -------------------------------------------------------------
+  function AllureApp() {
+    // Session State: Default unauthenticated so fresh launch starts at executive login screen
+    const [isAuthenticated, setIsAuthenticated] = useState(() => {
+      try {
+        return sessionStorage.getItem('allure_session_active') === 'true';
+      } catch (e) {
+        return false;
+      }
+    });
+
+    const [currentUser] = useState({
+      id: 'admin-001',
+      name: 'Admin Allure',
+      email: 'admin@allure.boutique',
+      role: 'Administrator Allure Space',
+      avatar: 'AL'
+    });
+
+    // Auto-clean migration to reset data to initial clean slate (0 transactions)
+    try {
+      if (!localStorage.getItem('allure_clean_slate_v3')) {
+        localStorage.setItem('allure_transactions_v1', JSON.stringify([]));
+        localStorage.setItem('allure_followups_v1', JSON.stringify([]));
+        localStorage.setItem('allure_tickets_v1', JSON.stringify([]));
+        localStorage.setItem('allure_wishlist_v1', JSON.stringify([]));
+        localStorage.setItem('allure_customers_v1', JSON.stringify(INITIAL_CUSTOMERS));
+        localStorage.setItem('allure_products_v1', JSON.stringify(INITIAL_PRODUCTS));
+        localStorage.setItem('allure_vouchers_v1', JSON.stringify(INITIAL_VOUCHERS));
+        localStorage.setItem('allure_logs_v1', JSON.stringify(INITIAL_LOGS));
+        localStorage.setItem('allure_clean_slate_v3', 'true');
+      }
+    } catch (e) {
+      console.warn('Storage cleaner:', e);
+    }
+
+    const [products, setProducts] = useState(() => {
+      const saved = localStorage.getItem('allure_products_v1');
+      return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
+    });
+
+    const [customers, setCustomers] = useState(() => {
+      const saved = localStorage.getItem('allure_customers_v1');
+      return saved ? JSON.parse(saved) : INITIAL_CUSTOMERS;
+    });
+
+    const [wishlistItems, setWishlistItems] = useState(() => {
+      const saved = localStorage.getItem('allure_wishlist_v1');
+      return saved ? JSON.parse(saved) : INITIAL_WISHLIST;
+    });
+
+    const [transactions, setTransactions] = useState(() => {
+      const saved = localStorage.getItem('allure_transactions_v1');
+      return saved ? JSON.parse(saved) : INITIAL_TRANSACTIONS;
+    });
+
+    const [followUps, setFollowUps] = useState(() => {
+      const saved = localStorage.getItem('allure_followups_v1');
+      return saved ? JSON.parse(saved) : INITIAL_FOLLOW_UPS;
+    });
+
+    const [vouchers, setVouchers] = useState(() => {
+      const saved = localStorage.getItem('allure_vouchers_v1');
+      return saved ? JSON.parse(saved) : INITIAL_VOUCHERS;
+    });
+
+    const [tickets, setTickets] = useState(() => {
+      const saved = localStorage.getItem('allure_tickets_v1');
+      return saved ? JSON.parse(saved) : INITIAL_TICKETS;
+    });
+
+    const [activityLogs, setActivityLogs] = useState(() => {
+      const saved = localStorage.getItem('allure_logs_v1');
+      return saved ? JSON.parse(saved) : INITIAL_LOGS;
+    });
+
+    const [settings, setSettings] = useState(() => {
+      try {
+        const saved = localStorage.getItem('allure_settings_v1');
+        const loaded = saved ? JSON.parse(saved) : INITIAL_SETTINGS;
+        if (!loaded.subTagline || loaded.tagline === 'Modest Elegance & Boutique Atelier' || loaded.tagline === 'Modest Elegance & Atelier') {
+          return {
+            ...loaded,
+            tagline: 'BUSINESS SPACE',
+            subTagline: 'Everything Behind Allure'
+          };
+        }
+        return loaded;
+      } catch (e) {
+        return INITIAL_SETTINGS;
+      }
+    });
+
+    // Navigation and Modals
+    const [currentTab, setCurrentTab] = useState('dashboard');
+    const [isMobileOpen, setIsMobileOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [activeInvoice, setActiveInvoice] = useState(null);
+
+    // Dropdowns
+    const [isNotifOpen, setIsNotifOpen] = useState(false);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+    // Sync to storage
+    useEffect(() => {
+      try {
+        if (isAuthenticated) {
+          sessionStorage.setItem('allure_session_active', 'true');
+        } else {
+          sessionStorage.removeItem('allure_session_active');
+          localStorage.removeItem('allure_auth_v1');
+        }
+      } catch (e) {}
+    }, [isAuthenticated]);
+    useEffect(() => { localStorage.setItem('allure_products_v1', JSON.stringify(products)); }, [products]);
+    useEffect(() => { localStorage.setItem('allure_customers_v1', JSON.stringify(customers)); }, [customers]);
+    useEffect(() => { localStorage.setItem('allure_wishlist_v1', JSON.stringify(wishlistItems)); }, [wishlistItems]);
+    useEffect(() => { localStorage.setItem('allure_transactions_v1', JSON.stringify(transactions)); }, [transactions]);
+    useEffect(() => { localStorage.setItem('allure_followups_v1', JSON.stringify(followUps)); }, [followUps]);
+    useEffect(() => { localStorage.setItem('allure_vouchers_v1', JSON.stringify(vouchers)); }, [vouchers]);
+    useEffect(() => { localStorage.setItem('allure_tickets_v1', JSON.stringify(tickets)); }, [tickets]);
+    useEffect(() => { localStorage.setItem('allure_logs_v1', JSON.stringify(activityLogs)); }, [activityLogs]);
+    useEffect(() => { localStorage.setItem('allure_settings_v1', JSON.stringify(settings)); }, [settings]);
+
+    const addLog = (type, title, description, actor = 'Siti Admin') => {
+      const entry = {
+        id: 'log-' + Date.now(),
+        timestamp: new Date().toISOString(),
+        type,
+        title,
+        description,
+        actor
+      };
+      setActivityLogs(prev => [entry, ...prev.slice(0, 49)]);
+    };
+
+    // Core POS Checkout
+    const handleProcessOrder = ({ customerId, items, voucherCode, paymentMethod, cashierName }) => {
+      const cust = customers.find(c => c.id === customerId);
+      if (!cust) return false;
+
+      // Stock check
+      const qtyMap = {};
+      for (const it of items) qtyMap[it.product.id] = (qtyMap[it.product.id] || 0) + it.qty;
+      for (const [pId, reqQty] of Object.entries(qtyMap)) {
+        const prod = products.find(p => p.id === pId);
+        if (!prod || prod.stock < reqQty) {
+          alert(`Stok ${prod ? prod.name : 'produk'} tidak mencukupi!`);
+          return false;
+        }
+      }
+
+      let subtotal = 0;
+      const trxItems = items.map(it => {
+        const lineTotal = it.product.price * it.qty;
+        subtotal += lineTotal;
+        return {
+          productId: it.product.id,
+          productName: it.product.name,
+          sku: it.product.sku,
+          price: it.product.price,
+          qty: it.qty,
+          color: it.selectedColor,
+          subtotal: lineTotal
+        };
+      });
+
+      let discountAmount = 0;
+      let appliedVoucherCode = null;
+      if (voucherCode) {
+        const v = vouchers.find(v => v.code === voucherCode && v.isActive);
+        if (v && subtotal >= v.minSpend) {
+          appliedVoucherCode = v.code;
+          if (v.discountType === 'percentage') {
+            discountAmount = Math.round((subtotal * v.discountValue) / 100);
+            if (v.maxDiscount && discountAmount > v.maxDiscount) discountAmount = v.maxDiscount;
+          } else {
+            discountAmount = v.discountValue;
+          }
+        }
+      }
+
+      const grandTotal = Math.max(0, subtotal - discountAmount);
+      const tierMult = getTierMultiplier(cust.tier);
+      const loyaltyEarned = Math.round(Math.floor(grandTotal / 1000) * tierMult * (settings.pointsMultiplier || 1));
+
+      const trxId = 'TRX-' + new Date().toISOString().slice(0, 7).replace('-', '') + '-' + Math.floor(1000 + Math.random() * 9000);
+
+      const newTrx = {
+        id: trxId,
+        date: new Date().toISOString(),
+        customerId: cust.id,
+        customerName: cust.name,
+        customerPhone: cust.phone,
+        customerTier: cust.tier,
+        items: trxItems,
+        subtotal,
+        voucherCode: appliedVoucherCode,
+        discountAmount,
+        grandTotal,
+        paymentMethod,
+        loyaltyPointsEarned: loyaltyEarned,
+        cashierName: cashierName || 'Siti Admin',
+        status: 'Completed'
+      };
+
+      // Deduct stock
+      setProducts(prev => prev.map(p => {
+        const qtyBought = items.filter(it => it.product.id === p.id).reduce((s, it) => s + it.qty, 0);
+        if (qtyBought > 0) {
+          return { ...p, stock: Math.max(0, p.stock - qtyBought), soldCount: (p.soldCount || 0) + qtyBought };
+        }
+        return p;
+      }));
+
+      // Update customer
+      setCustomers(prev => prev.map(c => {
+        if (c.id === cust.id) {
+          const newSpent = c.totalSpent + grandTotal;
+          const newOrders = c.ordersCount + 1;
+          const newPoints = c.loyaltyPoints + loyaltyEarned;
+          const newTier = calculateTier(newPoints);
+          let seg = c.segment;
+          if (newSpent >= 4000000) seg = 'Loyal/VIP';
+          else if (newOrders >= 4) seg = 'Loyal/VIP';
+          else if (newOrders >= 2) seg = 'Regular';
+
+          return {
+            ...c,
+            totalSpent: newSpent,
+            total_pengeluaran: newSpent,
+            ordersCount: newOrders,
+            jumlah_transaksi: newOrders,
+            loyaltyPoints: newPoints,
+            tier: newTier,
+            segment: seg,
+            lastOrderDate: new Date().toISOString()
+          };
+        }
+        return c;
+      }));
+
+      // Update voucher
+      if (appliedVoucherCode) {
+        setVouchers(prev => prev.map(v => v.code === appliedVoucherCode ? { ...v, usedCount: v.usedCount + 1 } : v));
+      }
+
+      setTransactions(prev => [newTrx, ...prev]);
+      addLog('order', 'Pesanan Kasir Selesai', `${trxId} senilai ${formatRupiah(grandTotal)} untuk Kak ${cust.name}.`, cashierName);
+      setActiveInvoice(newTrx);
+      return true;
+    };
+
+    const handleRestockWishlist = (wishlistId, quantity) => {
+      const item = wishlistItems.find(w => w.id === wishlistId);
+      if (!item) return;
+
+      setProducts(prev => prev.map(p => {
+        if (p.id === item.productId || p.sku === item.sku) {
+          return { ...p, stock: p.stock + quantity };
+        }
+        return p;
+      }));
+
+      setWishlistItems(prev => prev.map(w => {
+        if (w.id === wishlistId) {
+          return { ...w, stock: w.stock + quantity };
+        }
+        return w;
+      }));
+
+      addLog('stock', 'Restock Produk Selesai', `Menambahkan +${quantity} pcs stok untuk "${item.productName}".`);
+    };
+
+    const handleBroadcastWishlist = (wishlistId) => {
+      const item = wishlistItems.find(w => w.id === wishlistId);
+      if (!item) return;
+
+      setWishlistItems(prev => prev.map(w => {
+        if (w.id === wishlistId) {
+          return { ...w, lastBroadcastDate: new Date().toISOString() };
+        }
+        return w;
+      }));
+
+      addLog('customer', 'Simulasi Broadcast Restock WA', `Mengirim broadcast ke antrean peminat ${item.productName}.`);
+    };
+
+    const handleResetAll = () => {
+      if (confirm('Reset seluruh data butik ALLURE ke kondisi bawaan awal?')) {
+        setProducts(INITIAL_PRODUCTS);
+        setCustomers(INITIAL_CUSTOMERS);
+        setWishlistItems(INITIAL_WISHLIST);
+        setTransactions(INITIAL_TRANSACTIONS);
+        setFollowUps(INITIAL_FOLLOW_UPS);
+        setVouchers(INITIAL_VOUCHERS);
+        setTickets(INITIAL_TICKETS);
+        setActivityLogs(INITIAL_LOGS);
+        setSettings(INITIAL_SETTINGS);
+        setActiveInvoice(null);
+        localStorage.clear();
+        alert('Data butik ALLURE berhasil direset ke kondisi awal (0 transaksi)!');
+      }
+    };
+
+    // Calculate notifications (Smart threshold: minStock for favorites, < 5 for regular)
+    const lowStockItems = products.filter(p => p.stock <= (p.minStock || 5) || p.stock < 5);
+    const pendingFollowUps = followUps.filter(f => f.status === 'Pending');
+    const totalAlerts = lowStockItems.length + pendingFollowUps.length;
+
+    const handleLoginSuccess = () => {
+      try {
+        sessionStorage.setItem('allure_session_active', 'true');
+      } catch (e) {}
+      setIsAuthenticated(true);
+      addLog('setting', 'Admin Berhasil Masuk', 'Siti Admin berhasil login ke ALLURE.');
+    };
+
+    const handleLogout = () => {
+      try {
+        sessionStorage.removeItem('allure_session_active');
+        localStorage.removeItem('allure_auth_v1');
+      } catch (e) {}
+      setIsAuthenticated(false);
+      setIsProfileOpen(false);
+      addLog('setting', 'Admin Logout', 'Admin keluar dari sesi ALLURE.');
+    };
+
+    const handleToggleVoucher = (code) => {
+      setVouchers(prev => prev.map(v => v.code === code ? { ...v, isActive: !v.isActive } : v));
+      addLog('setting', 'Status Voucher Diperbarui', `Voucher ${code} diubah statusnya.`);
+    };
+
+    const handleAddVoucher = (voucher) => {
+      setVouchers(prev => [voucher, ...prev]);
+      addLog('setting', 'Voucher Baru Ditambahkan', `Kode promo ${voucher.code} siap digunakan.`);
+    };
+
+    // Login Gate
+    if (!isAuthenticated) {
+      return h(LoginView, {
+        onLoginSuccess: handleLoginSuccess,
+        settings
+      });
+    }
+
+    return h('div', { className: 'min-h-screen bg-[#FAF7F2] text-[#1F2937] flex flex-col lg:flex-row antialiased font-sans selection:bg-[#E8C3C4] selection:text-[#7D4443]' },
+      // Sidebar Navigation
+      h('aside', {
+        className: `fixed lg:static top-0 left-0 bottom-0 z-50 w-72 bg-white border-r border-[#EFE8DE] flex flex-col transition-transform duration-300 ${
+          isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`
+      },
+        // Brand Header
+        h('div', { className: 'p-6 border-b border-[#EFE8DE] bg-[#FAF7F2]' },
+          h('div', { className: 'flex items-center gap-3' },
+            h('div', { className: 'w-10 h-10 rounded-2xl bg-[#C48B89] flex items-center justify-center text-white font-serif font-bold text-lg shadow-sm' },
+              h(Icon, { name: 'sparkles', className: 'w-5 h-5 text-white' })
+            ),
+            h('div', null,
+              h('h1', { className: 'font-serif text-2xl font-extrabold tracking-widest text-[#1F2937] leading-none' }, settings.brandName || 'ALLURE'),
+              h('p', { className: 'text-[10px] tracking-wider font-bold text-[#B2706E] uppercase mt-1' }, settings.tagline || 'BUSINESS SPACE'),
+              h('p', { className: 'text-[9px] tracking-wider text-[#6B7280] font-medium mt-0.5' }, settings.subTagline || 'Everything Behind Allure')
+            )
+          )
+        ),
+
+        // Menu items
+        h('nav', { className: 'flex-1 overflow-y-auto px-4 py-4 space-y-1' },
+          [
+            { id: 'dashboard', label: 'Ringkasan Bisnis (Dashboard)', icon: 'layout-dashboard' },
+            { id: 'pos', label: 'Kasir Penjualan (POS)', icon: 'shopping-cart' },
+            { id: 'products', label: 'Katalog Produk & Stok', icon: 'package', badge: lowStockItems.length > 0 ? `${lowStockItems.length} tipis` : null, badgeColor: 'bg-rose-500' },
+            { id: 'customers', label: 'Daftar Pelanggan (CRM)', icon: 'users' },
+            { id: 'followup', label: 'Follow-up WhatsApp', icon: 'message-circle', badge: pendingFollowUps.length > 0 ? `${pendingFollowUps.length}` : null, badgeColor: 'bg-emerald-600' },
+            { id: 'wishlist', label: 'Antrean Stok Habis (Wishlist)', icon: 'heart-handshake', badge: wishlistItems.filter(w => w.stock <= 0).length > 0 ? `${wishlistItems.filter(w => w.stock <= 0).length} habis` : null, badgeColor: 'bg-[#C48B89]' },
+            { id: 'transactions', label: 'Riwayat Transaksi', icon: 'receipt' },
+            { id: 'loyalty', label: 'Poin Member & Kupon Diskon', icon: 'award' },
+            { id: 'service', label: 'Bantuan & Ulasan Pelanggan', icon: 'headset' },
+            { id: 'settings', label: 'Pengaturan Toko & Log', icon: 'settings' }
+          ].map(it => {
+            const isActive = currentTab === it.id;
+            return h('button', {
+              key: it.id,
+              onClick: () => { setCurrentTab(it.id); setIsMobileOpen(false); },
+              className: `w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all ${
+                isActive
+                  ? 'bg-[#C48B89] text-white font-semibold shadow-sm'
+                  : 'text-[#1F2937] hover:text-[#B2706E] hover:bg-[#FDF8F7]'
+              }`
+            },
+              h('div', { className: 'flex items-center gap-3' },
+                h(Icon, { name: it.icon, className: `w-4 h-4 ${isActive ? 'text-white' : 'text-[#6B7280]'}` }),
+                h('span', null, it.label)
+              ),
+              it.badge && h('span', { className: `text-[10px] px-2 py-0.5 rounded-full text-white font-bold ${it.badgeColor}` }, it.badge)
+            );
+          })
+        ),
+
+        // PWA & Desktop App Install Card in Sidebar
+        h('div', { className: 'px-4 pb-2' },
+          h('button', {
+            type: 'button',
+            onClick: () => {
+              if (window.promptAllureInstall) window.promptAllureInstall();
+            },
+            title: 'Pasang ALLURE ke Desktop / Layar Utama',
+            className: 'w-full flex items-center justify-between p-2.5 rounded-xl bg-[#FAF7F2] border border-[#E8C3C4] text-[#7D4443] hover:border-[#DDA7A5] transition-all text-xs group cursor-pointer text-left shadow-xs'
+          },
+            h('div', { className: 'flex items-center gap-2.5' },
+              h('div', { className: 'w-7 h-7 rounded-lg bg-[#C48B89] text-white flex items-center justify-center shrink-0 shadow-xs' },
+                h(Icon, { name: 'download', className: 'w-3.5 h-3.5' })
+              ),
+              h('div', null,
+                h('p', { className: 'font-semibold text-xs text-[#3E2020] leading-tight' }, 'Install ALLURE'),
+                h('p', { className: 'text-[10px] text-[#7D4443] leading-tight mt-0.5' }, 'Aplikasi Mandiri Windows')
+              )
+            ),
+            h(Icon, { name: 'chevron-right', className: 'w-3.5 h-3.5 text-[#B2706E] group-hover:translate-x-0.5 transition-transform' })
+          )
+        ),
+
+        // Sidebar Footer
+        h('div', { className: 'p-4 border-t border-[#EFE8DE] bg-[#FAF7F2] space-y-2' },
+          h('div', { className: 'p-2.5 bg-white rounded-xl border border-[#EFE8DE] text-xs flex items-center justify-between' },
+            h('span', { className: 'font-semibold text-[#1F2937]' }, currentUser.name),
+            h('span', { className: 'text-emerald-700 font-medium text-[11px]' }, '● Butik Aktif')
+          ),
+          h('button', {
+            onClick: handleLogout,
+            className: 'w-full py-2 text-center text-rose-600 hover:bg-rose-50 text-xs font-semibold border border-[#EFE8DE] rounded-xl transition-all flex items-center justify-center gap-1.5'
+          },
+            h(Icon, { name: 'log-out', className: 'w-3.5 h-3.5' }),
+            'Keluar (Logout)'
+          )
+        )
+      ),
+
+      // Main Content Area
+      h('div', { className: 'flex-1 flex flex-col min-w-0 min-h-screen' },
+        // Top Header
+        h('header', { className: 'sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#EFE8DE] px-4 lg:px-8 py-3.5 flex items-center justify-between' },
+          h('div', { className: 'flex items-center gap-3' },
+            h('button', { onClick: () => setIsMobileOpen(!isMobileOpen), className: 'p-2 text-[#6B7280] lg:hidden' },
+              h(Icon, { name: 'menu', className: 'w-5 h-5' })
+            ),
+            h('div', null,
+              h('h2', { className: 'font-serif text-lg lg:text-xl font-bold text-[#1F2937]' },
+                currentTab === 'dashboard' ? 'Ringkasan Bisnis (Dashboard)' :
+                currentTab === 'pos' ? 'Kasir Penjualan (POS)' :
+                currentTab === 'products' ? 'Katalog Produk & Stok' :
+                currentTab === 'customers' ? 'Daftar Pelanggan (CRM)' :
+                currentTab === 'followup' ? 'Follow-up WhatsApp' :
+                currentTab === 'wishlist' ? 'Antrean Stok Habis (Wishlist)' :
+                currentTab === 'transactions' ? 'Riwayat Transaksi' :
+                currentTab === 'loyalty' ? 'Poin Member & Kupon Diskon' :
+                currentTab === 'service' ? 'Bantuan & Ulasan Pelanggan' : 'Pengaturan Toko & Log'
+              ),
+              h('p', { className: 'text-xs text-[#6B7280] hidden sm:block' }, 'ALLURE • BUSINESS SPACE — Everything Behind Allure')
+            )
+          ),
+
+          // Search, Notification Bell, Admin Profile
+          h('div', { className: 'flex items-center gap-3' },
+            h('div', { className: 'hidden md:flex items-center relative' },
+              h('input', {
+                type: 'text',
+                placeholder: 'Cari sesuatu... (Ctrl + K)',
+                value: searchQuery,
+                onChange: (e) => setSearchQuery(e.target.value),
+                className: 'w-48 lg:w-64 pl-9 pr-3 py-1.5 text-xs bg-[#FAF7F2] border border-[#EFE8DE] rounded-xl text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#DDA7A5]'
+              }),
+              h(Icon, { name: 'search', className: 'w-3.5 h-3.5 absolute left-3 text-[#6B7280]' })
+            ),
+
+            currentTab !== 'pos' && h('button', {
+              onClick: () => setCurrentTab('pos'),
+              className: 'hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 bg-[#C48B89] text-white text-xs font-semibold rounded-xl shadow-xs'
+            },
+              h(Icon, { name: 'shopping-cart', className: 'w-3.5 h-3.5' }),
+              'Buka Kasir'
+            ),
+
+            // Install Aplikasi ALLURE (PWA & Desktop) Button
+            h('button', {
+              type: 'button',
+              onClick: () => {
+                if (window.promptAllureInstall) window.promptAllureInstall();
+              },
+              title: 'Pasang ALLURE sebagai aplikasi mandiri di Taskbar/Desktop',
+              className: 'flex items-center gap-1.5 px-3 py-1.5 bg-[#FDF8F7] hover:bg-[#F3D8D7] text-[#7D4443] border border-[#E8C3C4] text-xs font-semibold rounded-xl transition-all shadow-xs cursor-pointer'
+            },
+              h(Icon, { name: 'download', className: 'w-3.5 h-3.5 text-[#B2706E]' }),
+              h('span', { className: 'hidden md:inline' }, 'Install App')
+            ),
+
+            // Notification Bell
+            h('div', { className: 'relative' },
+              h('button', {
+                onClick: () => { setIsNotifOpen(!isNotifOpen); setIsProfileOpen(false); },
+                className: 'p-2 rounded-xl border border-[#EFE8DE] text-[#6B7280] hover:text-[#1F2937] hover:bg-[#FAF7F2] relative'
+              },
+                h(Icon, { name: 'bell', className: 'w-4 h-4' }),
+                totalAlerts > 0 && h('span', { className: 'absolute -top-1 -right-1 w-4 h-4 bg-rose-500 text-white rounded-full text-[9px] font-bold flex items-center justify-center animate-pulse' }, totalAlerts)
+              ),
+
+              isNotifOpen && h('div', { className: 'absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl shadow-xl border border-[#EFE8DE] p-4 z-50 space-y-3' },
+                h('div', { className: 'flex justify-between items-center border-b border-gray-100 pb-2' },
+                  h('span', { className: 'text-xs font-bold text-[#1F2937]' }, `Notifikasi (${totalAlerts})`),
+                  h('span', { className: 'text-[10px] text-[#B2706E] cursor-pointer font-semibold', onClick: () => setIsNotifOpen(false) }, 'Tutup')
+                ),
+                h('div', { className: 'space-y-2 max-h-60 overflow-y-auto text-xs' },
+                  lowStockItems.length > 0 && h('div', { className: 'p-2.5 rounded-xl bg-rose-50 border border-rose-100' },
+                    h('p', { className: 'font-semibold text-rose-800' }, '⚠️ Peringatan Stok Menipis'),
+                    h('p', { className: 'text-[11px] text-rose-600 mt-0.5' }, `${lowStockItems.length} produk hijab tersisa < 5 pcs.`),
+                    h('button', { onClick: () => { setCurrentTab('products'); setIsNotifOpen(false); }, className: 'text-[10px] text-rose-700 font-bold underline mt-1 block' }, 'Buka Katalog Hijab →')
+                  ),
+                  pendingFollowUps.length > 0 && h('div', { className: 'p-2.5 rounded-xl bg-emerald-50 border border-emerald-100' },
+                    h('p', { className: 'font-semibold text-emerald-800' }, '💬 Follow-up Tertunda'),
+                    h('p', { className: 'text-[11px] text-emerald-700 mt-0.5' }, `${pendingFollowUps.length} pesan WhatsApp perlu dikirim hari ini.`),
+                    h('button', { onClick: () => { setCurrentTab('followup'); setIsNotifOpen(false); }, className: 'text-[10px] text-emerald-800 font-bold underline mt-1 block' }, 'Buka CRM Follow-Up →')
+                  ),
+                  totalAlerts === 0 && h('p', { className: 'text-center py-4 text-[#6B7280] italic' }, 'Semua notifikasi aman.')
+                )
+              )
+            ),
+
+            // Admin Profile Dropdown
+            h('div', { className: 'relative' },
+              h('button', {
+                onClick: () => { setIsProfileOpen(!isProfileOpen); setIsNotifOpen(false); },
+                className: 'flex items-center gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-xl border border-[#EFE8DE] hover:border-[#DDA7A5] transition-all'
+              },
+                h('div', { className: 'w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#C48B89] text-white flex items-center justify-center font-bold text-xs' },
+                  currentUser.avatar || 'SA'
+                ),
+                h('div', { className: 'hidden md:block text-left text-xs' },
+                  h('p', { className: 'font-semibold text-[#1F2937] leading-tight' }, currentUser.name),
+                  h('p', { className: 'text-[10px] text-[#6B7280] leading-tight' }, currentUser.role)
+                )
+              ),
+
+              isProfileOpen && h('div', { className: 'absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-[#EFE8DE] p-2 z-50 space-y-1 text-xs' },
+                h('div', { className: 'px-3 py-2 border-b border-gray-100' },
+                  h('p', { className: 'font-bold text-[#1F2937]' }, currentUser.name),
+                  h('p', { className: 'text-[10px] text-[#6B7280]' }, currentUser.email)
+                ),
+                h('button', {
+                  onClick: () => { setCurrentTab('settings'); setIsProfileOpen(false); },
+                  className: 'w-full text-left px-3 py-2 hover:bg-[#FDF8F7] rounded-xl text-[#1F2937]'
+                }, 'Pengaturan Butik'),
+                h('button', {
+                  onClick: handleLogout,
+                  className: 'w-full text-left px-3 py-2 hover:bg-rose-50 text-rose-600 font-semibold rounded-xl flex items-center gap-1.5'
+                },
+                  h(Icon, { name: 'log-out', className: 'w-3.5 h-3.5' }),
+                  'Keluar (Logout)'
+                )
+              )
+            )
+          )
+        ),
+
+        // Main Module Render (Hook-safe separate components)
+        h('main', { className: 'flex-1 p-4 lg:p-8 max-w-7xl w-full mx-auto' },
+          currentTab === 'dashboard' && h(DashboardView, {
+            products,
+            customers,
+            transactions,
+            followUps,
+            settings,
+            setCurrentTab
+          }),
+          currentTab === 'pos' && h(PosView, {
+            products,
+            customers,
+            vouchers,
+            onProcessOrder: handleProcessOrder,
+            settings,
+            transactions,
+            onOpenInvoice: (trx) => setActiveInvoice(trx)
+          }),
+          currentTab === 'products' && h(ProductsView, {
+            products,
+            onAddProduct: (newP) => {
+              setProducts(prev => [{ ...newP, id: 'prod-' + Date.now() }, ...prev]);
+              addLog('stock', 'Produk Baru Ditambahkan', `Menambahkan katalog "${newP.name}".`);
+            },
+            onUpdateProduct: (id, updates) => {
+              setProducts(prev => prev.map(p => p.id === id ? { ...p, ...updates } : p));
+              addLog('stock', 'Perubahan Data Produk', `Memperbarui katalog produk ID ${id}.`);
+            },
+            onDeleteProduct: (id) => {
+              setProducts(prev => prev.filter(p => p.id !== id));
+              addLog('stock', 'Produk Dihapus', `Menghapus produk ID ${id}.`);
+            },
+            onAdjustStock: (id, delta) => {
+              setProducts(prev => prev.map(p => p.id === id ? { ...p, stock: Math.max(0, p.stock + delta) } : p));
+            }
+          }),
+          currentTab === 'customers' && h(CustomersView, {
+            customers,
+            onAddCustomer: (newC) => {
+              const c = {
+                id: 'cust-' + Date.now(),
+                ...newC,
+                tier: 'Bronze',
+                loyaltyPoints: 0,
+                totalSpent: 0,
+                total_pengeluaran: 0,
+                ordersCount: 0,
+                jumlah_transaksi: 0,
+                joinedDate: new Date().toISOString().slice(0, 10),
+                lastOrderDate: '-'
+              };
+              setCustomers(prev => [c, ...prev]);
+              addLog('customer', 'Pelanggan Baru Terdaftar', `Menambahkan Kak ${c.name}.`);
+            },
+            onUpdateCustomer: (id, updates) => {
+              setCustomers(prev => prev.map(c => c.id === id ? { ...c, ...updates } : c));
+              addLog('customer', 'Update Profil Pelanggan', `Memperbarui data pelanggan ID ${id}.`);
+            },
+            onDeleteCustomer: (id) => {
+              setCustomers(prev => prev.filter(c => c.id !== id));
+              addLog('customer', 'Pelanggan Dihapus', `Menghapus pelanggan ID ${id}.`);
+            }
+          }),
+          currentTab === 'transactions' && h(TransactionsView, {
+            transactions,
+            onOpenInvoice: (trx) => setActiveInvoice(trx)
+          }),
+          currentTab === 'followup' && h(FollowUpView, {
+            followUps,
+            customers,
+            settings,
+            onUpdateStatus: (id, status) => {
+              setFollowUps(prev => prev.map(f => f.id === id ? { ...f, status } : f));
+              addLog('customer', 'Status Follow-up Diperbarui', `Jadwal follow-up ID ${id} diubah ke "${status}".`);
+            },
+            onAddFollowUp: (item) => {
+              setFollowUps(prev => [{ ...item, id: 'flw-' + Date.now() }, ...prev]);
+            }
+          }),
+          currentTab === 'wishlist' && h(WishlistView, {
+            wishlistItems,
+            onRestock: handleRestockWishlist,
+            onBroadcast: handleBroadcastWishlist,
+            settings
+          }),
+          currentTab === 'loyalty' && h(LoyaltyView, {
+            vouchers,
+            customers,
+            onToggleVoucher: handleToggleVoucher,
+            onAddVoucher: handleAddVoucher
+          }),
+          currentTab === 'service' && h(ServiceView, {
+            tickets,
+            customers,
+            onAddTicket: (t) => {
+              setTickets(prev => [{ ...t, id: 'TCK-' + Math.floor(100 + Math.random() * 900) }, ...prev]);
+              addLog('ticket', 'Tiket Layanan Baru', `Tiket baru dari ${t.customerName}.`);
+            },
+            onUpdateTicketStatus: (id, status) => {
+              setTickets(prev => prev.map(tk => tk.id === id ? { ...tk, status } : tk));
+              addLog('ticket', 'Tiket Diselesaikan', `Tiket ${id} ditandai ${status}.`);
+            }
+          }),
+          currentTab === 'settings' && h(SettingsView, {
+            settings,
+            onUpdateSettings: (newS) => {
+              setSettings(prev => ({ ...prev, ...newS }));
+              addLog('setting', 'Pengaturan Butik Disimpan', 'Memperbarui profil butik ALLURE.');
+            },
+            activityLogs,
+            onResetDemo: handleResetAll,
+            currentUser
+          })
+        ),
+
+        // Footer
+        h('footer', { className: 'py-4 px-8 border-t border-[#EFE8DE] text-center text-xs text-[#6B7280] bg-white' },
+          '© 2026 ALLURE • BUSINESS SPACE • Everything Behind Allure • All Rights Reserved'
+        )
+      ),
+
+      // Invoice Modal
+      h(InvoiceModal, {
+        activeInvoice,
+        onClose: () => setActiveInvoice(null),
+        settings
+      })
+    );
+  }
+
+  // Mount Application
+  function mount() {
+    if (window.__ALLURE_VITE_ACTIVE__) return;
+    const rootEl = document.getElementById('root');
+    if (rootEl) {
+      const root = window.ReactDOM.createRoot(rootEl);
+      window.__ALLURE_STANDALONE_ROOT__ = root;
+      root.render(h(AllureApp));
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mount);
+  } else {
+    mount();
+  }
+})();
+
+</script>
 </body>
 </html>
