@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>ALLURE • BUSINESS SPACE</title>
+  
+  <!-- PWA Web App Manifest -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#C48B89">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="ALLURE">
+  <meta name="application-name" content="ALLURE">
+  <meta name="msapplication-TileColor" content="#C48B89">
+  <meta name="msapplication-TileImage" content="./icons/icon-192.svg">
+
+  <!-- Aesthetic Boutique Inlined Icon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' width='64' height='64'%3E%3Crect width='64' height='64' rx='16' fill='%23C48B89' /%3E%3Crect x='2' y='2' width='60' height='60' rx='14' fill='none' stroke='%23FAF7F2' stroke-opacity='0.6' stroke-width='1.5' /%3E%3Cpath d='M32 8 L34 16 L42 18 L34 20 L32 28 L30 20 L22 18 L30 16 Z' fill='%23FAF7F2' /%3E%3Ctext x='32' y='52' font-family='Georgia, serif' font-size='28' font-weight='700' fill='%23FFFFFF' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+  
+  <!-- Google Fonts: Cormorant Garamond + Playfair Display + Plus Jakarta Sans + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN for instant styling without build step -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            allure: {
+              50: '#FDF8F7',
+              100: '#F3D8D7',
+              200: '#E8C3C4',
+              300: '#DDA7A5',
+              400: '#C48B89',
+              500: '#B2706E',
+              600: '#9E5B59',
+              700: '#7D4443',
+              800: '#5C3130',
+              900: '#3E2020',
+            }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', '"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+      background-color: #FAF7F2;
+      color: #2C2725;
+    }
+    .font-serif {
+      font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    }
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #printable-receipt, #printable-receipt * {
+        visibility: visible !important;
+      }
+      #printable-receipt {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 20px !important;
+        background: white !important;
+      }
+    }
+  </style>
+
+  <!-- React 18 & ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- PWA & Service Worker Registration Script -->
+  <script>
+    // Global PWA State Store
+    window.__ALLURE_PWA__ = {
+      deferredPrompt: null,
+      isInstalled: false,
+      isStandalone: window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true,
+      listeners: []
+    };
+
+    // Capture install prompt
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      window.__ALLURE_PWA__.deferredPrompt = e;
+      window.__ALLURE_PWA__.notifyListeners();
+    });
+
+    // Detect successful install
+    window.addEventListener('appinstalled', () => {
+      window.__ALLURE_PWA__.isInstalled = true;
+      window.__ALLURE_PWA__.deferredPrompt = null;
+      window.__ALLURE_PWA__.notifyListeners();
+      console.log('🌸 [ALLURE] Aplikasi ALLURE berhasil diinstal di perangkat.');
+    });
+
+    window.__ALLURE_PWA__.subscribe = function(cb) {
+      window.__ALLURE_PWA__.listeners.push(cb);
+      cb({
+        canInstall: !!window.__ALLURE_PWA__.deferredPrompt,
+        isInstalled: window.__ALLURE_PWA__.isInstalled,
+        isStandalone: window.__ALLURE_PWA__.isStandalone
+      });
+      return () => {
+        window.__ALLURE_PWA__.listeners = window.__ALLURE_PWA__.listeners.filter(l => l !== cb);
+      };
+    };
+
+    window.__ALLURE_PWA__.notifyListeners = function() {
+      const state = {
+        canInstall: !!window.__ALLURE_PWA__.deferredPrompt,
+        isInstalled: window.__ALLURE_PWA__.isInstalled,
+        isStandalone: window.__ALLURE_PWA__.isStandalone
+      };
+      window.__ALLURE_PWA__.listeners.forEach(cb => {
+        try { cb(state); } catch(err) { /* silent */ }
+      });
+    };
+
+    // Global trigger for Install prompt
+    window.promptAllureInstall = async function() {
+      const pwa = window.__ALLURE_PWA__;
+      if (pwa.deferredPrompt) {
+        pwa.deferredPrompt.prompt();
+        const choice = await pwa.deferredPrompt.userChoice;
+        if (choice.outcome === 'accepted') {
+          console.log('🌸 [ALLURE] Pengguna menerima pemasangan aplikasi');
+        }
+        pwa.deferredPrompt = null;
+        pwa.notifyListeners();
+      } else if (pwa.isStandalone) {
+        alert('✨ Aplikasi ALLURE sudah terpasang dan berjalan dalam mode aplikasi desktop!');
+      } else {
+        alert('🌸 Pasang ALLURE sebagai Aplikasi Desktop:\n\n1. Klik ikon "Install" di address bar browser Anda, ATAU\n2. Buka menu browser (titik 3 di kanan atas) > pilih "Aplikasi" / "Apps" > "Instal ALLURE ini sebagai aplikasi".\n\nAplikasi akan langsung muncul di Desktop & Taskbar tanpa browser address bar!');
+      }
+    };
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js', { scope: './' })
+          .then((registration) => {
+            console.log('🌸 [ALLURE] Service Worker registered successfully:', registration.scope);
+          })
+          .catch((error) => {
+            console.warn('⚠️ [ALLURE] Service Worker registration skipped:', error);
+          });
+      });
+    }
+  </script>
+</head>
+<body class="selection:bg-[#E8C3C4] selection:text-[#7D4443] bg-[#FAF7F2] text-[#2C2725]">
+  <div id="root">
+    <!-- Elegant Boutique Initial Loader -->
+    <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #FAF7F2; color: #2C2725; font-family: 'Plus Jakarta Sans', sans-serif;">
+      <div style="width: 48px; height: 48px; border-radius: 16px; background-color: #C48B89; display: flex; align-items: center; justify-content: center; color: white; font-family: 'Playfair Display', serif; font-size: 26px; font-weight: bold; box-shadow: 0 4px 12px rgba(196,139,137,0.3); margin-bottom: 16px;">
+        A
+      </div>
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; letter-spacing: 4px; margin: 0 0 6px 0; color: #2C2725;">ALLURE</h1>
+      <p style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #8C5D58; margin: 0 0 3px 0; font-weight: 700;">BUSINESS SPACE</p>
+      <p style="font-size: 10px; letter-spacing: 1.5px; color: #6B7280; margin: 0 0 20px 0; font-weight: 500;">Everything Behind Allure</p>
+      <div style="width: 32px; height: 32px; border: 3px solid #EFE8DE; border-top-color: #C48B89; border-radius: 50%; animation: allureSpin 0.8s linear infinite;"></div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes allureSpin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+  <!-- Standalone browser application bundle with cache buster -->
+  <script src="./app.standalone.js?v=2.9.0"></script>
+</body>
+</html>
