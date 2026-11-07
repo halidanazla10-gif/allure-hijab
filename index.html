@@ -461,6 +461,17 @@
       h('path', { key: 1, d: 'M18 6 6 18' }),
       h('path', { key: 2, d: 'm6 6 12 12' })
     ],
+    'image': [
+      h('rect', { key: 1, width: '18', height: '18', x: '3', y: '3', rx: '2', ry: '2' }),
+      h('circle', { key: 2, cx: '9', cy: '9', r: '2' }),
+      h('path', { key: 3, d: 'm21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21' })
+    ],
+    'store': [
+      h('path', { key: 1, d: 'm2 7 4.418-4.418A2 2 0 0 1 7.832 2h8.336a2 2 0 0 1 1.414.582L22 7' }),
+      h('path', { key: 2, d: 'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8' }),
+      h('path', { key: 3, d: 'M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4' }),
+      h('path', { key: 4, d: 'M2 7h20' })
+    ],
     'filter': [
       h('polygon', { key: 1, points: '22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3' })
     ],
@@ -565,17 +576,6 @@
       h('rect', { key: 1, width: '20', height: '14', x: '2', y: '5', rx: '2' }),
       h('line', { key: 2, x1: '2', x2: '22', y1: '10', y2: '10' })
     ],
-    'image': [
-      h('rect', { key: 1, width: '18', height: '18', x: '3', y: '3', rx: '2', ry: '2' }),
-      h('circle', { key: 2, cx: '9', cy: '9', r: '2' }),
-      h('path', { key: 3, d: 'm21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21' })
-    ],
-    'store': [
-      h('path', { key: 1, d: 'm2 7 4.418-4.418A2 2 0 0 1 7.832 2h8.336a2 2 0 0 1 1.414.582L22 7' }),
-      h('path', { key: 2, d: 'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8' }),
-      h('path', { key: 3, d: 'M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4' }),
-      h('path', { key: 4, d: 'M2 7h20' })
-    ],
     'globe': [
       h('circle', { key: 1, cx: '12', cy: '12', r: '10' }),
       h('line', { key: 2, x1: '2', x2: '22', y1: '12', y2: '12' }),
@@ -592,6 +592,25 @@
       h('circle', { key: 3, cx: '8.5', cy: '7.5', r: '.5', fill: 'currentColor' }),
       h('circle', { key: 4, cx: '6.5', cy: '12.5', r: '.5', fill: 'currentColor' }),
       h('path', { key: 5, d: 'M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z' })
+    ],
+    'refresh-cw': [
+      h('path', { key: 1, d: 'M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8' }),
+      h('path', { key: 2, d: 'M21 3v5h-5' }),
+      h('path', { key: 3, d: 'M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16' }),
+      h('path', { key: 4, d: 'M8 16H3v5' })
+    ],
+    'smartphone': [
+      h('rect', { key: 1, width: '14', height: '20', x: '5', y: '2', rx: '2', ry: '2' }),
+      h('path', { key: 2, d: 'M12 18h.01' })
+    ],
+    'laptop': [
+      h('path', { key: 1, d: 'M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16' })
+    ],
+    'wifi': [
+      h('path', { key: 1, d: 'M12 20h.01' }),
+      h('path', { key: 2, d: 'M2 8.82a15 15 0 0 1 20 0' }),
+      h('path', { key: 3, d: 'M5 12.86a10 10 0 0 1 14 0' }),
+      h('path', { key: 4, d: 'M8.5 16.43a5 5 0 0 1 7 0' })
     ]
   };
 
@@ -999,7 +1018,7 @@
   }
 
   // -------------------------------------------------------------
-  // COMPONENT: LOGIN VIEW (DUAL TAB: LOGIN ADMIN & LOGIN PELANGGAN)
+  // COMPONENT: LOGIN VIEW (DUAL TAB: ADMIN & PELANGGAN VIP)
   // -------------------------------------------------------------
   function LoginView({ onLoginAdmin, onLoginCustomer, onRegisterCustomer, customers, settings, onLoginSuccess }) {
     const [activeTab, setActiveTab] = useState('admin'); // 'admin' | 'customer'
@@ -1336,7 +1355,8 @@
     onOpenInvoice,
     onProcessOrder,
     onConfirmOrderReceived,
-    onSubmitReview
+    onSubmitReview,
+    onOpenSyncModal
   }) {
     const [activeTab, setActiveTab] = useState('overview'); // overview, catalog, orders, vouchers, profile
     const [catalogSearch, setCatalogSearch] = useState('');
@@ -1749,6 +1769,17 @@
               h('p', { className: 'font-bold text-[#1F2937] leading-tight' }, currentCustomer.name),
               h('p', { className: 'text-[10px] text-[#B2706E] font-semibold' }, tier + ' Member • ' + points + ' Poin')
             )
+          ),
+
+          // Sinkronkan HP & Laptop Button
+          onOpenSyncModal && h('button', {
+            type: 'button',
+            onClick: onOpenSyncModal,
+            title: 'Sinkronkan data HP dan Laptop',
+            className: 'flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#E8C3C4] bg-[#FAF7F2] hover:bg-[#F3D8D7] text-[#7D4443] text-xs font-bold transition-all shadow-xs cursor-pointer'
+          },
+            h(Icon, { name: 'refresh-cw', className: 'w-3.5 h-3.5 text-[#B2706E]' }),
+            h('span', { className: 'hidden sm:inline' }, 'Sinkron HP & Laptop')
           ),
 
           // Logout Button
@@ -3424,6 +3455,7 @@
         )
       ),
 
+      // Add Product Modal
       // Add Product Modal
       isAddOpen && h('div', { className: 'fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4' },
         h('div', { className: 'bg-white w-full max-w-xl rounded-3xl p-6 shadow-2xl border border-[#EFE8DE] space-y-4 max-h-[90vh] overflow-y-auto' },
@@ -5881,6 +5913,268 @@
   }
 
   // -------------------------------------------------------------
+  // COMPONENT: SYNC MODAL (HP & LAPTOP CROSS-DEVICE SYNCHRONIZATION)
+  // -------------------------------------------------------------
+  function SyncModal({ isOpen, onClose, products, customers, transactions, onApplySyncData, lanUrl }) {
+    if (!isOpen) return null;
+    const [activeTab, setActiveTab] = useState('transfer'); // 'transfer' | 'wifi' | 'direct'
+    const [pastedCode, setPastedCode] = useState('');
+    const [copiedSuccess, setCopiedSuccess] = useState(false);
+    const [applyResult, setApplyResult] = useState(null);
+    const [isSyncing, setIsSyncing] = useState(false);
+
+    const handleCopyCode = () => {
+      try {
+        const payload = {
+          products,
+          customers,
+          transactions,
+          timestamp: Date.now(),
+          version: 'allure_sync_v1'
+        };
+        const code = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+        navigator.clipboard.writeText(code);
+        setCopiedSuccess(true);
+        setTimeout(() => setCopiedSuccess(false), 3000);
+      } catch (e) {
+        alert('Gagal menyalin: ' + e.message);
+      }
+    };
+
+    const handleApplyCode = () => {
+      if (!pastedCode.trim()) {
+        setApplyResult({ success: false, message: 'Silakan tempelkan kode yang disalin dari HP terlebih dahulu.' });
+        return;
+      }
+      try {
+        let raw = pastedCode.trim();
+        let parsed;
+        if (raw.startsWith('{')) {
+          parsed = JSON.parse(raw);
+        } else {
+          parsed = JSON.parse(decodeURIComponent(escape(atob(raw))));
+        }
+
+        if (parsed && parsed.products && Array.isArray(parsed.products)) {
+          if (onApplySyncData) onApplySyncData(parsed);
+          setApplyResult({ success: true, message: '🎉 Berhasil! Foto dan data produk terbaru dari HP telah terpasang di Laptop.' });
+          setTimeout(() => {
+            onClose();
+            setApplyResult(null);
+            setPastedCode('');
+          }, 1500);
+        } else {
+          setApplyResult({ success: false, message: 'Format kode tidak valid. Pastikan Anda menyalin dari menu "Salin Data HP".' });
+        }
+      } catch (err) {
+        setApplyResult({ success: false, message: 'Gagal membaca kode data: ' + err.message });
+      }
+    };
+
+    const handleServerSync = async () => {
+      setIsSyncing(true);
+      try {
+        const res = await fetch('/api/sync');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.products && Array.isArray(data.products)) {
+            if (onApplySyncData) onApplySyncData(data);
+            setApplyResult({ success: true, message: '✅ Berhasil memuat data terbaru dari server lokal!' });
+            setIsSyncing(false);
+            return;
+          }
+        }
+      } catch (e) {}
+      setIsSyncing(false);
+      setApplyResult({ success: false, message: 'Server lokal tidak terjangkau. Gunakan menu "Transfer Cepat HP ke Laptop".' });
+    };
+
+    return h('div', { className: 'fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4' },
+      h('div', { className: 'bg-white w-full max-w-xl rounded-3xl p-6 sm:p-7 shadow-2xl border border-[#EFE8DE] max-h-[92vh] overflow-y-auto space-y-5 animate-in fade-in zoom-in-95' },
+        
+        // Header
+        h('div', { className: 'flex items-start justify-between border-b border-gray-100 pb-4' },
+          h('div', { className: 'flex items-center gap-3' },
+            h('div', { className: 'w-10 h-10 rounded-2xl bg-[#FDF8F7] border border-[#E8C3C4] flex items-center justify-center text-[#B2706E]' },
+              h(Icon, { name: 'refresh-cw', className: 'w-5 h-5 animate-spin-slow' })
+            ),
+            h('div', null,
+              h('h2', { className: 'font-serif text-lg sm:text-xl font-bold text-[#1F2937]' }, 'Sinkronkan HP & Laptop'),
+              h('p', { className: 'text-xs text-[#6B7280]' }, 'Pindahkan foto produk dan data yang diubah di HP ke Laptop secara instan')
+            )
+          ),
+          h('button', {
+            onClick: onClose,
+            className: 'p-1.5 rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all cursor-pointer'
+          },
+            h(Icon, { name: 'x', className: 'w-5 h-5' })
+          )
+        ),
+
+        // Tab Switcher
+        h('div', { className: 'grid grid-cols-3 gap-1 bg-[#FAF7F2] p-1 rounded-2xl border border-[#EFE8DE] text-xs font-bold' },
+          h('button', {
+            type: 'button',
+            onClick: () => { setActiveTab('transfer'); setApplyResult(null); },
+            className: 'py-2 px-2 rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer ' + (
+              activeTab === 'transfer' ? 'bg-white text-[#7D4443] shadow-xs border border-[#EFE8DE]' : 'text-[#6B7280] hover:text-[#1F2937]'
+            )
+          },
+            h(Icon, { name: 'smartphone', className: 'w-3.5 h-3.5 text-[#B2706E]' }),
+            'Transfer Cepat'
+          ),
+          h('button', {
+            type: 'button',
+            onClick: () => { setActiveTab('wifi'); setApplyResult(null); },
+            className: 'py-2 px-2 rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer ' + (
+              activeTab === 'wifi' ? 'bg-white text-[#7D4443] shadow-xs border border-[#EFE8DE]' : 'text-[#6B7280] hover:text-[#1F2937]'
+            )
+          },
+            h(Icon, { name: 'wifi', className: 'w-3.5 h-3.5 text-[#B2706E]' }),
+            'Koneksi Wi-Fi'
+          ),
+          h('button', {
+            type: 'button',
+            onClick: () => { setActiveTab('direct'); setApplyResult(null); },
+            className: 'py-2 px-2 rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer ' + (
+              activeTab === 'direct' ? 'bg-white text-[#7D4443] shadow-xs border border-[#EFE8DE]' : 'text-[#6B7280] hover:text-[#1F2937]'
+            )
+          },
+            h(Icon, { name: 'refresh-cw', className: 'w-3.5 h-3.5 text-[#B2706E]' }),
+            'Server Sync'
+          )
+        ),
+
+        // Feedback Result Alert
+        applyResult && h('div', {
+          className: 'p-4 rounded-2xl border text-xs flex items-start gap-2.5 ' + (
+            applyResult.success ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'
+          )
+        },
+          h(Icon, { name: 'check-circle', className: 'w-4 h-4 shrink-0 mt-0.5' }),
+          h('p', { className: 'font-semibold' }, applyResult.message)
+        ),
+
+        // TAB 1: TRANSFER CEPAT
+        activeTab === 'transfer' && h('div', { className: 'space-y-4 text-xs' },
+          // Step 1: Di HP
+          h('div', { className: 'p-4 rounded-2xl bg-[#FAF7F2] border border-[#EFE8DE] space-y-2.5' },
+            h('div', { className: 'flex items-center gap-2' },
+              h('span', { className: 'w-5 h-5 rounded-full bg-[#C48B89] text-white flex items-center justify-center font-bold text-[10px]' }, '1'),
+              h('span', { className: 'font-bold text-[#1F2937] flex items-center gap-1.5' },
+                h(Icon, { name: 'smartphone', className: 'w-4 h-4 text-[#B2706E]' }),
+                'Jika Anda Sedang Buka di HP:'
+              )
+            ),
+            h('p', { className: 'text-[#6B7280] text-[11px] leading-relaxed' },
+              'Klik tombol di bawah ini di HP Anda untuk menyalin foto produk & data yang baru Anda ubah:'
+            ),
+            h('button', {
+              type: 'button',
+              onClick: handleCopyCode,
+              className: 'px-4 py-2.5 rounded-xl bg-[#C48B89] hover:bg-[#B2706E] text-white font-bold flex items-center gap-2 shadow-xs transition-all cursor-pointer'
+            },
+              h(Icon, { name: copiedSuccess ? 'check' : 'copy', className: 'w-4 h-4' }),
+              copiedSuccess ? '✓ Kode Data HP Tersalin ke Clipboard!' : 'Salin Data Produk & Foto dari HP'
+            )
+          ),
+
+          // Step 2: Di Laptop
+          h('div', { className: 'p-4 rounded-2xl bg-white border border-[#E8C3C4] shadow-xs space-y-2.5' },
+            h('div', { className: 'flex items-center gap-2' },
+              h('span', { className: 'w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px]' }, '2'),
+              h('span', { className: 'font-bold text-[#1F2937] flex items-center gap-1.5' },
+                h(Icon, { name: 'laptop', className: 'w-4 h-4 text-emerald-600' }),
+                'Jika Anda Sedang Buka di Laptop:'
+              )
+            ),
+            h('p', { className: 'text-[#6B7280] text-[11px] leading-relaxed' },
+              'Tempelkan kode yang tadi Anda salin dari HP ke kotak di bawah ini, lalu klik tombol terapkan:'
+            ),
+            h('textarea', {
+              rows: 3,
+              value: pastedCode,
+              onChange: (e) => setPastedCode(e.target.value),
+              placeholder: 'Tempelkan kode data dari HP di sini (klik kanan > paste)...',
+              className: 'w-full p-3 rounded-xl border border-[#EFE8DE] bg-[#FAF7F2] font-mono text-[10px] text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#DDA7A5]'
+            }),
+            h('button', {
+              type: 'button',
+              onClick: handleApplyCode,
+              className: 'px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center gap-2 shadow-xs transition-all cursor-pointer'
+            },
+              h(Icon, { name: 'sparkles', className: 'w-4 h-4' }),
+              '✨ Terapkan Perubahan Foto ke Laptop Sekarang'
+            )
+          )
+        ),
+
+        // TAB 2: WI-FI LOKAL
+        activeTab === 'wifi' && h('div', { className: 'space-y-4 text-xs' },
+          h('div', { className: 'p-4 rounded-2xl bg-[#FDF8F7] border border-[#E8C3C4] space-y-3' },
+            h('div', { className: 'flex items-center gap-2 text-[#7D4443]' },
+              h(Icon, { name: 'wifi', className: 'w-4 h-4 text-[#B2706E]' }),
+              h('span', { className: 'font-bold' }, 'Sambungan Otomatis via Wi-Fi Rumah/Toko')
+            ),
+            h('p', { className: 'text-[#6B7280] text-[11px] leading-relaxed' },
+              'Agar setiap perubahan foto produk di HP langsung otomatis muncul di Laptop tanpa perlu salin kode, buka link lokal ini di browser HP Anda (selama terhubung ke Wi-Fi yang sama):'
+            ),
+            h('div', { className: 'p-3 bg-white rounded-xl border border-[#E8C3C4] flex items-center justify-between gap-2' },
+              h('code', { className: 'font-mono font-bold text-sm text-[#7D4443] select-all' }, lanUrl || 'http://localhost:5173'),
+              h('button', {
+                type: 'button',
+                onClick: () => {
+                  navigator.clipboard.writeText(lanUrl || 'http://localhost:5173');
+                  setCopiedSuccess(true);
+                  setTimeout(() => setCopiedSuccess(false), 2500);
+                },
+                className: 'px-3 py-1.5 rounded-lg bg-[#FAF7F2] hover:bg-[#F3D8D7] text-[#7D4443] font-bold text-[11px] border border-[#E8C3C4] cursor-pointer'
+              }, copiedSuccess ? 'Tersalin!' : 'Salin Link')
+            ),
+            h('div', { className: 'pt-1 text-[11px] text-[#6B7280]' },
+              '💡 Saat membuka via link ini di HP, setiap kali Anda edit foto atau stok, laptop Anda akan langsung terupdate otomatis dalam 3 detik!'
+            )
+          )
+        ),
+
+        // TAB 3: SERVER SYNC
+        activeTab === 'direct' && h('div', { className: 'space-y-4 text-xs' },
+          h('div', { className: 'p-4 rounded-2xl bg-white border border-[#EFE8DE] space-y-3' },
+            h('div', { className: 'flex items-center justify-between' },
+              h('span', { className: 'font-bold text-[#1F2937]' }, 'Sinkronisasi Database Lokal'),
+              h('span', { className: 'px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold' }, 'Auto-Sync Aktif')
+            ),
+            h('p', { className: 'text-[#6B7280] text-[11px] leading-relaxed' },
+              'Tarik perubahan foto dan pesanan terbaru dari server server.mjs:'
+            ),
+            h('button', {
+              type: 'button',
+              onClick: handleServerSync,
+              disabled: isSyncing,
+              className: 'w-full py-3 px-4 rounded-2xl bg-[#FAF7F2] hover:bg-[#F3D8D7] border border-[#E8C3C4] text-[#7D4443] font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all'
+            },
+              h(Icon, { name: 'refresh-cw', className: 'w-4 h-4 text-[#B2706E] ' + (isSyncing ? 'animate-spin' : '') }),
+              isSyncing ? 'Sedang Memeriksa Server...' : 'Muat Ulang Data Terbaru dari Server Sekarang'
+            )
+          )
+        ),
+
+        // Footer
+        h('div', { className: 'pt-2 border-t border-gray-100 flex items-center justify-between text-[11px] text-[#6B7280]' },
+          h('span', { className: 'flex items-center gap-1 text-emerald-700 font-semibold' },
+            h(Icon, { name: 'shield-check', className: 'w-3.5 h-3.5 text-emerald-600' }),
+            'Katalog Hijab & Foto Tersimpan Aman'
+          ),
+          h('button', {
+            onClick: onClose,
+            className: 'px-4 py-1.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold cursor-pointer'
+          }, 'Tutup')
+        )
+      )
+    );
+  }
+
+  // -------------------------------------------------------------
   // MASTER APPLICATION ROOT COMPONENT
   // -------------------------------------------------------------
   
@@ -6050,10 +6344,85 @@
     const [isMobileOpen, setIsMobileOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [activeInvoice, setActiveInvoice] = useState(null);
+    const [isSyncModalOpen, setIsSyncModalOpen] = useState(false);
+    const [lanUrl, setLanUrl] = useState('http://localhost:5173');
 
     // Dropdowns
     const [isNotifOpen, setIsNotifOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+    const pushToServerSync = (payload) => {
+      try {
+        fetch('/api/sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(() => {});
+      } catch (e) {}
+    };
+
+    // Auto-fetch LAN URL for mobile pairing
+    useEffect(() => {
+      fetch('/api/network-info')
+        .then(r => r.json())
+        .then(d => { if (d.lanUrl) setLanUrl(d.lanUrl); })
+        .catch(() => {});
+    }, []);
+
+    // Periodic Server Auto-Sync (every 3 seconds) for cross-device live update (HP & Laptop)
+    useEffect(() => {
+      let lastRemote = 0;
+      const pollServer = async () => {
+        try {
+          const res = await fetch('/api/sync');
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.updatedAt && data.updatedAt > lastRemote) {
+              lastRemote = data.updatedAt;
+              if (data.products && Array.isArray(data.products) && data.products.length > 0) {
+                setProducts(ensureProductImages(data.products));
+              }
+              if (data.transactions && Array.isArray(data.transactions)) {
+                setTransactions(data.transactions);
+              }
+              if (data.customers && Array.isArray(data.customers)) {
+                setCustomers(data.customers);
+              }
+            }
+          }
+        } catch (e) {}
+      };
+      pollServer();
+      const timer = setInterval(pollServer, 3000);
+      return () => clearInterval(timer);
+    }, []);
+
+    const handleApplySyncData = (parsed) => {
+      if (parsed.products && Array.isArray(parsed.products)) {
+        const nextP = ensureProductImages(parsed.products);
+        setProducts(nextP);
+        try { localStorage.setItem('allure_products_v1', JSON.stringify(nextP)); } catch (e) {}
+        pushToServerSync({ products: nextP });
+      }
+      if (parsed.customers && Array.isArray(parsed.customers)) {
+        setCustomers(parsed.customers);
+        try { localStorage.setItem('allure_customers_v1', JSON.stringify(parsed.customers)); } catch (e) {}
+        pushToServerSync({ customers: parsed.customers });
+      }
+      if (parsed.transactions && Array.isArray(parsed.transactions)) {
+        setTransactions(parsed.transactions);
+        try { localStorage.setItem('allure_transactions_v1', JSON.stringify(parsed.transactions)); } catch (e) {}
+        pushToServerSync({ transactions: parsed.transactions });
+      }
+      try {
+        if (typeof BroadcastChannel !== 'undefined') {
+          const ch = new BroadcastChannel('allure_live_sync');
+          ch.postMessage({ type: 'SYNC', time: Date.now() });
+          ch.close();
+        }
+        window.dispatchEvent(new Event('storage'));
+      } catch (e) {}
+    };
 
     // Sync to storage
     useEffect(() => {
@@ -6066,7 +6435,10 @@
         }
       } catch (e) {}
     }, [isAuthenticated]);
-    useEffect(() => { localStorage.setItem('allure_products_v1', JSON.stringify(products)); }, [products]);
+    useEffect(() => { 
+      localStorage.setItem('allure_products_v1', JSON.stringify(products)); 
+      pushToServerSync({ products });
+    }, [products]);
     useEffect(() => { localStorage.setItem('allure_customers_v1', JSON.stringify(customers)); }, [customers]);
     useEffect(() => { localStorage.setItem('allure_wishlist_v1', JSON.stringify(wishlistItems)); }, [wishlistItems]);
     useEffect(() => { localStorage.setItem('allure_transactions_v1', JSON.stringify(transactions)); }, [transactions]);
@@ -6674,12 +7046,22 @@
             addLog('customer', 'Update Profil Pelanggan', `Memperbarui data profil pelanggan ID ${id}.`);
           },
           onOpenInvoice: (trx) => setActiveInvoice(trx),
-          onSubmitReview: handleSubmitOrderReview
+          onSubmitReview: handleSubmitOrderReview,
+          onOpenSyncModal: () => setIsSyncModalOpen(true)
         }),
         h(InvoiceModal, {
           activeInvoice,
           onClose: () => setActiveInvoice(null),
           settings
+        }),
+        h(SyncModal, {
+          isOpen: isSyncModalOpen,
+          onClose: () => setIsSyncModalOpen(false),
+          products,
+          customers,
+          transactions,
+          onApplySyncData: handleApplySyncData,
+          lanUrl
         })
       );
     }
@@ -6831,6 +7213,18 @@
             },
               h(Icon, { name: 'download', className: 'w-3.5 h-3.5 text-[#B2706E]' }),
               h('span', { className: 'hidden md:inline' }, 'Install App')
+            ),
+
+            // Sinkronkan HP & Laptop Button
+            h('button', {
+              type: 'button',
+              onClick: () => setIsSyncModalOpen(true),
+              title: 'Sinkronkan data HP dan Laptop',
+              className: 'flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#E8C3C4] bg-[#FAF7F2] hover:bg-[#F3D8D7] text-[#7D4443] text-xs font-bold transition-all shadow-xs cursor-pointer'
+            },
+              h(Icon, { name: 'refresh-cw', className: 'w-3.5 h-3.5 text-[#B2706E]' }),
+              h('span', { className: 'hidden sm:inline' }, 'Sinkron HP & Laptop'),
+              h('span', { className: 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse' })
             ),
 
             // Notification Bell
@@ -7041,6 +7435,17 @@
         activeInvoice,
         onClose: () => setActiveInvoice(null),
         settings
+      }),
+
+      // Sync Modal (HP & Laptop)
+      h(SyncModal, {
+        isOpen: isSyncModalOpen,
+        onClose: () => setIsSyncModalOpen(false),
+        products,
+        customers,
+        transactions,
+        onApplySyncData: handleApplySyncData,
+        lanUrl
       })
     );
   }
