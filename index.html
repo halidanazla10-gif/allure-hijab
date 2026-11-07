@@ -6485,10 +6485,12 @@
     const totalAlerts = lowStockItems.length + pendingFollowUps.length;
 
     const ADMIN_AUTHORIZED_EMAIL = 'halidanazla10@gmail.com';
+    const ADMIN_AUTHORIZED_PASSWORD = 'nazla1010';
 
     const handleLoginAdmin = (email, password) => {
       const cleanEmail = (email || '').trim().toLowerCase();
-      if (cleanEmail !== ADMIN_AUTHORIZED_EMAIL) {
+      const cleanPassword = (password || '').trim();
+      if (cleanEmail !== ADMIN_AUTHORIZED_EMAIL || cleanPassword !== ADMIN_AUTHORIZED_PASSWORD) {
         return {
           success: false,
           error: 'Akses ditolak! Email atau kata sandi tidak memiliki hak akses Administrator.'
