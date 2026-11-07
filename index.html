@@ -612,13 +612,13 @@
 
   // Reset all sales, transactions & customers to 0 on boot for clean operational start
   try {
-    if (typeof localStorage !== 'undefined' && !localStorage.getItem('allure_clean_slate_v8')) {
+    if (typeof localStorage !== 'undefined' && !localStorage.getItem('allure_clean_slate_v9')) {
       localStorage.setItem('allure_transactions_v1', JSON.stringify([]));
       localStorage.setItem('allure_customers_v1', JSON.stringify([]));
       localStorage.setItem('allure_followups_v1', JSON.stringify([]));
       localStorage.setItem('allure_tickets_v1', JSON.stringify([]));
       localStorage.setItem('allure_wishlist_v1', JSON.stringify([]));
-      localStorage.setItem('allure_clean_slate_v8', 'true');
+      localStorage.setItem('allure_clean_slate_v9', 'true');
     }
   } catch (e) {}
 
@@ -1435,7 +1435,7 @@
 
       if (isCompleted) {
         stepIndex = 4;
-        title = (status === 'Selesai (Ambil di Butik)' || trx.fulfillmentStatus === 'Selesai (Ambil di Butik)') ? 'Selesai (Ambil di Butik)' : 'Selesai';
+        title = (status === 'Selesai (Ambil di Butik)' || trx.fulfillmentStatus === 'Selesai (Ambil di Butik)') ? 'Selesai (Ambil di Butik)' : 'Selesai / Diterima';
         badgeColor = 'bg-emerald-50 text-emerald-800 border-emerald-200';
         icon = 'check-circle';
         desc = (status === 'Selesai (Ambil di Butik)' || trx.fulfillmentStatus === 'Selesai (Ambil di Butik)')
@@ -1494,7 +1494,7 @@
         { label: 'Diproses', icon: 'clock', short: 'Proses' },
         { label: 'Dikemas', icon: 'package', short: 'Kemas' },
         { label: 'Dikirim', icon: 'truck', short: 'Kirim' },
-        { label: 'Selesai', icon: 'check-circle', short: 'Selesai' }
+        { label: 'Selesai / Diterima', icon: 'check-circle', short: 'Selesai' }
       ];
 
       return h('div', { className: 'py-2' },
@@ -2153,19 +2153,43 @@
           ) : h('div', { className: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' },
             filteredProducts.map(p => {
               const selectedColor = selectedColorMap[p.id] || (p.colors && p.colors[0]) || 'Standard';
+              const fallbackImages = {
+                'Pashmina Viscose': 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80',
+                'Pashmina Kaos': 'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=600&q=80',
+                'Segi Empat Voal': 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80',
+                'Parisian Silk': 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=600&q=80',
+                'Bergo Daily': 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=80',
+                'Aksesoris Hijab': 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80'
+              };
+              const fallbackImg = fallbackImages[p.category] || fallbackImages['Pashmina Viscose'];
 
               return h('div', {
                 key: p.id,
-                className: 'bg-white rounded-3xl border border-[#EFE8DE] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between'
+                className: 'bg-white rounded-3xl border border-[#EFE8DE] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group'
               },
-                h('div', { className: 'p-5 space-y-3' },
-                  h('div', { className: 'flex justify-between items-start gap-2' },
-                    h('span', { className: 'px-2.5 py-1 rounded-full bg-[#FAF7F2] text-[#7D4443] font-semibold text-[10px] border border-[#E8C3C4]' }, p.category),
-                    h('span', { className: 'text-[10px] font-bold px-2 py-0.5 rounded-full ' + (p.stock > 5 ? 'bg-emerald-100 text-emerald-800' : p.stock > 0 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800') },
+                // Product Photo Container with Category & Stock Badge Overlays
+                h('div', { className: 'relative aspect-[4/3] w-full overflow-hidden bg-[#FAF7F2]' },
+                  h('img', {
+                    src: p.image || fallbackImg,
+                    alt: p.name,
+                    className: 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-300',
+                    onError: (e) => {
+                      e.target.src = fallbackImg;
+                    }
+                  }),
+                  // Category badge overlay
+                  h('div', { className: 'absolute top-3 left-3' },
+                    h('span', { className: 'px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs text-[#7D4443] font-bold text-[10px] border border-[#E8C3C4] shadow-xs' }, p.category)
+                  ),
+                  // Stock badge overlay
+                  h('div', { className: 'absolute top-3 right-3' },
+                    h('span', { className: 'text-[10px] font-bold px-2 py-0.5 rounded-full shadow-xs ' + (p.stock > 5 ? 'bg-emerald-600/95 text-white backdrop-blur-xs' : p.stock > 0 ? 'bg-amber-600/95 text-white backdrop-blur-xs' : 'bg-rose-600/95 text-white backdrop-blur-xs') },
                       p.stock > 0 ? 'Stok: ' + p.stock + ' pcs' : 'Stok Habis'
                     )
-                  ),
+                  )
+                ),
 
+                h('div', { className: 'p-5 space-y-3' },
                   h('div', null,
                     h('h3', { className: 'font-serif text-lg font-bold text-[#1F2937]' }, p.name),
                     h('p', { className: 'text-[11px] text-[#6B7280] font-mono mt-0.5' }, 'SKU: ' + p.sku)
@@ -5949,7 +5973,7 @@
 
     // Auto-clean migration to reset data to initial clean slate (0 transactions & 0 customers)
     try {
-      if (!localStorage.getItem('allure_clean_slate_v8')) {
+      if (!localStorage.getItem('allure_clean_slate_v9')) {
         localStorage.setItem('allure_transactions_v1', JSON.stringify([]));
         localStorage.setItem('allure_customers_v1', JSON.stringify([]));
         localStorage.setItem('allure_followups_v1', JSON.stringify([]));
@@ -5958,7 +5982,7 @@
         localStorage.setItem('allure_products_v1', JSON.stringify(INITIAL_PRODUCTS));
         localStorage.setItem('allure_vouchers_v1', JSON.stringify(INITIAL_VOUCHERS));
         localStorage.setItem('allure_logs_v1', JSON.stringify(INITIAL_LOGS));
-        localStorage.setItem('allure_clean_slate_v8', 'true');
+        localStorage.setItem('allure_clean_slate_v9', 'true');
       }
     } catch (e) {
       console.warn('Storage cleaner:', e);
@@ -6107,11 +6131,9 @@
       let cust = customers.find(c => c.id === customerId);
       if (!cust && currentCustomer && currentCustomer.id === customerId) {
         cust = currentCustomer;
-        setCustomers(prev => [cust, ...prev]);
       }
       if (!cust && currentCustomer) {
         cust = currentCustomer;
-        setCustomers(prev => [cust, ...prev]);
       }
       if (!cust) {
         const fallbackName = (customerData && customerData.name) || customerName || (currentCustomer && currentCustomer.name) || 'Pelanggan Butik';
@@ -6128,14 +6150,29 @@
           totalSpent: 0,
           ordersCount: 0
         };
-        setCustomers(prev => [cust, ...prev]);
       } else if (cust.id === 'cust-walkin' && customerName && customerName !== 'Pelanggan Umum (Walk-in)') {
         cust = { ...cust, name: customerName, phone: customerPhone || cust.phone || '081200000000' };
       }
 
+      // Defensive item normalization: handles both { product, qty } and { productId, qty }
+      const resolvedItems = (items || []).map(it => {
+        const prod = it.product || products.find(p => p.id === (it.productId || it.id) || p.sku === it.sku);
+        return {
+          product: prod,
+          qty: it.qty || 1,
+          selectedColor: it.selectedColor || (prod && prod.colors && prod.colors[0]) || 'Standard'
+        };
+      });
+
       // Stock check
       const qtyMap = {};
-      for (const it of items) qtyMap[it.product.id] = (qtyMap[it.product.id] || 0) + it.qty;
+      for (const it of resolvedItems) {
+        if (!it.product) {
+          alert('Salah satu produk tidak ditemukan atau sudah tidak tersedia.');
+          return false;
+        }
+        qtyMap[it.product.id] = (qtyMap[it.product.id] || 0) + it.qty;
+      }
       for (const [pId, reqQty] of Object.entries(qtyMap)) {
         const prod = products.find(p => p.id === pId);
         if (!prod || prod.stock < reqQty) {
@@ -6145,7 +6182,7 @@
       }
 
       let subtotal = 0;
-      const trxItems = items.map(it => {
+      const trxItems = resolvedItems.map(it => {
         const lineTotal = it.product.price * it.qty;
         subtotal += lineTotal;
         return {
@@ -6201,51 +6238,62 @@
         orderStatus: isOfflineOrder ? 'Selesai' : 'Pesanan Masuk',
         fulfillmentStatus: isOfflineOrder ? 'Selesai (Ambil di Butik)' : 'Pesanan Masuk',
         courierName: isOfflineOrder ? 'Ambil di Toko Langsung' : 'Kurir Butik ALLURE',
-        trackingNumber: isOfflineOrder ? 'OFFLINE-STORE' : '-'
+        trackingNumber: isOfflineOrder ? 'OFFLINE-STORE' : `ALR-${Math.floor(100000 + Math.random() * 900000)}`
       };
 
       // Deduct stock
-      setProducts(prev => prev.map(p => {
-        const qtyBought = items.filter(it => it.product.id === p.id).reduce((s, it) => s + it.qty, 0);
+      const nextProducts = products.map(p => {
+        const qtyBought = qtyMap[p.id] || 0;
         if (qtyBought > 0) {
           return { ...p, stock: Math.max(0, p.stock - qtyBought), soldCount: (p.soldCount || 0) + qtyBought };
         }
         return p;
-      }));
+      });
+      setProducts(nextProducts);
 
-      // Update customer
-      setCustomers(prev => prev.map(c => {
-        if (c.id === cust.id) {
-          const newSpent = c.totalSpent + grandTotal;
-          const newOrders = c.ordersCount + 1;
-          const newPoints = c.loyaltyPoints + loyaltyEarned;
-          const newTier = calculateTier(newPoints);
-          let seg = c.segment;
-          if (newSpent >= 4000000) seg = 'Loyal/VIP';
-          else if (newOrders >= 4) seg = 'Loyal/VIP';
-          else if (newOrders >= 2) seg = 'Regular';
+      // Update customer - accurately guarantee inclusion in nextCustomers even if starting from 0 customers
+      const custExists = customers.some(c => c.id === cust.id);
+      const newSpent = (cust.totalSpent || 0) + grandTotal;
+      const newOrders = (cust.ordersCount || 0) + 1;
+      const newPoints = (cust.loyaltyPoints || 0) + loyaltyEarned;
+      const newTier = calculateTier(newPoints);
+      let seg = cust.segment || 'Regular';
+      if (newSpent >= 4000000) seg = 'Loyal/VIP';
+      else if (newOrders >= 4) seg = 'Loyal/VIP';
+      else if (newOrders >= 2) seg = 'Regular';
 
-          return {
-            ...c,
-            totalSpent: newSpent,
-            total_pengeluaran: newSpent,
-            ordersCount: newOrders,
-            jumlah_transaksi: newOrders,
-            loyaltyPoints: newPoints,
-            tier: newTier,
-            segment: seg,
-            lastOrderDate: new Date().toISOString()
-          };
-        }
-        return c;
-      }));
+      const updatedC = {
+        ...cust,
+        totalSpent: newSpent,
+        total_pengeluaran: newSpent,
+        ordersCount: newOrders,
+        jumlah_transaksi: newOrders,
+        loyaltyPoints: newPoints,
+        tier: newTier,
+        segment: seg,
+        lastOrderDate: new Date().toISOString()
+      };
 
-      // Update voucher
-      if (appliedVoucherCode) {
-        setVouchers(prev => prev.map(v => v.code === appliedVoucherCode ? { ...v, usedCount: v.usedCount + 1 } : v));
+      const nextCustomers = custExists
+        ? customers.map(c => c.id === cust.id ? updatedC : c)
+        : [updatedC, ...customers];
+
+      setCustomers(nextCustomers);
+      if (currentCustomer && currentCustomer.id === cust.id) {
+        setCurrentCustomer(updatedC);
+        try { sessionStorage.setItem('allure_auth_customer', JSON.stringify(updatedC)); } catch (e) {}
       }
 
-      setTransactions(prev => [newTrx, ...prev]);
+      // Update voucher
+      let nextVouchers = vouchers;
+      if (appliedVoucherCode) {
+        nextVouchers = vouchers.map(v => v.code === appliedVoucherCode ? { ...v, usedCount: v.usedCount + 1 } : v);
+        setVouchers(nextVouchers);
+      }
+
+      const nextTransactions = [newTrx, ...transactions];
+      setTransactions(nextTransactions);
+
       // Auto-schedule WhatsApp follow-up for Admin
       const newFollowUp = {
         id: 'FU-' + Date.now(),
@@ -6258,7 +6306,19 @@
         status: 'Pending',
         lastContactDate: null
       };
-      setFollowUps(prev => [newFollowUp, ...prev]);
+      const nextFollowUps = [newFollowUp, ...followUps];
+      setFollowUps(nextFollowUps);
+
+      // Synchronously write to localStorage right here
+      try {
+        localStorage.setItem('allure_transactions_v1', JSON.stringify(nextTransactions));
+        localStorage.setItem('allure_customers_v1', JSON.stringify(nextCustomers));
+        localStorage.setItem('allure_products_v1', JSON.stringify(nextProducts));
+        localStorage.setItem('allure_vouchers_v1', JSON.stringify(nextVouchers));
+        localStorage.setItem('allure_followups_v1', JSON.stringify(nextFollowUps));
+      } catch (e) {}
+
+      // Broadcast immediately via BroadcastChannel and window storage event
       try {
         if (typeof BroadcastChannel !== 'undefined') {
           const ch = new BroadcastChannel('allure_live_sync');
@@ -6266,16 +6326,20 @@
           ch.close();
         }
       } catch (e) {}
+      try {
+        window.dispatchEvent(new Event('storage'));
+      } catch (e) {}
+
       addLog('order', 'Pesanan Kasir Selesai', `${trxId} senilai ${formatRupiah(grandTotal)} untuk Kak ${cust.name}.`, cashierName);
       setActiveInvoice(newTrx);
       return newTrx;
     };
 
-        const handleUpdateFulfillmentStatus = (trxId, newStatus, courier, tracking) => {
-      setTransactions(prev => prev.map(t => {
+    const handleUpdateFulfillmentStatus = (trxId, newStatus, courier, tracking) => {
+      const nextTransactions = transactions.map(t => {
         if (t.id === trxId) {
           let mainStatus = t.status;
-          if (newStatus === 'Selesai') mainStatus = 'Completed';
+          if (newStatus === 'Selesai' || newStatus === 'Pesanan Diterima' || newStatus === 'Selesai / Diterima') mainStatus = 'Completed';
           else if (newStatus === 'Dibatalkan') mainStatus = 'Cancelled';
           else if (newStatus === 'Belum Bayar') mainStatus = 'Pending';
 
@@ -6290,9 +6354,15 @@
           return updated;
         }
         return t;
-      }));
+      });
+      setTransactions(nextTransactions);
 
       addLog('order', 'Status Pesanan Diperbarui', 'Pesanan ' + trxId + ' diubah statusnya menjadi "' + newStatus + '".');
+
+      // Synchronously write to localStorage right here
+      try {
+        localStorage.setItem('allure_transactions_v1', JSON.stringify(nextTransactions));
+      } catch (e) {}
 
       try {
         if (typeof BroadcastChannel !== 'undefined') {
@@ -6300,6 +6370,9 @@
           ch.postMessage({ type: 'SYNC', time: Date.now() });
           ch.close();
         }
+      } catch (e) {}
+      try {
+        window.dispatchEvent(new Event('storage'));
       } catch (e) {}
     };
 
